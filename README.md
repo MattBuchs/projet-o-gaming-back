@@ -1,4 +1,5 @@
 # projet-o-gaming-back
+[Front](https://github.com/O-Clock-Watt/projet-o-gaming-front)
 
 ## Équipes
 - Yoann : aime : dev front - react - intégration / aime pas : bdd
