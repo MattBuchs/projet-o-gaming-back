@@ -63,8 +63,10 @@ L’utilisateur clique sur un bouton “signaler un bug” qui l’envoie vers u
 ## Idées / bonus / évolutions
 - Un dev peut ajouter un commentaire sur un bug
 - les joueurs peuvent liker un bug ou une suggestion pour lui donner de l’importance
+- Le joueur peut recevoir une notification lors du changement de statut d'un de ses bugs
+
 
 ## Questions / Interrogations :
-- Comment différencier les joueurs des devs lors de l’inscription ? 
-- Un compte dev par organisation ? 
-- Comment assigner à une personne un bug ? ( via un compte utilisateur, un champ texte libre, un envoi par mail ?)
+
+
+

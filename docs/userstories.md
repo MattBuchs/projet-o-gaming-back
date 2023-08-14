@@ -19,10 +19,29 @@
 
 ### Joueurs
  - Je peux faire toutes les actions d'un visiteur
+ - Je peux lors de l'inscription choisir le rôle joueur
+ - Je peux accéder et modifier mes informations de profil (pseudo, avatar, mot de passe)
+ - Je peux accéder à mes bug et suggestions depuis la page mon profil
+ - Je peux supprimer ou modifier un bug ou suggestion que j'ai créé si son statut est non lu ou refusé
+ - (Je peux passer mon profil en tant que dev)
+ - Je peux accéder au formulaire de déclaration de bug ou suggestion sur la page d'un jeu
+ - Je peux choisir la visibilité public ou privé de mon bug
+ - Je peux déclarer où se trouve le bug (interface, en jeu, autre…)
+ - Je peux choisir si le bug intervient en ligne et/ou en local (plusieurs choix possibles)
+ - Je peux choisir parmi des tags proposés par le dev pour préciser l'origine du bug (ex: personnage, carte, arme, sort, etc…)J
+ - Je peux décrire le bug et son impact dans le jeu
+ - Je peux choisir la fréquence d'apparition du bug (tout le temps, parfois…)
+ - Je peux écrire les étapes pour reproduire le bug
+ - Je peux écrire une suggestion (champ texte)
+ - Je peux choisir des tags pour catégoriser la suggestion (choix parmis les mêmes tags que pour une déclaration de bug)
+ 
+
+ 
 
 ### Développeur
  - Je peux faire toutes les actions d'un visiteur
  - Je peux lors de l'inscription choisir le rôle développeur
+ - Je peux accéder et modifier mes informations de profil
  - Je peux créer plusieurs pages pour des jeux
  - Je peux choisir un titre pour le jeu
  - Je peux choisir une image de couverture pour un jeu
