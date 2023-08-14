@@ -11,6 +11,7 @@
 ## Les élément principaux du projet o’Gaming
 - Plateforme de feedback pour les jeux vidéo
 - 2 Cibles : les développeurs, les joueurs
+- Le site sera en anglais car il vise l'international
 - Besoin : avoir une plateforme qui centralise les retours utilisateurs
 - Objectif développeur : l'objectif principal étant de simplifier la vie aux développeurs pour avoir de la visibilité sur les bugs et les suggestions des joueurs.
 - objectif joueur :  l'objectif principal étant de donner des suggestion ou des retours a des bug 
@@ -63,10 +64,66 @@ L’utilisateur clique sur un bouton “signaler un bug” qui l’envoie vers u
 ## Idées / bonus / évolutions
 - Un dev peut ajouter un commentaire sur un bug
 - les joueurs peuvent liker un bug ou une suggestion pour lui donner de l’importance
-- Le joueur peut recevoir une notification lors du changement de statut d'un de ses bugs
+- Le joueur peut recevoir une notification lors du changement de statut d'un bugs ou d'une suggestion
 
+## La liste des technologies
+
+- back :
+	- Express, Node.js, Jest, Postgresql, Sequelize, Sqitch, Winston
+- front :
+	- Vite, Typescript, React, redux, tailwind, daisy UI 
+
+## Navigateurs compatibles :
+	- Chrome, Firefox, Edge, Safari (16.5 et sup)
+	- Chrome for Android (115), Firefox for Android (115), Safari on IOS (16.6-17)
+
+
+## Plan du site :
+	- Home
+	- Login
+	- Signup
+	- Games
+		- create game (dev)
+		- Game 
+			- Issues (everyone) 
+			- create issue (gamer)
+			- create suggestion (gamer)
+	- My account
+
+
+## Wireframes (version desktop et version mobile):
+	- Outil : Whimsical (https://whimsical.com/)
+
+	- Homepage (Everyone) Raphael burnier
+	- Login & signup (visiter) : Matt
+	- Games : Zachary
+	- Create game (dev) Raphael Burnier
+	- Game (dev et gamer) : Zachary
+	- Issue (dev et game) : Yoann
+	- Create issue / Create suggestion (gamer) : Yoann
+	- My account : Matt
+
+
+## Un outil de gestion et suivi de projet :
+	- Trello
 
 ## Questions / Interrogations :
 
+
+## Rôles :
+
+- Product Owner : Raphael Burnier
+
+
+- Scrum Master : Yoann Cos
+
+- Lead dev : 
+	- back : Matt
+	- front : Yoann Cos
+
+- Git Master : Zachary 
+
+- Référents techniques 
+  - catégorie
 
 
