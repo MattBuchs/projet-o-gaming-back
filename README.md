@@ -27,12 +27,13 @@
 - Pour chaque retour ils pourront le classifier selon son importance
 - Assigner un bug à une personne
 - Les retours pourront être configurés pour être Publiques ou Invisibles aux public afin d’éviter de rendre public un bug majeur
-- Joueurs :
+#### Joueurs :
 - S'identifier sur la plateforme pour participer
 - Choisir un jeu parmi les jeux disponibles (spa)
 - Le joueur choisit s’il s’agit d’un bug ou d’une suggestion
 - les utilisateurs peuvent mettre des filtres pour être le trier et être le plus précis possible
 - les joueur peuvent mettre des issue avec un modèle prédéfinie ou il peuvent mettre (text, image, video) avec des tags
+#### Visiteur:
 ```
 L’utilisateur clique sur un bouton “signaler un bug” qui l’envoie vers un questionnaire avec les questions guidées suggérées par florent:
     	dans le questionnaire d'un signalement de bug
@@ -62,7 +63,7 @@ L’utilisateur clique sur un bouton “signaler un bug” qui l’envoie vers u
             	description de comment reproduire le bug
 ```
 ## Idées / bonus / évolutions
-- Un dev peut ajouter un commentaire sur un bug
+- Un dev peut ajouter un commentaire sur un bug (bouger en haut)
 - les joueurs peuvent liker un bug ou une suggestion pour lui donner de l’importance
 - Le joueur peut recevoir une notification lors du changement de statut d'un bugs ou d'une suggestion
 
@@ -74,56 +75,55 @@ L’utilisateur clique sur un bouton “signaler un bug” qui l’envoie vers u
 	- Vite, Typescript, React, redux, tailwind, daisy UI 
 
 ## Navigateurs compatibles :
-	- Chrome, Firefox, Edge, Safari (16.5 et sup)
-	- Chrome for Android (115), Firefox for Android (115), Safari on IOS (16.6-17)
+- Chrome, Firefox, Edge, Safari (16.5 et sup)
+- Chrome for Android (115), Firefox for Android (115), Safari on IOS (16.6-17)
 
 
 ## Plan du site :
-	- Home
-	- Login
-	- Signup
-	- Games
-		- create game (dev)
-		- Game 
-			- Issues (everyone) 
-			- create issue (gamer)
-			- create suggestion (gamer)
-	- My account
+- Home
+- Login
+- Signup
+- My account
+- Games
+	- create game (dev)
+	- Game 
+		- Issues (everyone) 
+		- create issue (gamer)
+		- create suggestion (gamer)
 
 
 ## Wireframes (version desktop et version mobile):
-	- Outil : Whimsical (https://whimsical.com/)
+- Outil : Whimsical (https://whimsical.com/)
 
-	- Homepage (Everyone) Raphael burnier
-	- Login & signup (visiter) : Matt
-	- Games : Zachary
-	- Create game (dev) Raphael Burnier
-	- Game (dev et gamer) : Zachary
-	- Issue (dev et game) : Yoann
-	- Create issue / Create suggestion (gamer) : Yoann
-	- My account : Matt
-
+- Homepage (Everyone) Raphael burnier
+- Login & signup (visiter) : Matt
+- Games : Zachary
+- Create game (dev) Raphael Burnier
+- Game (dev et gamer) : Zachary
+- Issue (dev et game) : Yoann
+- Create issue / Create suggestion (gamer) : Yoann
+- My account : Matt
 
 ## Un outil de gestion et suivi de projet :
-	- Trello
+- Trello
 
 ## Questions / Interrogations :
+
+
+
+## L'arborescence 
+
 
 
 ## Rôles :
 
 - Product Owner : Raphael Burnier
-
-
 - Scrum Master : Yoann Cos
-
-- Lead dev : 
-	- back : Matt
+- Lead dev
+    - back : Matt
 	- front : Yoann Cos
-
 - Git Master : Zachary 
-
 - Référents techniques 
-  - catégorie
+  - par catégorie
 
 

@@ -5,6 +5,7 @@
 - Je peux accéder à la page d'accueil
 - Je peux m'inscrire via mail, pseudo et mot de passe
 - Je peux me connecter
+- Je peux changer mon mot de passe
 - Je peux voir la liste des jeux
 - Je peux rechercher un jeu
 - Je peux faire une recherche par filtre
