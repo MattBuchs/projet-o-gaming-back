@@ -111,10 +111,6 @@ L’utilisateur clique sur un bouton “signaler un bug” qui l’envoie vers u
 
 
 
-## L'arborescence 
-
-
-
 ## Rôles :
 
 - Product Owner : Raphael Burnier
