@@ -2,6 +2,17 @@
 
 BEGIN;
 
--- XXX Add DDLs here.
+DROP TABLE 
+    "role", 
+    "platform", 
+    "user", 
+    "game", 
+    "issue", 
+    "suggestion", 
+    "comment",
+    "category", 
+    "tag", 
+    "category_has_game", 
+    "issue_has_tag";
 
 COMMIT;
