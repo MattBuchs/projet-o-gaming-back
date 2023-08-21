@@ -2,7 +2,7 @@
 **/.DS_Store
 
 # Sqitch
-sqitch.conf
+# sqitch.conf
 
 # Logs
 logs
