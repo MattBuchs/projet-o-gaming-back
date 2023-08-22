@@ -26,7 +26,7 @@ export default {
 
             // verifier si password correspond à password confirm
             if (password !== confirmPassword) {
-                return res.render('register', {
+                return res.json({
                     error: 'Password confirmation is incorrect',
                 });
             }
@@ -51,11 +51,8 @@ export default {
             });
 
             return res.json(!!createUser);
-
-            // res.status(201).json(user);
         } catch (err) {
             // code 23505 = unique_violation
-            console.log('code', err);
             if (err.code === '23505') {
                 throw new UserInputError(err);
             } else {
