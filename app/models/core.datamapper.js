@@ -12,8 +12,9 @@ export default class CoreDatamapper {
         return result.rows;
     }
 
-    async findByPk() {
-        // TODO
+    async findByPk(id) {
+        const result = await this.client.query(`SELECT * FROM "${this.tableName}" WHERE id = ${id}`);
+        return result.rows[0];
     }
 
     async findOne(condition) {

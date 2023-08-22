@@ -1,5 +1,6 @@
 import * as EmailValidator from 'email-validator';
 import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
 import * as datamappers from '../models/index.datamapper.js';
 import DatabaseError from '../errors/database.error.js';
 import UserInputError from '../errors/user.input.error.js';
@@ -51,6 +52,45 @@ export default {
             });
 
             return res.json(!!createUser);
+        } catch (err) {
+            // code 23505 = unique_violation
+            if (err.code === '23505') {
+                throw new UserInputError(err);
+            } else {
+                throw new DatabaseError(err);
+            }
+        }
+    },
+
+    async postLogin(req, res) {
+        const { email, password } = req.body;
+
+        try {
+            if (!EmailValidator.validate(email)) {
+                return res.json({ error: 'Invalid email' });
+            }
+
+            const existUser = await datamappers.userDatamapper.findOne(`email = '${email}'`);
+            if (!existUser) {
+                return res.json({ error: 'Incorrect email or password' });
+            }
+
+            const passOk = await bcrypt.compare(password, existUser.password);
+            if (!passOk) {
+                return res.json({ error: 'Incorrect email or password' });
+            }
+
+            const role = await datamappers.roleDatamapper.findByPk(existUser.role_id);
+
+            const user = {
+                username: existUser.username,
+                email: existUser.email,
+                role: role.name,
+            };
+
+            const token = jwt.sign(user, process.env.SECRET_KEY, { expiresIn: '30d' });
+
+            return res.json({ token });
         } catch (err) {
             // code 23505 = unique_violation
             if (err.code === '23505') {
