@@ -83,12 +83,11 @@ export default {
             const role = await datamappers.roleDatamapper.findByPk(existUser.role_id);
 
             const user = {
-                username: existUser.username,
-                email: existUser.email,
+                userId: existUser.id,
                 role: role.name,
             };
 
-            const token = jwt.sign(user, process.env.SECRET_KEY, { expiresIn: '30d' });
+            const token = jwt.sign(user, process.env.SECRET_KEY, { expiresIn: '1h' });
 
             return res.json({ token });
         } catch (err) {
