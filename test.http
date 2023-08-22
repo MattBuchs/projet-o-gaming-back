@@ -22,4 +22,4 @@ Content-Type: application/json
 
 ### Test Token
 GET  http://localhost:3000/test
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInJvbGUiOiJKb3VldXIiLCJpYXQiOjE2OTI3MjM1NjgsImV4cCI6MTY5MjcyNzE2OH0.32pNkFI1p9h_Am1GoXc25SBtDvJJyj7RFEkfaqRyz9Y
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInJvbGUiOiJKb3VldXIiLCJpYXQiOjE2OTI3MjM3ODMsImV4cCI6MTY5MjcyNzM4M30.qSEULDgeJ26XR7pjflPY6blqqgRROEe2ORofkPkP-7Q
