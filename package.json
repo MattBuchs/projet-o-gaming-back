@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "npx nodemon"
+    "dev": "npx nodemon",
+    "dbDeploy": "sqitch revert -y;sqitch deploy; node data/seeding.js;"
   },
   "keywords": [],
   "author": "",
