@@ -13,13 +13,8 @@ export default class CoreDatamapper {
     }
 
     async findByPk(id) {
-        const result = await this.client.query(`SELECT * FROM "${this.tableName}" WHERE id = ${id}`);
+        const result = await this.client.query(`SELECT * FROM "${this.tableName}" WHERE id = $1`, [id]);
         return result.rows[0];
-    }
-
-    async findOne(condition) {
-        const result = await this.client.query(`SELECT * FROM "${this.tableName}" WHERE ${condition}`);
-        return result.rows[0] || null;
     }
 
     async create(inputData) {
@@ -45,5 +40,10 @@ export default class CoreDatamapper {
 
     async delete() {
         // TODO
+    }
+
+    async findByEmail(email) {
+        const result = await this.client.query(`SELECT * FROM "${this.tableName}" WHERE email = $1`, [email]);
+        return result.rows[0] || null;
     }
 }
