@@ -10,6 +10,10 @@
     },
     "rules": {
         "indent": ["error", 4],
-        "import/extensions": ["error", "always"]
+        "import/extensions": ["error", "always"],
+        "import/no-extraneous-dependencies": [
+            "error",
+            { "devDependencies": true }
+        ]
     }
 }
