@@ -27,9 +27,10 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInJvbGUiOiJK
 ### Création d'un Jeux
 POST http://localhost:3000/games/game
 Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb2xlIjoiZGV2ZWxvcGVyIiwiaWF0IjoxNjkyNzk4MTQwLCJleHAiOjE2OTI4MDE3NDB9.em4RdTec8u9O4u6bUeopZNz4BOw7ukRkhiSs4D6h84Y
 
 {
-    "name": "test",
+    "name": "test9",
     "description": "test",
     "picture": "https://www.jeuxvideo.com/smileys_img/45.gif",
     "external_link": "https://www.test",
