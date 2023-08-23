@@ -1,5 +1,6 @@
 import express from 'express';
 import controllerAuth from '../controllers/auth.controller.js';
+import controllerCreateGame from '../controllers/createGame.controller.js';
 import authenticateToken from '../validation/authToken.middleware.js';
 
 const router = express.Router();
@@ -15,6 +16,6 @@ router.get('/test', authenticateToken, (req, res) => {
 });
 
 router.route('/games/game')
-    .post()
+    .post(controllerCreateGame.createGame);
 
 export default router;

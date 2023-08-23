@@ -6,8 +6,10 @@ export default {
             name,
             description,
             picture,
-            external_link: externalLink, release_date: releaseDate,
+            external_link: externalLink,
+            release_date: releaseDate,
             user_id: userId,
+            categories,
         } = req.body;
 
         try {
@@ -19,17 +21,31 @@ export default {
                 return res.json({ error: 'Missing values' });
             }
 
-            // const createGame = await datamappers.gameDatamapper.create({
-            //     name,
-            //     description,
-            //     picture,
-            //     externalLink,
-            //     releaseDate,
-            //     userId,
-            // });
+            const categoryIds = [];
+            categories.forEach(async (category) => {
+                const findCategory = await datamappers.categoryDatamapper
+                    .findByName(category.toLowerCase());
 
-            // return res.json(!!createGame);
-            return console.log('ok');
+                if (!findCategory) {
+                    await datamappers.categoryDatamapper.create({
+                        name: category.toLowerCase(),
+                        color: '#000000',
+                    });
+                } else {
+                    categoryIds.push(findCategory.id);
+                }
+            });
+
+            const createGame = await datamappers.gameDatamapper.create({
+                name,
+                description,
+                picture,
+                externalLink,
+                releaseDate,
+                userId,
+            });
+
+            // return res.json({ message: 'Game created' });
         } catch (err) {
             console.error(err);
         }

@@ -46,4 +46,9 @@ export default class CoreDatamapper {
     async delete() {
         // TODO
     }
+
+    async findByName(category) {
+        const result = await this.client.query(`SELECT * FROM "${this.tableName}" WHERE name = $1`, [category]);
+        return result.rows[0] || null;
+    }
 }
