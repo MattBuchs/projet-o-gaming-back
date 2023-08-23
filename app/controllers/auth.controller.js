@@ -32,7 +32,7 @@ export default {
                 });
             }
 
-            const existEmail = await datamappers.userDatamapper.findOne(`email = '${email}'`);
+            const existEmail = await datamappers.userDatamapper.findByEmail(email);
             if (existEmail) {
                 return res.json({
                     error: 'An error has occurred',
@@ -70,7 +70,7 @@ export default {
                 return res.json({ error: 'Invalid email' });
             }
 
-            const existUser = await datamappers.userDatamapper.findOne(`email = '${email}'`);
+            const existUser = await datamappers.userDatamapper.findByEmail(email);
             if (!existUser) {
                 return res.json({ error: 'Incorrect email or password' });
             }

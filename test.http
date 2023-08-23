@@ -34,5 +34,7 @@ Content-Type: application/json
     "picture": "https://www.jeuxvideo.com/smileys_img/45.gif",
     "external_link": "https://www.test",
     "user_id": 11,
-    "categories": ["RPG", "analyst", "Action"]
+    "release_date": "2021-05-20",
+    "categories": ["ankle", "ascot", "supreme"],
+    "tags": ["view", "analyst", "action"]
 }
