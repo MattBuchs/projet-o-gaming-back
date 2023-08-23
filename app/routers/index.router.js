@@ -14,4 +14,7 @@ router.get('/test', authenticateToken, (req, res) => {
     res.json({ message: 'Hello World' });
 });
 
+router.route('/games/game')
+    .post()
+
 export default router;
