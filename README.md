@@ -122,4 +122,3 @@ L’utilisateur clique sur un bouton “signaler un bug” qui l’envoie vers u
 - Référents techniques 
   - par catégorie
 
-
