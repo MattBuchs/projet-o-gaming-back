@@ -13,7 +13,7 @@ export default class CoreDatamapper {
     }
 
     async findByPk(id) {
-        const result = await this.client.query(`SELECT * FROM "${this.tableName}" WHERE id = ${id}`);
+        const result = await this.client.query(`SELECT * FROM "${this.tableName}" WHERE id = $1`, [id]);
         return result.rows[0];
     }
 
