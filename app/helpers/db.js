@@ -2,11 +2,7 @@ import pg from 'pg';
 
 const { Client } = pg;
 
-const client = new Client({
-    host: 'localhost',
-    database: 'o-gaming',
-});
-
+const client = new Client();
 // await client.connect();
 client.connect((error) => {
     if (error) {
