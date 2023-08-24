@@ -1,6 +1,6 @@
 import express from 'express';
 import controllerAuth from '../controllers/auth.controller.js';
-import controllerCreateGame from '../controllers/createGame.controller.js';
+import controllerCreateGame from '../controllers/game.controller.js';
 import authenticateToken from '../validation/authToken.middleware.js';
 import checkUserRole from '../validation/checkUserRole.middleware.js';
 

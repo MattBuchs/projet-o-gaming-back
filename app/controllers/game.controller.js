@@ -1,4 +1,6 @@
 import * as datamappers from '../models/index.datamapper.js';
+import DatabaseError from '../errors/database.error.js';
+import UserInputError from '../errors/user.input.error.js';
 
 export default {
     async createGame(req, res) {
@@ -19,19 +21,22 @@ export default {
                 || !picture
                 || !externalLink
                 || !releaseDate
+                || !categories
                 || !userId) {
                 return res.json({ error: 'Missing values' });
             }
 
-            tags.forEach(async (tag) => {
-                const findTag = await datamappers.tagDatamapper.findOne('title', tag);
+            if (tags) {
+                tags.forEach(async (tag) => {
+                    const findTag = await datamappers.tagDatamapper.findOne('title', tag);
 
-                if (!findTag) {
-                    await datamappers.tagDatamapper.create({
-                        title: tag.toLowerCase(),
-                    });
-                }
-            });
+                    if (!findTag) {
+                        await datamappers.tagDatamapper.create({
+                            title: tag.toLowerCase(),
+                        });
+                    }
+                });
+            }
 
             const createGame = await datamappers.gameDatamapper.create({
                 name,
@@ -47,6 +52,10 @@ export default {
             }
 
             const findGame = await datamappers.gameDatamapper.findOne('name', name);
+
+            if (!findGame) {
+                return res.json({ error: 'Game not found' });
+            }
 
             categories.forEach(async (category) => {
                 const findCategory = await datamappers.categoryDatamapper.findOne('name', category);
@@ -65,7 +74,11 @@ export default {
 
             return res.json({ message: 'Game created' });
         } catch (err) {
-            console.error(err);
+            if (err.code === '23505') {
+                throw new UserInputError(err);
+            } else {
+                throw new DatabaseError(err);
+            }
         }
     },
 };
