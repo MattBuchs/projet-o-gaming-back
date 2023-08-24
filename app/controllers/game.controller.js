@@ -26,18 +26,6 @@ export default {
                 return res.json({ error: 'Missing values' });
             }
 
-            if (tags) {
-                tags.forEach(async (tag) => {
-                    const findTag = await datamappers.tagDatamapper.findOne('title', tag);
-
-                    if (!findTag) {
-                        await datamappers.tagDatamapper.create({
-                            title: tag.toLowerCase(),
-                        });
-                    }
-                });
-            }
-
             const createGame = await datamappers.gameDatamapper.create({
                 name,
                 description,
@@ -55,6 +43,25 @@ export default {
 
             if (!findGame) {
                 return res.json({ error: 'Game not found' });
+            }
+
+            if (tags) {
+                tags.forEach(async (tag) => {
+                    let findTag = await datamappers.tagDatamapper.findOne('title', tag);
+
+                    if (!findTag) {
+                        await datamappers.tagDatamapper.create({
+                            title: tag.toLowerCase(),
+                        });
+
+                        findTag = await datamappers.tagDatamapper.findOne('title', tag);
+                    }
+
+                    await datamappers.gameTagDatamapper.create({
+                        game_id: findGame.id,
+                        tag_id: findTag.id,
+                    });
+                });
             }
 
             categories.forEach(async (category) => {
