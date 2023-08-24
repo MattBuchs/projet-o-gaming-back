@@ -39,3 +39,22 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb2xlIjoi
     "categories": ["ankle", "ascot", "supreme"],
     "tags": ["view", "analyst", "action"]
 }
+
+### Create Issue
+POST http://localhost:3000/games/game/1/issue
+Content-Type: application/json
+
+{
+    "title": "test2",
+    "description": "test test",
+    "status": "test",
+    "is_minor": true,
+    "assign_to": "test@test.com",
+    "is_public": true,
+    "is_online": true,
+    "frequency": "test",
+    "replication": "test test",
+    "published_at": "2021-02-13",
+    "user_id": 1,
+    "platform": "PlayStation 4"
+}
