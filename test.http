@@ -30,7 +30,7 @@ Content-Type: application/json
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb2xlIjoiZGV2ZWxvcGVyIiwiaWF0IjoxNjkyODY0MTAyLCJleHAiOjE2OTI4Njc3MDJ9.Nu2zErPah5P9CJ2fMLSAgV9Xz4Dv0n2p5mxwGIlKR2k
 
 {
-    "name": "test10",
+    "name": "test11",
     "description": "test",
     "picture": "https://www.jeuxvideo.com/smileys_img/45.gif",
     "external_link": "https://www.test",

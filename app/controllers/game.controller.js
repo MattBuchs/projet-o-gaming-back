@@ -23,10 +23,10 @@ export default {
                 || !releaseDate
                 || !categories
                 || !userId) {
-                return res.json({ error: 'Missing values' });
+                return res.status(400).json({ error: 'Missing values' });
             }
 
-            const createGame = await datamappers.gameDatamapper.create({
+            const createdGame = await datamappers.gameDatamapper.create({
                 name,
                 description,
                 picture,
@@ -35,57 +35,51 @@ export default {
                 user_id: userId,
             });
 
-            if (!createGame) {
-                return res.json({ error: 'Game not created' });
+            if (!createdGame) {
+                return res.status(500).json({ error: 'Game not created' });
             }
 
             const findGame = await datamappers.gameDatamapper.findOne('name', name);
 
             if (!findGame) {
-                return res.json({ error: 'Game not found' });
+                return res.status(404).json({ error: 'Game not found' });
             }
 
-            if (tags) {
-                tags.forEach(async (tag) => {
-                    let findTag = await datamappers.tagDatamapper.findOne('title', tag);
+            if (tags && tags.length > 0) {
+                await Promise.all(tags.map(async (tag) => {
+                    const tagTitle = tag.toLowerCase();
+                    let findTag = await datamappers.tagDatamapper.findOne('title', tagTitle);
 
                     if (!findTag) {
-                        await datamappers.tagDatamapper.create({
-                            title: tag.toLowerCase(),
-                        });
-
-                        findTag = await datamappers.tagDatamapper.findOne('title', tag);
+                        findTag = await datamappers.tagDatamapper.create({ title: tagTitle });
                     }
 
                     await datamappers.gameTagDatamapper.create({
                         game_id: findGame.id,
                         tag_id: findTag.id,
                     });
-                });
+                }));
             }
 
-            categories.forEach(async (category) => {
+            await Promise.all(categories.map(async (category) => {
                 const findCategory = await datamappers.categoryDatamapper.findOne('name', category);
 
                 if (!findCategory) {
-                    return res.json({ error: 'Category not found' });
+                    return res.status(404).json({ error: 'Category not found' });
                 }
 
-                const createCategoryHasGame = await datamappers.gameCategoryDatamapper.create({
+                await datamappers.gameCategoryDatamapper.create({
                     category_id: findCategory.id,
                     game_id: findGame.id,
                 });
-
-                return !!createCategoryHasGame;
-            });
+            }));
 
             return res.json({ message: 'Game created' });
         } catch (err) {
             if (err.code === '23505') {
-                throw new UserInputError(err);
-            } else {
-                throw new DatabaseError(err);
+                return res.status(400).json({ error: 'Duplicate entry' });
             }
+            return res.status(500).json({ error: 'Database error' });
         }
     },
 };
