@@ -45,11 +45,9 @@ POST http://localhost:3000/games/game/1/issue
 Content-Type: application/json
 
 {
-    "title": "test2",
+    "title": "test",
     "description": "test test",
-    "status": "test",
     "is_minor": true,
-    "assign_to": "test@test.com",
     "is_public": true,
     "is_online": true,
     "frequency": "test",
