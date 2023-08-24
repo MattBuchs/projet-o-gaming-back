@@ -12,6 +12,7 @@ import TagDatamapper from './tag.datamapper.js';
 import UserDatamapper from './user.datamapper.js';
 import GameCategoryDatamapper from './gameCategory.datamapper.js';
 import IssueTagDatamapper from './issueTag.datamapper.js';
+import GameTagDatamapper from './gameTag.datamapper.js';
 
 // Instanciation avec injection du client dans le constructeur
 export const categoryDatamapper = new CategoryDatamapper(client);
@@ -25,3 +26,4 @@ export const tagDatamapper = new TagDatamapper(client);
 export const userDatamapper = new UserDatamapper(client);
 export const gameCategoryDatamapper = new GameCategoryDatamapper(client);
 export const issueTagDatamapper = new IssueTagDatamapper(client);
+export const gameTagDatamapper = new GameTagDatamapper(client);
