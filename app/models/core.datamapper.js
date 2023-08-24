@@ -21,9 +21,7 @@ export default class CoreDatamapper {
         const fields = Object.keys(inputData);
         const values = Object.values(inputData);
 
-        console.log('values: ', values);
         const placeholders = values.map((_, index) => `$${index + 1}`);
-        console.log('placeholders: ', placeholders);
 
         const result = await this.client.query(
             `
