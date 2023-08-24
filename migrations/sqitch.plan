@@ -2,3 +2,4 @@
 %project=o-gaming
 
 init 2023-08-21T09:04:52Z Zaiquiri <zaiquiri@pop-os> # initilization
+add_game_tag_relation 2023-08-24T07:46:11Z Matt,,, <matt@matt-Laptop> # added relationship table for game & tag table

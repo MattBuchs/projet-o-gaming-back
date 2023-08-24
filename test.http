@@ -6,7 +6,7 @@ Content-Type: application/json
     "username": "user",
     "email": "test@test.com",
     "password": "password",
-    "confirmPassword": "passdfvword",
+    "confirmPassword": "password",
     "avatar": "https://img.freepik.com/premium-vector/young-smiling-man-avatar-man-with-brown-beard-mustache-hair-wearing-yellow-sweater-sweatshirt-3d-vector-people-character-illustration-cartoon-minimal-style_365941-860.jpg",
     "role_id": 1
 }
@@ -23,3 +23,19 @@ Content-Type: application/json
 ### Test Token
 GET  http://localhost:3000/test
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInJvbGUiOiJKb3VldXIiLCJpYXQiOjE2OTI3MjM3ODMsImV4cCI6MTY5MjcyNzM4M30.qSEULDgeJ26XR7pjflPY6blqqgRROEe2ORofkPkP-7Q
+
+### Création d'un Jeux
+POST http://localhost:3000/games/game
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb2xlIjoiZGV2ZWxvcGVyIiwiaWF0IjoxNjkyODY0MTAyLCJleHAiOjE2OTI4Njc3MDJ9.Nu2zErPah5P9CJ2fMLSAgV9Xz4Dv0n2p5mxwGIlKR2k
+
+{
+    "name": "test11",
+    "description": "test",
+    "picture": "https://www.jeuxvideo.com/smileys_img/45.gif",
+    "external_link": "https://www.test",
+    "user_id": 11,
+    "release_date": "2021-05-20",
+    "categories": ["ankle", "ascot", "supreme"],
+    "tags": ["view", "analyst", "action"]
+}
