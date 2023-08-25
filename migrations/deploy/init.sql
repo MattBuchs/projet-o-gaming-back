@@ -49,7 +49,7 @@ CREATE TABLE "issue" (
     "id" int GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     "title" text NOT NULL,
     "description" text NOT NULL,
-    "status" text NOT NULL,
+    "status" text,
     "is_minor" boolean NOT NULL,
     "assign_to" text,
     "is_public" boolean NOT NULL,
