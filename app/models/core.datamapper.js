@@ -38,15 +38,16 @@ export default class CoreDatamapper {
         // TODO
     }
 
-    async delete() {
-        // TODO
+    async delete(id) {
+        const result = await this.client.query(`DELETE FROM "${this.tableName}" WHERE id = $1`, [id]);
+        return !!result.rowCount;
     }
 
     async findByEmail(email) {
         const result = await this.client.query(`SELECT * FROM "${this.tableName}" WHERE email = $1`, [email]);
         return result.rows[0] || null;
     }
-  
+
     async findOne(key, value) {
         const result = await this.client.query(`SELECT * FROM "${this.tableName}" WHERE ${key} = $1`, [value]);
         return result.rows[0] || null;

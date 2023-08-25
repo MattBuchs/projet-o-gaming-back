@@ -23,4 +23,7 @@ router.route('/games/game')
 router.route('/games/game/:id_game/issue')
     .post(controllerIssue.createIssue);
 
+router.route('/games/game/:id_game/issue/:id_issue')
+    .delete(authenticateToken, controllerIssue.deleteIssue);
+
 export default router;

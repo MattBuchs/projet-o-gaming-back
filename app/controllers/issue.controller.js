@@ -1,3 +1,4 @@
+import jwt from 'jsonwebtoken';
 import * as datamappers from '../models/index.datamapper.js';
 
 export default {
@@ -66,6 +67,25 @@ export default {
             if (err.code === '23505') {
                 return res.status(400).json({ error: 'Duplicate entry' });
             }
+            return res.status(500).json({ error: 'Database error' });
+        }
+    },
+
+    async deleteIssue(req, res) {
+        const issueId = Number(req.params.id_issue);
+
+        try {
+            const issue = await datamappers.issueDatamapper.findByPk(issueId);
+            if (!issue) {
+                return res.status(400).json({ error: 'Issue Not Found' });
+            }
+
+            if (req.user.userId !== issueId) return res.status(401).json({ error: 'Unauthorized' });
+
+            await datamappers.issueDatamapper.delete(issueId);
+
+            return res.status(200).json({ message: 'Issue deleted successfully' });
+        } catch (err) {
             return res.status(500).json({ error: 'Database error' });
         }
     },
