@@ -3,6 +3,7 @@ import controllerAuth from '../controllers/auth.controller.js';
 import controllerCreateGame from '../controllers/game.controller.js';
 import authenticateToken from '../validation/authToken.middleware.js';
 import checkUserRole from '../validation/checkUserRole.middleware.js';
+import controllerIssue from '../controllers/issue.controller.js';
 
 const router = express.Router();
 
@@ -18,5 +19,8 @@ router.get('/test', authenticateToken, (req, res) => {
 
 router.route('/games/game')
     .post([authenticateToken, checkUserRole.isDeveloper], controllerCreateGame.createGame);
+
+router.route('/games/game/:id_game/issue')
+    .post(controllerIssue.createIssue);
 
 export default router;
