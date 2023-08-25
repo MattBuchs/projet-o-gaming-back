@@ -3,6 +3,7 @@ import controllerAuth from '../controllers/auth.controller.js';
 import controllerGame from '../controllers/game.controller.js';
 import authenticateToken from '../validation/authToken.middleware.js';
 import checkUserRole from '../validation/checkUserRole.middleware.js';
+import controllerIssue from '../controllers/issue.controller.js';
 
 const router = express.Router();
 
@@ -25,5 +26,8 @@ router.route('/games')
 
 router.route('/games/game/:id')
     .get(controllerGame.getOneGame);
+
+router.route('/games/game/:id_game/issue')
+    .post(controllerIssue.createIssue);
 
 export default router;
