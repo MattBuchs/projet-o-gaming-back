@@ -22,12 +22,12 @@ Content-Type: application/json
 
 ### Test Token
 GET  http://localhost:3000/test
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInJvbGUiOiJKb3VldXIiLCJpYXQiOjE2OTI3MjM3ODMsImV4cCI6MTY5MjcyNzM4M30.qSEULDgeJ26XR7pjflPY6blqqgRROEe2ORofkPkP-7Q
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb2xlIjoiZGV2ZWxvcGVyIiwiaWF0IjoxNjkyODkyNDI4LCJleHAiOjE2OTI4OTYwMjh9.A422VrHBAdQrm4rQLDZ0KKHkJ3SedimJvfPRjT95wCE
 
 ### Création d'un Jeux
 POST http://localhost:3000/games/game
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb2xlIjoiZGV2ZWxvcGVyIiwiaWF0IjoxNjkyODY0MTAyLCJleHAiOjE2OTI4Njc3MDJ9.Nu2zErPah5P9CJ2fMLSAgV9Xz4Dv0n2p5mxwGIlKR2k
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb2xlIjoiZGV2ZWxvcGVyIiwiaWF0IjoxNjkyODkyNDI4LCJleHAiOjE2OTI4OTYwMjh9.A422VrHBAdQrm4rQLDZ0KKHkJ3SedimJvfPRjT95wCE
 
 {
     "name": "test11",
@@ -39,3 +39,9 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb2xlIjoi
     "categories": ["ankle", "ascot", "supreme"],
     "tags": ["view", "analyst", "action"]
 }
+
+### Trouver tous les Jeux
+GET http://localhost:3000/games
+
+### Trouver un Jeux
+GET http://localhost:3000/games/game/1
