@@ -52,7 +52,7 @@ export default class CoreDatamapper {
     // async findByKeyValue(key, value) {
     async findOne(key, value) {
         const result = await this.client.query(`SELECT * FROM "${this.tableName}" WHERE ${key} = $1`, [value]);
-        return result.rows[0] || null;
+        return result.rows || null;
     }
 
     async findBy2KeyValues(key1, value1, key2, value2) {

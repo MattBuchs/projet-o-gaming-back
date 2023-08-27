@@ -33,34 +33,17 @@ export default {
         const {
             title,
             description,
-            is_minor: isMinor,
-            is_public: isPublic,
-            is_online: isOnline,
-            frequency,
-            replication,
             published_at: publishedAt,
             user_id: userId,
-            platform,
         } = req.body;
 
         try {
             if (!title
                 || !description
-                || !isMinor
-                || !isPublic
-                || !isOnline
-                || !frequency
-                || !replication
                 || !publishedAt
                 || !userId
-                || !platform
             ) {
                 return res.status(400).json({ error: 'Missing values' });
-            }
-
-            const getPlatform = await datamappers.platformDatamapper.findOne('name', platform);
-            if (!getPlatform) {
-                return res.status(400).json({ error: 'Invalid platform' });
             }
 
             const game = await datamappers.gameDatamapper.findByPk(gameId);
@@ -76,15 +59,9 @@ export default {
             await datamappers.suggestionDatamapper.create({
                 title,
                 description,
-                is_minor: isMinor,
-                is_public: isPublic,
-                is_online: isOnline,
-                frequency,
-                replication,
                 published_at: publishedAt,
                 user_id: userId,
                 game_id: gameId,
-                platform_id: getPlatform.id,
             });
 
             return res.status(201).json({ message: 'Suggestion created successfully' });
