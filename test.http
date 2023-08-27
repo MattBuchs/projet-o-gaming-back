@@ -3,12 +3,12 @@ POST http://localhost:3000/signup
 Content-Type: application/json
 
 {
-    "username": "user",
-    "email": "test@test.com",
+    "username": "user2",
+    "email": "test2@test.com",
     "password": "password",
     "confirmPassword": "password",
     "avatar": "https://img.freepik.com/premium-vector/young-smiling-man-avatar-man-with-brown-beard-mustache-hair-wearing-yellow-sweater-sweatshirt-3d-vector-people-character-illustration-cartoon-minimal-style_365941-860.jpg",
-    "role_id": 2
+    "role_id": 1
 }
 
 ### Connexion d'un utilisateur
@@ -16,7 +16,7 @@ POST http://localhost:3000/login
 Content-Type: application/json
 
 {
-    "email": "test@test.com",
+    "email": "test2@test.com",
     "password": "password"
 }
 
@@ -27,21 +27,21 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInJvbGUiOiJK
 ### Création d'un Jeux
 POST http://localhost:3000/games/game
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb2xlIjoiZGV2ZWxvcGVyIiwiaWF0IjoxNjkyOTUzMzQ4LCJleHAiOjE2OTI5NTY5NDh9.l_kyUGDGkCwgke-_oZzKm4MCSXariWQp-JhhezcxT7U
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEyLCJyb2xlIjoiZGV2ZWxvcGVyIiwiaWF0IjoxNjkzMTMwNzA0LCJleHAiOjE2OTMxMzQzMDR9.lhxHkjPgPZqgcXsygiLdiUTr_QGPdkznvArlR7teuk8
 
 {
-    "name": "test11",
+    "name": "Jeux 2",
     "description": "test",
     "picture": "https://www.jeuxvideo.com/smileys_img/45.gif",
     "external_link": "https://www.test",
-    "user_id": 11,
+    "user_id": 12,
     "release_date": "2021-05-20",
-    "categories": ["adapter", "teacher", "vane"],
+    "categories": ["screen", "porcupine", "attitude"],
     "tags": ["view", "analyst", "action"]
 }
 
 ### Create Issue
-POST http://localhost:3000/games/game/1/issue
+POST http://localhost:3000/games/game/13/issue
 Content-Type: application/json
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb2xlIjoicGxheWVyIiwiaWF0IjoxNjkzMTI4ODAzLCJleHAiOjE2OTMxMzI0MDN9.eybsj70SXpdRdx5varjLe8q1fS4THNXq03AzfyhBvik
 
@@ -68,6 +68,16 @@ Content-Type: application/json
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb2xlIjoicGxheWVyIiwiaWF0IjoxNjkzMTI4ODAzLCJleHAiOjE2OTMxMzI0MDN9.eybsj70SXpdRdx5varjLe8q1fS4THNXq03AzfyhBvik
 
 {
-    "title": "test56",
+    "title": "test32",
     "description": "test3 test2"
+}
+
+### Update Issue Developer
+PATCH http://localhost:3000/games/game/13/issue/13
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEyLCJyb2xlIjoiZGV2ZWxvcGVyIiwiaWF0IjoxNjkzMTMwNzA0LCJleHAiOjE2OTMxMzQzMDR9.lhxHkjPgPZqgcXsygiLdiUTr_QGPdkznvArlR7teuk8
+
+{
+    "status": "accepted",
+    "assign_to": "test@developer.com"
 }
