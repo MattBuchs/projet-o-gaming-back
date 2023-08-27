@@ -1,6 +1,32 @@
 import * as datamappers from '../models/index.datamapper.js';
 
 export default {
+    async getAllIssues(req, res) {
+        try {
+            const gameId = req.params.id_game;
+            const issues = await datamappers.issueDatamapper.findOne('game_id', gameId);
+            return res.json({ issues });
+        } catch (err) {
+            return res.status(500).json({ error: `Internal Server Error: ${err}` });
+        }
+    },
+    async getOneIssue(req, res) {
+        try {
+            const gameId = req.params.id_game;
+            const issueId = req.params.id_issue;
+            const game = await datamappers.issueDatamapper.findOne('id', gameId);
+            const issue = await datamappers.issueDatamapper.findBy2KeyValues('game_id', gameId, 'id', issueId);
+            if (!game) {
+                return res.status(404).json(`Can not find game with id ${gameId}`);
+            }
+            if (!issue) {
+                return res.status(404).json(`Can not find issue with id ${issueId} for game with id ${gameId}`);
+            }
+            return res.json({ issue });
+        } catch (err) {
+            return res.status(500).json({ error: `Internal Server Error: ${err}` });
+        }
+    },
     async createIssue(req, res) {
         const gameId = req.params.id_game;
         const {
@@ -66,7 +92,7 @@ export default {
             if (err.code === '23505') {
                 return res.status(400).json({ error: 'Duplicate entry' });
             }
-            return res.status(500).json({ error: 'Database error' });
+            return res.status(500).json({ error: `Internal Server Error: ${err}` });
         }
     },
 };

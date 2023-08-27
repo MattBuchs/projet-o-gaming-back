@@ -8,19 +8,12 @@ export default {
             const games = await datamappers.gameDatamapper.findAll();
             return res.json({ games });
         } catch (err) {
-            // code 23505 = unique_violation
-            if (err.code === '23505') {
-                throw new UserInputError(err);
-            } else {
-                throw new DatabaseError(err);
-                // return res.status(500)
-                // .json({ error: `Internal Server Error: ${DatabaseError(err)}`});
-            }
+            return res.status(500).json({ error: `Internal Server Error: ${err}` });
         }
     },
     async getOneGame(req, res) {
         try {
-            const gameId = req.params.id;
+            const gameId = req.params.id_game;
             const game = await datamappers.gameDatamapper.findOne('id', gameId);
             // not sure if needed:
             // const findGame = await datamappers.gameDatamapper.findByPk(gameId);
@@ -29,7 +22,6 @@ export default {
             }
             return res.json({ game });
         } catch (err) {
-            // throw new DatabaseError(err);
             return res.status(500).json({ error: `Internal Server Error: ${DatabaseError(err)}` });
         }
     },
@@ -109,7 +101,7 @@ export default {
             if (err.code === '23505') {
                 return res.status(400).json({ error: 'Duplicate entry' });
             }
-            return res.status(500).json({ error: 'Database error' });
+            return res.status(500).json({ error: `Internal Server Error: ${err}` });
         }
     },
 };

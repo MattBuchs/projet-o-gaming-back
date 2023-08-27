@@ -25,11 +25,18 @@ router.route('/games/game')
 router.route('/games')
     .get(controllerGame.getAllGames);
 
-router.route('/games/game/:id')
+router.route('/games/game/:id_game')
     .get(controllerGame.getOneGame);
 
+/* Issues */
 router.route('/games/game/:id_game/issue')
     .post(controllerIssue.createIssue);
+
+router.route('/games/game/:id_game/issues')
+    .get(controllerIssue.getAllIssues);
+
+router.route('/games/game/:id_game/issue/:id_issue')
+    .get(controllerIssue.getOneIssue);
 
 /* Suggestions */
 router.route('/games/game/:id_game/suggestion')
