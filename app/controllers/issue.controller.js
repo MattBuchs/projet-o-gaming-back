@@ -65,7 +65,7 @@ export default {
         }
     },
 
-    async updatePlayerIssue(req, res) {
+    async updateAuthorIssue(req, res) {
         const issueId = Number(req.params.id_issue);
         const inputData = req.body;
 
