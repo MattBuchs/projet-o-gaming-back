@@ -61,7 +61,7 @@ export default {
             if (err.code === '23505') {
                 return res.status(400).json({ error: 'Duplicate entry' });
             }
-            return res.status(500).json({ error: 'Database error' });
+            return res.status(500).json({ error: `Internal Server Error: ${err.message}` });
         }
     },
 
@@ -75,17 +75,17 @@ export default {
                 return res.status(400).json({ error: 'Issue Not Found' });
             }
 
+            if (inputData.assign_to || inputData.status) {
+                return res.status(400).json({ error: 'Unauthorized' });
+            }
+
             if (req.user.userId !== issue.user_id) return res.status(401).json({ error: 'Unauthorized' });
 
             await datamappers.issueDatamapper.update(inputData, issueId);
 
             return res.status(200).json({ message: 'Issue updated successfully' });
         } catch (err) {
-            // code 23505 = unique_violation
-            if (err.code === '23505') {
-                return res.status(400).json({ error: 'Duplicate entry' });
-            }
-            return res.status(500).json({ error: 'Database error' });
+            return res.status(500).json({ error: `Internal Server Error: ${err.message}` });
         }
     },
 
@@ -99,6 +99,10 @@ export default {
                 return res.status(400).json({ error: 'Issue Not Found' });
             }
 
+            if (inputData.assign_to || inputData.status) {
+                return res.status(400).json({ error: 'Unauthorized' });
+            }
+
             const game = await datamappers.gameDatamapper.findByPk(issue.game_id);
 
             if (req.user.userId !== game.user_id) return res.status(401).json({ error: 'Unauthorized' });
@@ -107,11 +111,7 @@ export default {
 
             return res.status(200).json({ message: 'Issue updated successfully' });
         } catch (err) {
-            // code 23505 = unique_violation
-            if (err.code === '23505') {
-                return res.status(400).json({ error: 'Duplicate entry' });
-            }
-            return res.status(500).json({ error: 'Database error' });
+            return res.status(500).json({ error: `Internal Server Error: ${err.message}` });
         }
     },
 
@@ -130,7 +130,7 @@ export default {
 
             return res.status(200).json({ message: 'Issue deleted successfully' });
         } catch (err) {
-            return res.status(500).json({ error: 'Database error' });
+            return res.status(500).json({ error: `Internal Server Error: ${err.message}` });
         }
     },
 };

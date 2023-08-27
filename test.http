@@ -65,17 +65,17 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb2xlIjoi
 ### Update Issue Player
 PATCH http://localhost:3000/games/game/1/issue/11
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb2xlIjoicGxheWVyIiwiaWF0IjoxNjkzMTI4ODAzLCJleHAiOjE2OTMxMzI0MDN9.eybsj70SXpdRdx5varjLe8q1fS4THNXq03AzfyhBvik
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb2xlIjoicGxheWVyIiwiaWF0IjoxNjkzMTM0MTI3LCJleHAiOjE2OTMxMzc3Mjd9.JPEhHPUV0CVIRDpdpfFsnMw5S3MVkf-0Axo9aOFrl90
 
 {
     "title": "test32",
-    "description": "test3 test2"
+    "description": "test test test"
 }
 
 ### Update Issue Developer
 PATCH http://localhost:3000/games/game/13/issue/13
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEyLCJyb2xlIjoiZGV2ZWxvcGVyIiwiaWF0IjoxNjkzMTMwNzA0LCJleHAiOjE2OTMxMzQzMDR9.lhxHkjPgPZqgcXsygiLdiUTr_QGPdkznvArlR7teuk8
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEyLCJyb2xlIjoiZGV2ZWxvcGVyIiwiaWF0IjoxNjkzMTM1NDIwLCJleHAiOjE2OTMxMzkwMjB9.fUIMzRdz2UKRu_MAbQkyvFCPo-IsVhzHHR63dBgoKDE
 
 {
     "status": "accepted",
