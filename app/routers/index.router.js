@@ -21,9 +21,10 @@ router.route('/games/game')
     .post([authenticateToken, checkUserRole.isDeveloper], controllerCreateGame.createGame);
 
 router.route('/games/game/:id_game/issue')
-    .post(controllerIssue.createIssue);
+    .post(authenticateToken, controllerIssue.createIssue);
 
 router.route('/games/game/:id_game/issue/:id_issue')
+    .patch(authenticateToken, controllerIssue.updatePlayerIssue)
     .delete(authenticateToken, controllerIssue.deleteIssue);
 
 export default router;

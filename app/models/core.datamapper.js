@@ -34,8 +34,25 @@ export default class CoreDatamapper {
         return !!result.rowCount;
     }
 
-    async update() {
-        // TODO
+    async update(inputData, id) {
+        const fields = Object.keys(inputData);
+        const values = Object.values(inputData);
+        values.push(id);
+
+        const updateColumns = Object.keys(inputData)
+            .map((column) => `${column} = $${fields.indexOf(column) + 1}`)
+            .join(', ');
+
+        const result = await this.client.query(
+            `
+          UPDATE "${this.tableName}" 
+          SET ${updateColumns}
+          WHERE id = $${fields.length + 1}
+        `,
+            values,
+        );
+
+        return !!result.rowCount;
     }
 
     async delete(id) {

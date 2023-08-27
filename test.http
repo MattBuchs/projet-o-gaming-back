@@ -43,6 +43,7 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb2xlIjoi
 ### Create Issue
 POST http://localhost:3000/games/game/1/issue
 Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb2xlIjoicGxheWVyIiwiaWF0IjoxNjkyOTY0Mzg5LCJleHAiOjE2OTI5Njc5ODl9.ElMWTFNYWB8-nWSbj3iB8UWC_GaV98eUO8zVAxWrJDk
 
 {
     "title": "test6",
@@ -54,9 +55,19 @@ Content-Type: application/json
     "replication": "test test",
     "published_at": "2021-02-13",
     "user_id": 11,
-    "platform": "PlayStation 4"
+    "platform_id": 1
 }
 
 ### Delete Issue
 DELETE http://localhost:3000/games/game/1/issue/11
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb2xlIjoicGxheWVyIiwiaWF0IjoxNjkyOTYxNDEyLCJleHAiOjE2OTI5NjUwMTJ9.iByKVawsHAVMnhoX2DtF1t0LmT-Zy053Asay-o3LCjI
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb2xlIjoicGxheWVyIiwiaWF0IjoxNjkyOTY0Mzg5LCJleHAiOjE2OTI5Njc5ODl9.ElMWTFNYWB8-nWSbj3iB8UWC_GaV98eUO8zVAxWrJDk
+
+### Update Issue Player
+PATCH http://localhost:3000/games/game/1/issue/11
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb2xlIjoicGxheWVyIiwiaWF0IjoxNjkzMTI4ODAzLCJleHAiOjE2OTMxMzI0MDN9.eybsj70SXpdRdx5varjLe8q1fS4THNXq03AzfyhBvik
+
+{
+    "title": "test56",
+    "description": "test3 test2"
+}
