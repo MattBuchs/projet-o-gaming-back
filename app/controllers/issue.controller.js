@@ -1,4 +1,3 @@
-import jwt from 'jsonwebtoken';
 import * as datamappers from '../models/index.datamapper.js';
 
 export default {
@@ -14,7 +13,7 @@ export default {
             replication,
             published_at: publishedAt,
             user_id: userId,
-            platform,
+            platform_id: platformId,
         } = req.body;
 
         try {
@@ -27,14 +26,9 @@ export default {
                 || !replication
                 || !publishedAt
                 || !userId
-                || !platform
+                || !platformId
             ) {
                 return res.status(400).json({ error: 'Missing values' });
-            }
-
-            const getPlatform = await datamappers.platformDatamapper.findOne('name', platform);
-            if (!getPlatform) {
-                return res.status(400).json({ error: 'Invalid platform' });
             }
 
             const game = await datamappers.gameDatamapper.findByPk(gameId);
@@ -58,7 +52,7 @@ export default {
                 published_at: publishedAt,
                 user_id: userId,
                 game_id: gameId,
-                platform_id: getPlatform.id,
+                platform_id: platformId,
             });
 
             return res.status(201).json({ message: 'Issue created successfully' });

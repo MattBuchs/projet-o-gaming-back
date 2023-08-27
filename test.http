@@ -43,10 +43,10 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb2xlIjoi
 ### Create Issue
 POST http://localhost:3000/games/game/1/issue
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb2xlIjoicGxheWVyIiwiaWF0IjoxNjkyOTY0Mzg5LCJleHAiOjE2OTI5Njc5ODl9.ElMWTFNYWB8-nWSbj3iB8UWC_GaV98eUO8zVAxWrJDk
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb2xlIjoicGxheWVyIiwiaWF0IjoxNjkzMTI4ODAzLCJleHAiOjE2OTMxMzI0MDN9.eybsj70SXpdRdx5varjLe8q1fS4THNXq03AzfyhBvik
 
 {
-    "title": "test6",
+    "title": "test7",
     "description": "test test",
     "is_minor": true,
     "is_public": true,
@@ -55,7 +55,7 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb2xlIjoi
     "replication": "test test",
     "published_at": "2021-02-13",
     "user_id": 11,
-    "platform_id": 1
+    "platform_id": 2
 }
 
 ### Delete Issue
