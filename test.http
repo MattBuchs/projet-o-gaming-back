@@ -62,3 +62,10 @@ Content-Type: application/json
     "user_id": 1,
     "platform": "PlayStation 4"
 }
+
+### Trouver tous les Issues d'un Jeux
+GET http://localhost:3000/games/game/1/issues
+
+### Trouver un Issue d'un Jeux
+GET http://localhost:3000/games/game/1/issue/1
+
