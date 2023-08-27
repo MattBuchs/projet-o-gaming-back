@@ -62,3 +62,26 @@ Content-Type: application/json
     "user_id": 1,
     "platform": "PlayStation 4"
 }
+
+### Create Suggestion
+POST http://localhost:3000/games/game/1/suggestion
+Content-Type: application/json
+
+{
+    "title": "test",
+    "description": "test test",
+    "is_minor": true,
+    "is_public": true,
+    "is_online": true,
+    "frequency": "test",
+    "replication": "test test",
+    "published_at": "2021-02-13",
+    "user_id": 1,
+    "platform": "PlayStation 4"
+}
+
+### Trouver tous les Suggestions d'un Jeux
+GET http://localhost:3000/games/game/1/suggestions
+
+### Trouver un Suggestion d'un Jeux
+GET http://localhost:3000/games/game/1/suggestion/1
