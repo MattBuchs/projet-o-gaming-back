@@ -116,3 +116,6 @@ GET http://localhost:3000/games/game/1/suggestions
 
 ### Trouver un Suggestion d'un Jeux
 GET http://localhost:3000/games/game/1/suggestion/1
+
+### Trouver tous les Suggestions d'un Jeux
+GET http://localhost:3000/categories
