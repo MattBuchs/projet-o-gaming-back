@@ -30,7 +30,18 @@ router.route('/games/game/:id_game')
 
 /* Issues */
 router.route('/games/game/:id_game/issue')
-    .post(controllerIssue.createIssue);
+    .post(authenticateToken, controllerIssue.createIssue);
+
+router.route('/games/game/:id_game/issue/:id_issue')
+    .patch(authenticateToken, (req, res) => {
+        if (req.user.role === 'player') {
+            controllerIssue.updateAuthorIssue(req, res);
+        }
+        if (req.user.role === 'developer') {
+            controllerIssue.updateDeveloperIssue(req, res);
+        }
+    })
+    .delete(authenticateToken, controllerIssue.deleteIssue);
 
 router.route('/games/game/:id_game/issues')
     .get(controllerIssue.getAllIssues);

@@ -3,8 +3,8 @@ POST http://localhost:3000/signup
 Content-Type: application/json
 
 {
-    "username": "user",
-    "email": "test@test.com",
+    "username": "user2",
+    "email": "test2@test.com",
     "password": "password",
     "confirmPassword": "password",
     "avatar": "https://img.freepik.com/premium-vector/young-smiling-man-avatar-man-with-brown-beard-mustache-hair-wearing-yellow-sweater-sweatshirt-3d-vector-people-character-illustration-cartoon-minimal-style_365941-860.jpg",
@@ -16,7 +16,7 @@ POST http://localhost:3000/login
 Content-Type: application/json
 
 {
-    "email": "test@test.com",
+    "email": "test2@test.com",
     "password": "password"
 }
 
@@ -27,16 +27,16 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb2xlIjoi
 ### Création d'un Jeux
 POST http://localhost:3000/games/game
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb2xlIjoiZGV2ZWxvcGVyIiwiaWF0IjoxNjkyODkyNDI4LCJleHAiOjE2OTI4OTYwMjh9.A422VrHBAdQrm4rQLDZ0KKHkJ3SedimJvfPRjT95wCE
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEyLCJyb2xlIjoiZGV2ZWxvcGVyIiwiaWF0IjoxNjkzMTMwNzA0LCJleHAiOjE2OTMxMzQzMDR9.lhxHkjPgPZqgcXsygiLdiUTr_QGPdkznvArlR7teuk8
 
 {
-    "name": "test11",
+    "name": "Jeux 2",
     "description": "test",
     "picture": "https://www.jeuxvideo.com/smileys_img/45.gif",
     "external_link": "https://www.test",
-    "user_id": 11,
+    "user_id": 12,
     "release_date": "2021-05-20",
-    "categories": ["ankle", "ascot", "supreme"],
+    "categories": ["screen", "porcupine", "attitude"],
     "tags": ["view", "analyst", "action"]
 }
 
@@ -47,11 +47,12 @@ GET http://localhost:3000/games
 GET http://localhost:3000/games/game/1
 
 ### Create Issue
-POST http://localhost:3000/games/game/1/issue
+POST http://localhost:3000/games/game/13/issue
 Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb2xlIjoicGxheWVyIiwiaWF0IjoxNjkzMTI4ODAzLCJleHAiOjE2OTMxMzI0MDN9.eybsj70SXpdRdx5varjLe8q1fS4THNXq03AzfyhBvik
 
 {
-    "title": "test",
+    "title": "test7",
     "description": "test test",
     "is_minor": true,
     "is_public": true,
@@ -59,9 +60,33 @@ Content-Type: application/json
     "frequency": "test",
     "replication": "test test",
     "published_at": "2021-02-13",
-    "user_id": 1,
-    "platform": "PlayStation 4"
+    "user_id": 11,
+    "platform_id": 2
 }
+
+### Delete Issue
+DELETE http://localhost:3000/games/game/1/issue/11
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb2xlIjoicGxheWVyIiwiaWF0IjoxNjkyOTY0Mzg5LCJleHAiOjE2OTI5Njc5ODl9.ElMWTFNYWB8-nWSbj3iB8UWC_GaV98eUO8zVAxWrJDk
+
+### Update Issue Player
+PATCH http://localhost:3000/games/game/1/issue/11
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb2xlIjoicGxheWVyIiwiaWF0IjoxNjkzMTM0MTI3LCJleHAiOjE2OTMxMzc3Mjd9.JPEhHPUV0CVIRDpdpfFsnMw5S3MVkf-0Axo9aOFrl90
+
+{
+    "title": "test32",
+    "description": "test test test"
+}
+
+### Update Issue Developer
+PATCH http://localhost:3000/games/game/13/issue/13
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEyLCJyb2xlIjoiZGV2ZWxvcGVyIiwiaWF0IjoxNjkzMTM1NDIwLCJleHAiOjE2OTMxMzkwMjB9.fUIMzRdz2UKRu_MAbQkyvFCPo-IsVhzHHR63dBgoKDE
+
+{
+    "status": "accepted",
+    "assign_to": "test@developer.com"
+} 
 
 ### Trouver tous les Issues d'un Jeux
 GET http://localhost:3000/games/game/1/issues

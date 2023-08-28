@@ -39,7 +39,7 @@ export default {
             replication,
             published_at: publishedAt,
             user_id: userId,
-            platform,
+            platform_id: platformId,
         } = req.body;
 
         try {
@@ -52,14 +52,9 @@ export default {
                 || !replication
                 || !publishedAt
                 || !userId
-                || !platform
+                || !platformId
             ) {
                 return res.status(400).json({ error: 'Missing values' });
-            }
-
-            const getPlatform = await datamappers.platformDatamapper.findOne('name', platform);
-            if (!getPlatform) {
-                return res.status(400).json({ error: 'Invalid platform' });
             }
 
             const game = await datamappers.gameDatamapper.findByPk(gameId);
@@ -83,7 +78,7 @@ export default {
                 published_at: publishedAt,
                 user_id: userId,
                 game_id: gameId,
-                platform_id: getPlatform.id,
+                platform_id: platformId,
             });
 
             return res.status(201).json({ message: 'Issue created successfully' });
@@ -92,7 +87,75 @@ export default {
             if (err.code === '23505') {
                 return res.status(400).json({ error: 'Duplicate entry' });
             }
-            return res.status(500).json({ error: `Internal Server Error: ${err}` });
+            return res.status(500).json({ error: `Internal Server Error: ${err.message}` });
+        }
+    },
+    async updateAuthorIssue(req, res) {
+        const issueId = Number(req.params.id_issue);
+        const inputData = req.body;
+
+        try {
+            const issue = await datamappers.issueDatamapper.findByPk(issueId);
+            if (!issue) {
+                return res.status(400).json({ error: 'Issue Not Found' });
+            }
+
+            if (inputData.assign_to || inputData.status) {
+                return res.status(400).json({ error: 'Unauthorized' });
+            }
+
+            if (req.user.userId !== issue.user_id) return res.status(401).json({ error: 'Unauthorized' });
+
+            await datamappers.issueDatamapper.update(inputData, issueId);
+
+            return res.status(200).json({ message: 'Issue updated successfully' });
+        } catch (err) {
+            return res.status(500).json({ error: `Internal Server Error: ${err.message}` });
+        }
+    },
+
+    async updateDeveloperIssue(req, res) {
+        const issueId = Number(req.params.id_issue);
+        const inputData = req.body;
+
+        try {
+            const issue = await datamappers.issueDatamapper.findByPk(issueId);
+            if (!issue) {
+                return res.status(400).json({ error: 'Issue Not Found' });
+            }
+
+            if (inputData.assign_to || inputData.status) {
+                return res.status(400).json({ error: 'Unauthorized' });
+            }
+
+            const game = await datamappers.gameDatamapper.findByPk(issue.game_id);
+
+            if (req.user.userId !== game.user_id) return res.status(401).json({ error: 'Unauthorized' });
+
+            await datamappers.issueDatamapper.update(inputData, issueId);
+
+            return res.status(200).json({ message: 'Issue updated successfully' });
+        } catch (err) {
+            return res.status(500).json({ error: `Internal Server Error: ${err.message}` });
+        }
+    },
+
+    async deleteIssue(req, res) {
+        const issueId = Number(req.params.id_issue);
+
+        try {
+            const issue = await datamappers.issueDatamapper.findByPk(issueId);
+            if (!issue) {
+                return res.status(400).json({ error: 'Issue Not Found' });
+            }
+
+            if (req.user.userId !== issueId) return res.status(401).json({ error: 'Unauthorized' });
+
+            await datamappers.issueDatamapper.delete(issueId);
+
+            return res.status(200).json({ message: 'Issue deleted successfully' });
+        } catch (err) {
+            return res.status(500).json({ error: `Internal Server Error: ${err.message}` });
         }
     },
 };
