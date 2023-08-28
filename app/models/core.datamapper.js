@@ -64,9 +64,14 @@ export default class CoreDatamapper {
         const result = await this.client.query(`SELECT * FROM "${this.tableName}" WHERE email = $1`, [email]);
         return result.rows[0] || null;
     }
-
+    // async findByKeyValue(key, value) {
     async findOne(key, value) {
         const result = await this.client.query(`SELECT * FROM "${this.tableName}" WHERE ${key} = $1`, [value]);
+        return result.rows[0] || null;
+    }
+
+    async findBy2KeyValues(key1, value1, key2, value2) {
+        const result = await this.client.query(`SELECT * FROM "${this.tableName}" WHERE ${key1} = $1 and ${key2}= $2`, [value1, value2]);
         return result.rows[0] || null;
     }
 }

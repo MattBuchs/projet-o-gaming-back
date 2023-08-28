@@ -3,6 +3,28 @@ import DatabaseError from '../errors/database.error.js';
 import UserInputError from '../errors/user.input.error.js';
 
 export default {
+    async getAllGames(req, res) {
+        try {
+            const games = await datamappers.gameDatamapper.findAll();
+            return res.json({ games });
+        } catch (err) {
+            return res.status(500).json({ error: `Internal Server Error: ${err}` });
+        }
+    },
+    async getOneGame(req, res) {
+        try {
+            const gameId = req.params.id_game;
+            const game = await datamappers.gameDatamapper.findOne('id', gameId);
+            // not sure if needed:
+            // const findGame = await datamappers.gameDatamapper.findByPk(gameId);
+            if (!game) {
+                return res.status(404).json(`Can not find game with id ${gameId}`);
+            }
+            return res.json({ game });
+        } catch (err) {
+            return res.status(500).json({ error: `Internal Server Error: ${DatabaseError(err)}` });
+        }
+    },
     async createGame(req, res) {
         const {
             name,
@@ -79,7 +101,7 @@ export default {
             if (err.code === '23505') {
                 return res.status(400).json({ error: 'Duplicate entry' });
             }
-            return res.status(500).json({ error: 'Database error' });
+            return res.status(500).json({ error: `Internal Server Error: ${err}` });
         }
     },
 };

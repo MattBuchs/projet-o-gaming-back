@@ -22,7 +22,7 @@ Content-Type: application/json
 
 ### Test Token
 GET  http://localhost:3000/test
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInJvbGUiOiJKb3VldXIiLCJpYXQiOjE2OTI3MjM3ODMsImV4cCI6MTY5MjcyNzM4M30.qSEULDgeJ26XR7pjflPY6blqqgRROEe2ORofkPkP-7Q
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb2xlIjoiZGV2ZWxvcGVyIiwiaWF0IjoxNjkyODkyNDI4LCJleHAiOjE2OTI4OTYwMjh9.A422VrHBAdQrm4rQLDZ0KKHkJ3SedimJvfPRjT95wCE
 
 ### Création d'un Jeux
 POST http://localhost:3000/games/game
@@ -39,6 +39,12 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEyLCJyb2xlIjoi
     "categories": ["screen", "porcupine", "attitude"],
     "tags": ["view", "analyst", "action"]
 }
+
+### Trouver tous les Jeux
+GET http://localhost:3000/games
+
+### Trouver un Jeux
+GET http://localhost:3000/games/game/1
 
 ### Create Issue
 POST http://localhost:3000/games/game/13/issue
@@ -80,4 +86,10 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEyLCJyb2xlIjoi
 {
     "status": "accepted",
     "assign_to": "test@developer.com"
-}
+} 
+
+### Trouver tous les Issues d'un Jeux
+GET http://localhost:3000/games/game/1/issues
+
+### Trouver un Issue d'un Jeux
+GET http://localhost:3000/games/game/1/issue/1
