@@ -59,4 +59,8 @@ router.route('/games/game/:id_game/suggestions')
 router.route('/games/game/:id_game/suggestion/:id_suggestion')
     .get(controllerSuggestion.getOneSuggestion);
 
+/* Categories */
+router.route('/categories')
+    .get(controllerGame.getAllCategories);
+
 export default router;
