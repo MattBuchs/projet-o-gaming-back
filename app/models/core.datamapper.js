@@ -64,8 +64,8 @@ export default class CoreDatamapper {
         const result = await this.client.query(`SELECT * FROM "${this.tableName}" WHERE email = $1`, [email]);
         return result.rows[0] || null;
     }
-    // async findByKeyValue(key, value) {
-    async findOne(key, value) {
+
+    async findByKeyValue(key, value) {
         const result = await this.client.query(`SELECT * FROM "${this.tableName}" WHERE ${key} = $1`, [value]);
         return result.rows || null;
     }

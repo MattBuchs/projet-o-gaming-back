@@ -4,7 +4,7 @@ export default {
     async getAllIssues(req, res) {
         try {
             const gameId = req.params.id_game;
-            const issues = await datamappers.issueDatamapper.findOne('game_id', gameId);
+            const issues = await datamappers.issueDatamapper.findByKeyValue('game_id', gameId);
             return res.json({ issues });
         } catch (err) {
             return res.status(500).json({ error: `Internal Server Error: ${err}` });
@@ -14,7 +14,7 @@ export default {
         try {
             const gameId = req.params.id_game;
             const issueId = req.params.id_issue;
-            const game = await datamappers.issueDatamapper.findOne('id', gameId);
+            const game = await datamappers.issueDatamapper.findByKeyValue('id', gameId);
             const issue = await datamappers.issueDatamapper.findBy2KeyValues('game_id', gameId, 'id', issueId);
             if (!game) {
                 return res.status(404).json(`Can not find game with id ${gameId}`);

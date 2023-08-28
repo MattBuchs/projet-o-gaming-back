@@ -5,7 +5,7 @@ export default {
         try {
             const gameId = req.params.id_game;
             // find all sugestions associated with game ID
-            const suggestions = await datamappers.suggestionDatamapper.findOne('game_id', gameId);
+            const suggestions = await datamappers.suggestionDatamapper.findByKeyValue('game_id', gameId);
             return res.json({ suggestions });
         } catch (err) {
             return res.status(500).json({ error: `Internal Server Error: ${err}` });
@@ -15,7 +15,7 @@ export default {
         try {
             const gameId = req.params.id_game;
             const suggestionId = req.params.id_suggestion;
-            const game = await datamappers.suggestionDatamapper.findOne('id', gameId);
+            const game = await datamappers.suggestionDatamapper.findByKeyValue('id', gameId);
             const suggestion = await datamappers.suggestionDatamapper.findBy2KeyValues('game_id', gameId, 'id', suggestionId);
             if (!game) {
                 return res.status(404).json(`Can not find game with id ${gameId}`);

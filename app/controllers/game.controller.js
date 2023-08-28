@@ -14,7 +14,7 @@ export default {
     async getOneGame(req, res) {
         try {
             const gameId = req.params.id_game;
-            const game = await datamappers.gameDatamapper.findOne('id', gameId);
+            const game = await datamappers.gameDatamapper.findByKeyValue('id', gameId);
             // not sure if needed:
             // const findGame = await datamappers.gameDatamapper.findByPk(gameId);
             if (!game) {
@@ -61,7 +61,7 @@ export default {
                 return res.status(500).json({ error: 'Game not created' });
             }
 
-            const findGame = await datamappers.gameDatamapper.findOne('name', name);
+            const findGame = await datamappers.gameDatamapper.findByKeyValue('name', name);
 
             if (!findGame) {
                 return res.status(404).json({ error: 'Game not found' });
@@ -70,7 +70,7 @@ export default {
             if (tags && tags.length > 0) {
                 await Promise.all(tags.map(async (tag) => {
                     const tagTitle = tag.toLowerCase();
-                    let findTag = await datamappers.tagDatamapper.findOne('title', tagTitle);
+                    let findTag = await datamappers.tagDatamapper.findByKeyValue('title', tagTitle);
 
                     if (!findTag) {
                         findTag = await datamappers.tagDatamapper.create({ title: tagTitle });
@@ -84,7 +84,7 @@ export default {
             }
 
             await Promise.all(categories.map(async (category) => {
-                const findCategory = await datamappers.categoryDatamapper.findOne('name', category);
+                const findCategory = await datamappers.categoryDatamapper.findByKeyValue('name', category);
 
                 if (!findCategory) {
                     return res.status(404).json({ error: 'Category not found' });
