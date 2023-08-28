@@ -29,10 +29,12 @@ router.route('/games/game/:id_game')
     .get(controllerGame.getOneGame);
 
 /* Issues */
-router.route('/games/game/:id_game/issue')
+router.route('/games/game/:id_game/issues')
+    .get(controllerIssue.getAllIssues)
     .post(authenticateToken, controllerIssue.createIssue);
 
 router.route('/games/game/:id_game/issue/:id_issue')
+    .get(controllerIssue.getOneIssue)
     .patch(authenticateToken, (req, res) => {
         if (req.user.role === 'player') {
             controllerIssue.updateAuthorIssue(req, res);
@@ -43,20 +45,13 @@ router.route('/games/game/:id_game/issue/:id_issue')
     })
     .delete(authenticateToken, controllerIssue.deleteIssue);
 
-router.route('/games/game/:id_game/issues')
-    .get(controllerIssue.getAllIssues);
-
-router.route('/games/game/:id_game/issue/:id_issue')
-    .get(controllerIssue.getOneIssue);
-
 /* Suggestions */
-router.route('/games/game/:id_game/suggestion')
+router.route('/games/game/:id_game/suggestions')
+    .get(controllerSuggestion.getAllSuggestions)
     .post(controllerSuggestion.createSuggestion);
 
-router.route('/games/game/:id_game/suggestions')
-    .get(controllerSuggestion.getAllSuggestions);
-
 router.route('/games/game/:id_game/suggestion/:id_suggestion')
-    .get(controllerSuggestion.getOneSuggestion);
+    .get(controllerSuggestion.getOneSuggestion)
+    .delete(authenticateToken, controllerSuggestion.deleteSuggestion);
 
 export default router;
