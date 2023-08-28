@@ -85,6 +85,7 @@ export default {
             const user = {
                 userId: existUser.id,
                 role: role.name,
+                username: existUser.username,
             };
 
             const token = jwt.sign(user, process.env.SECRET_KEY, { expiresIn: '1h' });
