@@ -117,4 +117,24 @@ export default {
             return res.status(500).json({ error: `Internal Server Error: ${err.message}` });
         }
     },
+
+    async updateGame(req, res) {
+        const gameId = Number(req.params.id_game);
+        const inputData = req.body;
+
+        try {
+            const game = await datamappers.gameDatamapper.findByPk(gameId);
+            if (!game) {
+                return res.status(400).json({ error: 'Issue Not Found' });
+            }
+
+            if (req.user.userId !== game.user_id) return res.status(401).json({ error: 'Unauthorized' });
+
+            await datamappers.gameDatamapper.update(inputData, gameId);
+
+            return res.status(200).json({ message: 'Issue updated successfully' });
+        } catch (err) {
+            return res.status(500).json({ error: `Internal Server Error: ${err.message}` });
+        }
+    },
 };

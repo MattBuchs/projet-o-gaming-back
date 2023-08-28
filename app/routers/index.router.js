@@ -26,7 +26,8 @@ router.route('/games')
     .get(controllerGame.getAllGames);
 
 router.route('/games/game/:id_game')
-    .get(controllerGame.getOneGame);
+    .get(controllerGame.getOneGame)
+    .patch([authenticateToken, checkUserRole.isDeveloper], controllerGame.updateGame);
 
 /* Issues */
 router.route('/games/game/:id_game/issues')

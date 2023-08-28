@@ -40,6 +40,16 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb2xlIjoi
     "tags": ["view", "analyst", "action"]
 }
 
+### Update d'un Jeux
+PATCH http://localhost:3000/games/game/13
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEyLCJyb2xlIjoiZGV2ZWxvcGVyIiwidXNlcm5hbWUiOiJ1c2VyMiIsImlhdCI6MTY5MzIzOTU2MSwiZXhwIjoxNjkzMjQzMTYxfQ.giPV38fqGtfji0VHiOctvH7ZmNn57qtmW7fcJj6SH0k
+
+{
+    "name": "Jeux Test",
+    "description": "test2"
+}
+
 ### Trouver tous les Jeux
 GET http://localhost:3000/games
 
