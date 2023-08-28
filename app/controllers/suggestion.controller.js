@@ -73,4 +73,25 @@ export default {
             return res.status(500).json({ error: `Internal Server Error: ${err}` });
         }
     },
+    async deleteSuggestion(req, res) {
+        const suggestionId = Number(req.params.id_suggestion);
+        const { userId } = req.user;
+
+        try {
+            const suggestion = await datamappers.suggestionDatamapper.findByPk(suggestionId);
+            if (!suggestion) {
+                return res.status(400).json({ error: 'Suggestion Not Found' });
+            }
+
+            const suggestionAuthorId = suggestion.user_id;
+            // check user id given vs user id of the suggestion
+            if (userId !== suggestionAuthorId) return res.status(401).json({ error: 'Unauthorized' });
+
+            await datamappers.suggestionDatamapper.delete(suggestionId);
+
+            return res.status(200).json({ message: 'Suggestion deleted successfully' });
+        } catch (err) {
+            return res.status(500).json({ error: `Internal Server Error: ${err.message}` });
+        }
+    },
 };

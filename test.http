@@ -22,12 +22,12 @@ Content-Type: application/json
 
 ### Test Token
 GET  http://localhost:3000/test
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb2xlIjoiZGV2ZWxvcGVyIiwiaWF0IjoxNjkyODkyNDI4LCJleHAiOjE2OTI4OTYwMjh9.A422VrHBAdQrm4rQLDZ0KKHkJ3SedimJvfPRjT95wCE
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb2xlIjoiZGV2ZWxvcGVyIiwiaWF0IjoxNjkzMjEzMjE3LCJleHAiOjE2OTMyMTY4MTd9.OKK4sLllNHrspu8zk-G8OWpwWhc7-WFcqwYoOyPhNNY
 
 ### Création d'un Jeux
 POST http://localhost:3000/games/game
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEyLCJyb2xlIjoiZGV2ZWxvcGVyIiwiaWF0IjoxNjkzMTMwNzA0LCJleHAiOjE2OTMxMzQzMDR9.lhxHkjPgPZqgcXsygiLdiUTr_QGPdkznvArlR7teuk8
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb2xlIjoiZGV2ZWxvcGVyIiwiaWF0IjoxNjkzMjEzMjE3LCJleHAiOjE2OTMyMTY4MTd9.OKK4sLllNHrspu8zk-G8OWpwWhc7-WFcqwYoOyPhNNY
 
 {
     "name": "Jeux 2",
@@ -47,9 +47,9 @@ GET http://localhost:3000/games
 GET http://localhost:3000/games/game/1
 
 ### Create Issue
-POST http://localhost:3000/games/game/13/issue
+POST http://localhost:3000/games/game/1/issues
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb2xlIjoicGxheWVyIiwiaWF0IjoxNjkzMTI4ODAzLCJleHAiOjE2OTMxMzI0MDN9.eybsj70SXpdRdx5varjLe8q1fS4THNXq03AzfyhBvik
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb2xlIjoiZGV2ZWxvcGVyIiwiaWF0IjoxNjkzMjEzMjE3LCJleHAiOjE2OTMyMTY4MTd9.OKK4sLllNHrspu8zk-G8OWpwWhc7-WFcqwYoOyPhNNY
 
 {
     "title": "test7",
@@ -66,12 +66,12 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb2xlIjoi
 
 ### Delete Issue
 DELETE http://localhost:3000/games/game/1/issue/11
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb2xlIjoicGxheWVyIiwiaWF0IjoxNjkyOTY0Mzg5LCJleHAiOjE2OTI5Njc5ODl9.ElMWTFNYWB8-nWSbj3iB8UWC_GaV98eUO8zVAxWrJDk
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb2xlIjoiZGV2ZWxvcGVyIiwiaWF0IjoxNjkzMjEzMjE3LCJleHAiOjE2OTMyMTY4MTd9.OKK4sLllNHrspu8zk-G8OWpwWhc7-WFcqwYoOyPhNNY
 
 ### Update Issue Player
 PATCH http://localhost:3000/games/game/1/issue/11
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb2xlIjoicGxheWVyIiwiaWF0IjoxNjkzMTM0MTI3LCJleHAiOjE2OTMxMzc3Mjd9.JPEhHPUV0CVIRDpdpfFsnMw5S3MVkf-0Axo9aOFrl90
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb2xlIjoiZGV2ZWxvcGVyIiwiaWF0IjoxNjkzMjEzMjE3LCJleHAiOjE2OTMyMTY4MTd9.OKK4sLllNHrspu8zk-G8OWpwWhc7-WFcqwYoOyPhNNY
 
 {
     "title": "test32",
@@ -81,7 +81,7 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb2xlIjoi
 ### Update Issue Developer
 PATCH http://localhost:3000/games/game/13/issue/13
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEyLCJyb2xlIjoiZGV2ZWxvcGVyIiwiaWF0IjoxNjkzMTM1NDIwLCJleHAiOjE2OTMxMzkwMjB9.fUIMzRdz2UKRu_MAbQkyvFCPo-IsVhzHHR63dBgoKDE
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb2xlIjoiZGV2ZWxvcGVyIiwiaWF0IjoxNjkzMjEzMjE3LCJleHAiOjE2OTMyMTY4MTd9.OKK4sLllNHrspu8zk-G8OWpwWhc7-WFcqwYoOyPhNNY
 
 {
     "status": "accepted",
@@ -95,7 +95,7 @@ GET http://localhost:3000/games/game/1/issues
 GET http://localhost:3000/games/game/1/issue/1
 
 ### Create Suggestion
-POST http://localhost:3000/games/game/1/suggestion
+POST http://localhost:3000/games/game/1/suggestions
 Content-Type: application/json
 
 {
@@ -108,8 +108,12 @@ Content-Type: application/json
     "replication": "test test",
     "published_at": "2021-02-13",
     "user_id": 1,
-    "platform": "PlayStation 4"
+    "platform_id": 2
 }
+
+### Delete Suggestion
+DELETE http://localhost:3000/games/game/1/suggestion/14
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb2xlIjoiZGV2ZWxvcGVyIiwiaWF0IjoxNjkzMjI1NjAxLCJleHAiOjE2OTMyMjkyMDF9.YSJl96mZS5lnV64JjkH8SPVz9SqJGFk6OiE52fVL9z8
 
 ### Trouver tous les Suggestions d'un Jeux
 GET http://localhost:3000/games/game/1/suggestions
