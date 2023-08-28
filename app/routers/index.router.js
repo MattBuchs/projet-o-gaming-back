@@ -1,9 +1,10 @@
 import express from 'express';
 import controllerAuth from '../controllers/auth.controller.js';
 import controllerGame from '../controllers/game.controller.js';
+import controllerIssue from '../controllers/issue.controller.js';
+import controllerSuggestion from '../controllers/suggestion.controller.js';
 import authenticateToken from '../validation/authToken.middleware.js';
 import checkUserRole from '../validation/checkUserRole.middleware.js';
-import controllerIssue from '../controllers/issue.controller.js';
 
 const router = express.Router();
 
@@ -47,5 +48,15 @@ router.route('/games/game/:id_game/issues')
 
 router.route('/games/game/:id_game/issue/:id_issue')
     .get(controllerIssue.getOneIssue);
+
+/* Suggestions */
+router.route('/games/game/:id_game/suggestion')
+    .post(controllerSuggestion.createSuggestion);
+
+router.route('/games/game/:id_game/suggestions')
+    .get(controllerSuggestion.getAllSuggestions);
+
+router.route('/games/game/:id_game/suggestion/:id_suggestion')
+    .get(controllerSuggestion.getOneSuggestion);
 
 export default router;
