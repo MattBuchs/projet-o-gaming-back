@@ -26,13 +26,13 @@ export default {
         }
     },
     async createGame(req, res) {
+        const { userId } = req.user;
         const {
             name,
             description,
             picture,
             external_link: externalLink,
             release_date: releaseDate,
-            user_id: userId,
             categories,
             tags,
         } = req.body;
@@ -61,16 +61,17 @@ export default {
                 return res.status(500).json({ error: 'Game not created' });
             }
 
-            const findGame = await datamappers.gameDatamapper.findByKeyValue('name', name);
+            const findGame = await datamappers.gameDatamapper.findOne('name', name);
 
             if (!findGame) {
                 return res.status(404).json({ error: 'Game not found' });
             }
 
+            let tagPromises;
             if (tags && tags.length > 0) {
-                await Promise.all(tags.map(async (tag) => {
+                tagPromises = tags.map(async (tag) => {
                     const tagTitle = tag.toLowerCase();
-                    let findTag = await datamappers.tagDatamapper.findByKeyValue('title', tagTitle);
+                    let findTag = await datamappers.tagDatamapper.findOne('title', tagTitle);
 
                     if (!findTag) {
                         findTag = await datamappers.tagDatamapper.create({ title: tagTitle });
@@ -80,11 +81,11 @@ export default {
                         game_id: findGame.id,
                         tag_id: findTag.id,
                     });
-                }));
+                });
             }
 
-            await Promise.all(categories.map(async (category) => {
-                const findCategory = await datamappers.categoryDatamapper.findByKeyValue('name', category);
+            const categoryPromises = categories.map(async (category) => {
+                const findCategory = await datamappers.categoryDatamapper.findOne('name', category);
 
                 if (!findCategory) {
                     return res.status(404).json({ error: 'Category not found' });
@@ -94,7 +95,9 @@ export default {
                     category_id: findCategory.id,
                     game_id: findGame.id,
                 });
-            }));
+            });
+
+            await Promise.all([...tagPromises, ...categoryPromises]);
 
             return res.json({ message: 'Game created' });
         } catch (err) {
