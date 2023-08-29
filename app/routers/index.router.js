@@ -38,14 +38,7 @@ router.route('/games/game/:id_game/issues')
 
 router.route('/games/game/:id_game/issue/:id_issue')
     .get(controllerIssue.getOneIssue)
-    .patch(authenticateToken, (req, res) => {
-        if (req.user.role === 'player') {
-            controllerIssue.updateAuthorIssue(req, res);
-        }
-        if (req.user.role === 'developer') {
-            controllerIssue.updateDeveloperIssue(req, res);
-        }
-    })
+    .patch(authenticateToken, controllerIssue.updateIssue)
     .delete(authenticateToken, controllerIssue.deleteIssue);
 
 /* Suggestions */
