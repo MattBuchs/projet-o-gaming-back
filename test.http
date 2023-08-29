@@ -27,10 +27,10 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb2xlIjoi
 ### Création d'un Jeux
 POST http://localhost:3000/games/game
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb2xlIjoiZGV2ZWxvcGVyIiwiaWF0IjoxNjkzMjEzMjE3LCJleHAiOjE2OTMyMTY4MTd9.OKK4sLllNHrspu8zk-G8OWpwWhc7-WFcqwYoOyPhNNY
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEyLCJyb2xlIjoiZGV2ZWxvcGVyIiwidXNlcm5hbWUiOiJ1c2VyMiIsImlhdCI6MTY5MzMwOTk2MywiZXhwIjoxNjkzMzEzNTYzfQ.AC_IrDp7eVeAoKIrJvDBV4UrMJ2luDNnxCj0l-v8fcg
 
 {
-    "name": "Jeux 2",
+    "name": "Jeux 515",
     "description": "test",
     "picture": "https://www.jeuxvideo.com/smileys_img/45.gif",
     "external_link": "https://www.test",
@@ -138,4 +138,4 @@ GET http://localhost:3000/categories
 GET http://localhost:3000/users
 
 ### Trouver un user
-GET http://localhost:3000/users/user/2
+GET http://localhost:3000/users/user/11

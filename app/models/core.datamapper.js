@@ -65,6 +65,11 @@ export default class CoreDatamapper {
         return result.rows[0] || null;
     }
 
+    async findOne(key, value) {
+        const result = await this.client.query(`SELECT * FROM "${this.tableName}" WHERE ${key} = $1`, [value]);
+        return result.rows[0] || null;
+    }
+
     async findByKeyValue(key, value) {
         const result = await this.client.query(`SELECT * FROM "${this.tableName}" WHERE ${key} = $1`, [value]);
         return result.rows || null;
