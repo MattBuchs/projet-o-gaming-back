@@ -73,9 +73,9 @@ export default {
             return res.status(500).json({ error: `Internal Server Error: ${err}` });
         }
     },
-    async deleteSuggestion(req, res) {
+    async updateSuggestion(req, res) {
         const suggestionId = Number(req.params.id_suggestion);
-        const { userId } = req.user;
+        const inputData = req.body;
 
         try {
             const suggestion = await datamappers.suggestionDatamapper.findByPk(suggestionId);
@@ -83,9 +83,38 @@ export default {
                 return res.status(400).json({ error: 'Suggestion Not Found' });
             }
 
-            const suggestionAuthorId = suggestion.user_id;
-            // check user id given vs user id of the suggestion
-            if (userId !== suggestionAuthorId) return res.status(401).json({ error: 'Unauthorized' });
+            // console.log("req.user.userId: ", req.user.userId)
+            // console.log("suggestion.user_id: ", suggestion.user_id)
+            const isAuthor = req.user.userId === suggestion.user_id;
+            // console.log("isAuthor: ", isAuthor)
+            // console.log("req.user.role: ", req.user.role)
+            const isDev = req.user.role === 'developer';
+            // console.log("isDev: ", isDev)
+
+            // if user id given is not the author and not a dev send Unauthorized
+            if (!isAuthor && !isDev) return res.status(401).json({ error: 'Unauthorized' });
+
+            await datamappers.suggestionDatamapper.update(inputData, suggestionId);
+
+            return res.status(200).json({ message: 'Suggestion updated successfully' });
+        } catch (err) {
+            return res.status(500).json({ error: `Internal Server Error: ${err.message}` });
+        }
+    },
+    async deleteSuggestion(req, res) {
+        const suggestionId = Number(req.params.id_suggestion);
+
+        try {
+            const suggestion = await datamappers.suggestionDatamapper.findByPk(suggestionId);
+            if (!suggestion) {
+                return res.status(400).json({ error: 'Suggestion Not Found' });
+            }
+
+            const isAuthor = req.user.userId === suggestion.user_id;
+            const isDev = req.user.role === 'developer';
+
+            // if user id given is not the author and not a dev send Unauthorized
+            if (!isAuthor && !isDev) return res.status(401).json({ error: 'Unauthorized' });
 
             await datamappers.suggestionDatamapper.delete(suggestionId);
 

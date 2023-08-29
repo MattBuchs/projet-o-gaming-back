@@ -115,6 +115,16 @@ Content-Type: application/json
 DELETE http://localhost:3000/games/game/1/suggestion/14
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb2xlIjoiZGV2ZWxvcGVyIiwiaWF0IjoxNjkzMjI1NjAxLCJleHAiOjE2OTMyMjkyMDF9.YSJl96mZS5lnV64JjkH8SPVz9SqJGFk6OiE52fVL9z8
 
+### Update Suggestion 
+PATCH http://localhost:3000/games/game/1/suggestion/1
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb2xlIjoiZGV2ZWxvcGVyIiwiaWF0IjoxNjkzMjEzMjE3LCJleHAiOjE2OTMyMTY4MTd9.OKK4sLllNHrspu8zk-G8OWpwWhc7-WFcqwYoOyPhNNY
+
+{
+    "title": "Patch test successful",
+    "description": "test test of patch test"
+} 
+
 ### Trouver tous les Suggestions d'un Jeux
 GET http://localhost:3000/games/game/1/suggestions
 
