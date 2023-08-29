@@ -1,5 +1,6 @@
 import express from 'express';
 import controllerAuth from '../controllers/auth.controller.js';
+import controllerUser from '../controllers/user.controller.js';
 import controllerGame from '../controllers/game.controller.js';
 import controllerIssue from '../controllers/issue.controller.js';
 import controllerSuggestion from '../controllers/suggestion.controller.js';
@@ -60,5 +61,12 @@ router.route('/games/game/:id_game/suggestion/:id_suggestion')
 /* Categories */
 router.route('/categories')
     .get(controllerGame.getAllCategories);
+
+/* Users */
+router.route('/users')
+    .get(controllerUser.getAllUsers);
+
+router.route('/users/user/:id_user')
+    .get(controllerUser.getOneUser);
 
 export default router;
