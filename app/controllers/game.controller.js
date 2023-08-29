@@ -5,7 +5,7 @@ import UserInputError from '../errors/user.input.error.js';
 export default {
     async getAllGames(req, res) {
         try {
-            const games = await datamappers.gameDatamapper.findAll();
+            const games = await datamappers.gameDatamapper.getGamesWithDetails();
             return res.json({ games });
         } catch (err) {
             return res.status(500).json({ error: `Internal Server Error: ${err}` });
