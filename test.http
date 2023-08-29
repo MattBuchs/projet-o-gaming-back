@@ -136,3 +136,6 @@ GET http://localhost:3000/categories
 
 ### Trouver tous les users
 GET http://localhost:3000/users
+
+### Trouver un user
+GET http://localhost:3000/users/user/2

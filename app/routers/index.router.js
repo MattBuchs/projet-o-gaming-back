@@ -64,4 +64,7 @@ router.route('/categories')
 router.route('/users')
     .get(controllerUser.getAllUsers);
 
+router.route('/users/user/:id_user')
+    .get(controllerUser.getOneUser);
+
 export default router;
