@@ -149,7 +149,8 @@ export default {
                 return res.status(400).json({ error: 'Issue Not Found' });
             }
 
-            if (req.user.userId !== issueId) return res.status(401).json({ error: 'Unauthorized' });
+            // check user id given vs user id of the issue
+            if (req.user.userId !== issue.user_id) return res.status(401).json({ error: 'Unauthorized' });
 
             await datamappers.issueDatamapper.delete(issueId);
 
