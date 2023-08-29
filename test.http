@@ -16,7 +16,7 @@ POST http://localhost:3000/login
 Content-Type: application/json
 
 {
-    "email": "test2@test.com",
+    "email": "test@test.com",
     "password": "password"
 }
 
@@ -27,18 +27,31 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb2xlIjoi
 ### Création d'un Jeux
 POST http://localhost:3000/games/game
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb2xlIjoiZGV2ZWxvcGVyIiwiaWF0IjoxNjkzMjEzMjE3LCJleHAiOjE2OTMyMTY4MTd9.OKK4sLllNHrspu8zk-G8OWpwWhc7-WFcqwYoOyPhNNY
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEyLCJyb2xlIjoiZGV2ZWxvcGVyIiwidXNlcm5hbWUiOiJ1c2VyMiIsImlhdCI6MTY5MzI5NjQ0MCwiZXhwIjoxNjkzMzAwMDQwfQ.8-104-OrFGMYJUbDMbyTY3NMBdeMcZrMiTAXxJhqSew
 
 {
-    "name": "Jeux 2",
+    "name": "Jeux 554",
     "description": "test",
     "picture": "https://www.jeuxvideo.com/smileys_img/45.gif",
     "external_link": "https://www.test",
-    "user_id": 12,
     "release_date": "2021-05-20",
     "categories": ["screen", "porcupine", "attitude"],
     "tags": ["view", "analyst", "action"]
 }
+
+### Update d'un Jeux
+PATCH http://localhost:3000/games/game/19
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEyLCJyb2xlIjoiZGV2ZWxvcGVyIiwidXNlcm5hbWUiOiJ1c2VyMiIsImlhdCI6MTY5MzI5ODE0OCwiZXhwIjoxNjkzMzAxNzQ4fQ.AcK4dgde1I5qb5R5GShRBufyBfy3hkjlixYKg0hoVmQ
+
+{
+    "name": "Jeux 5465",
+    "description": "test2"
+}
+
+### Delete d'un Jeux
+DELETE http://localhost:3000/games/game/19
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEyLCJyb2xlIjoiZGV2ZWxvcGVyIiwidXNlcm5hbWUiOiJ1c2VyMiIsImlhdCI6MTY5MzI5ODE0OCwiZXhwIjoxNjkzMzAxNzQ4fQ.AcK4dgde1I5qb5R5GShRBufyBfy3hkjlixYKg0hoVmQ
 
 ### Trouver tous les Jeux
 GET http://localhost:3000/games
@@ -47,12 +60,12 @@ GET http://localhost:3000/games
 GET http://localhost:3000/games/game/1
 
 ### Create Issue
-POST http://localhost:3000/games/game/1/issues
+POST http://localhost:3000/games/game/19/issues
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb2xlIjoiZGV2ZWxvcGVyIiwiaWF0IjoxNjkzMjEzMjE3LCJleHAiOjE2OTMyMTY4MTd9.OKK4sLllNHrspu8zk-G8OWpwWhc7-WFcqwYoOyPhNNY
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb2xlIjoicGxheWVyIiwidXNlcm5hbWUiOiJ1c2VyIiwiaWF0IjoxNjkzMjk5NTIwLCJleHAiOjE2OTMzMDMxMjB9.Prw1M_Nd2WOJzcCnpXf06CF-Ehi2bYD0U8E9eaGWD0I
 
 {
-    "title": "test7",
+    "title": "test32g",
     "description": "test test",
     "is_minor": true,
     "is_public": true,
@@ -107,13 +120,13 @@ Content-Type: application/json
     "frequency": "test",
     "replication": "test test",
     "published_at": "2021-02-13",
-    "user_id": 1,
+    "user_id": 11,
     "platform_id": 2
 }
 
 ### Delete Suggestion
-DELETE http://localhost:3000/games/game/1/suggestion/14
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb2xlIjoiZGV2ZWxvcGVyIiwiaWF0IjoxNjkzMjI1NjAxLCJleHAiOjE2OTMyMjkyMDF9.YSJl96mZS5lnV64JjkH8SPVz9SqJGFk6OiE52fVL9z8
+DELETE http://localhost:3000/games/game/1/suggestion/13
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb2xlIjoicGxheWVyIiwidXNlcm5hbWUiOiJ1c2VyIiwiaWF0IjoxNjkzMjkxNjc2LCJleHAiOjE2OTMyOTUyNzZ9.VXBl1lFRL7DXRj19fun0IVSdzH7l5QvYd0WU-7nWITQ
 
 ### Update Suggestion 
 PATCH http://localhost:3000/games/game/1/suggestion/1
@@ -131,5 +144,5 @@ GET http://localhost:3000/games/game/1/suggestions
 ### Trouver un Suggestion d'un Jeux
 GET http://localhost:3000/games/game/1/suggestion/1
 
-### Trouver tous les Suggestions d'un Jeux
+### Trouver tous les Catégories
 GET http://localhost:3000/categories

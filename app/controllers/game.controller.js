@@ -26,13 +26,13 @@ export default {
         }
     },
     async createGame(req, res) {
+        const { userId } = req.user;
         const {
             name,
             description,
             picture,
             external_link: externalLink,
             release_date: releaseDate,
-            user_id: userId,
             categories,
             tags,
         } = req.body;
@@ -61,16 +61,17 @@ export default {
                 return res.status(500).json({ error: 'Game not created' });
             }
 
-            const findGame = await datamappers.gameDatamapper.findByKeyValue('name', name);
+            const findGame = await datamappers.gameDatamapper.findOne('name', name);
 
             if (!findGame) {
                 return res.status(404).json({ error: 'Game not found' });
             }
 
+            let tagPromises;
             if (tags && tags.length > 0) {
-                await Promise.all(tags.map(async (tag) => {
+                tagPromises = tags.map(async (tag) => {
                     const tagTitle = tag.toLowerCase();
-                    let findTag = await datamappers.tagDatamapper.findByKeyValue('title', tagTitle);
+                    let findTag = await datamappers.tagDatamapper.findOne('title', tagTitle);
 
                     if (!findTag) {
                         findTag = await datamappers.tagDatamapper.create({ title: tagTitle });
@@ -80,11 +81,11 @@ export default {
                         game_id: findGame.id,
                         tag_id: findTag.id,
                     });
-                }));
+                });
             }
 
-            await Promise.all(categories.map(async (category) => {
-                const findCategory = await datamappers.categoryDatamapper.findByKeyValue('name', category);
+            const categoryPromises = categories.map(async (category) => {
+                const findCategory = await datamappers.categoryDatamapper.findOne('name', category);
 
                 if (!findCategory) {
                     return res.status(404).json({ error: 'Category not found' });
@@ -94,7 +95,9 @@ export default {
                     category_id: findCategory.id,
                     game_id: findGame.id,
                 });
-            }));
+            });
+
+            await Promise.all([...tagPromises, ...categoryPromises]);
 
             return res.json({ message: 'Game created' });
         } catch (err) {
@@ -113,6 +116,68 @@ export default {
             }
 
             return res.json({ categories });
+        } catch (err) {
+            return res.status(500).json({ error: `Internal Server Error: ${err.message}` });
+        }
+    },
+
+    async updateGame(req, res) {
+        const gameId = Number(req.params.id_game);
+        const inputData = req.body;
+
+        try {
+            const game = await datamappers.gameDatamapper.findByPk(gameId);
+            if (!game) {
+                return res.status(400).json({ error: 'Issue Not Found' });
+            }
+
+            if (req.user.userId !== game.user_id) return res.status(401).json({ error: 'Unauthorized' });
+
+            inputData.updated_at = new Date();
+            console.log(inputData);
+            await datamappers.gameDatamapper.update(inputData, gameId);
+
+            return res.status(200).json({ message: 'Issue updated successfully' });
+        } catch (err) {
+            return res.status(500).json({ error: `Internal Server Error: ${err.message}` });
+        }
+    },
+
+    async deleteGame(req, res) {
+        const gameId = Number(req.params.id_game);
+        try {
+            const game = await datamappers.gameDatamapper.findByPk(gameId);
+            if (!game) {
+                return res.status(404).json({ error: 'Game not found' });
+            }
+
+            if (req.user.userId !== game.user_id) return res.status(401).json({ error: 'Unauthorized' });
+
+            const issues = await datamappers.issueDatamapper.findByKeyValue('game_id', gameId);
+            const categoryHasGame = await datamappers.gameCategoryDatamapper.findByKeyValue('game_id', gameId);
+            const gameHasTag = await datamappers.gameTagDatamapper.findByKeyValue('game_id', gameId);
+
+            if (issues) {
+                await Promise.all(issues.map(async (issue) => {
+                    await datamappers.issueDatamapper.delete(issue.id);
+                }));
+            }
+
+            if (categoryHasGame) {
+                await Promise.all(categoryHasGame.map(async () => {
+                    await datamappers.gameCategoryDatamapper.deleteByFk('game_id', gameId);
+                }));
+            }
+
+            if (gameHasTag) {
+                await Promise.all(gameHasTag.map(async () => {
+                    await datamappers.gameTagDatamapper.deleteByFk('game_id', gameId);
+                }));
+            }
+
+            await datamappers.gameDatamapper.delete(gameId);
+
+            return res.json({ message: 'Game deleted' });
         } catch (err) {
             return res.status(500).json({ error: `Internal Server Error: ${err.message}` });
         }
