@@ -48,10 +48,11 @@ router.route('/games/game/:id_game/issue/:id_issue')
 /* Suggestions */
 router.route('/games/game/:id_game/suggestions')
     .get(controllerSuggestion.getAllSuggestions)
-    .post(controllerSuggestion.createSuggestion);
+    .post(authenticateToken, controllerSuggestion.createSuggestion);
 
 router.route('/games/game/:id_game/suggestion/:id_suggestion')
     .get(controllerSuggestion.getOneSuggestion)
+    .patch(authenticateToken, controllerSuggestion.updateSuggestion)
     .delete(authenticateToken, controllerSuggestion.deleteSuggestion);
 
 /* Categories */
