@@ -79,4 +79,16 @@ export default class CoreDatamapper {
         const result = await this.client.query(`SELECT * FROM "${this.tableName}" WHERE ${key1} = $1 and ${key2}= $2`, [value1, value2]);
         return result.rows[0] || null;
     }
+
+    async getIssuesByGameId(gameId) {
+        const result = await this.client.query(`
+        SELECT * FROM "issue" WHERE game_id = $1`, [gameId]);
+        return result.rows || null;
+    }
+
+    async deleteByFk(key, value) {
+        console.log(key, value);
+        const result = await this.client.query(`DELETE FROM "${this.tableName}" WHERE ${key} = $1`, [value]);
+        return !!result.rowCount;
+    }
 }

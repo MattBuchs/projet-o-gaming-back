@@ -133,9 +133,51 @@ export default {
 
             if (req.user.userId !== game.user_id) return res.status(401).json({ error: 'Unauthorized' });
 
+            inputData.updated_at = new Date();
+            console.log(inputData);
             await datamappers.gameDatamapper.update(inputData, gameId);
 
             return res.status(200).json({ message: 'Issue updated successfully' });
+        } catch (err) {
+            return res.status(500).json({ error: `Internal Server Error: ${err.message}` });
+        }
+    },
+
+    async deleteGame(req, res) {
+        const gameId = Number(req.params.id_game);
+        try {
+            const game = await datamappers.gameDatamapper.findByPk(gameId);
+            if (!game) {
+                return res.status(404).json({ error: 'Game not found' });
+            }
+
+            if (req.user.userId !== game.user_id) return res.status(401).json({ error: 'Unauthorized' });
+
+            const issues = await datamappers.issueDatamapper.findByKeyValue('game_id', gameId);
+            const categoryHasGame = await datamappers.gameCategoryDatamapper.findByKeyValue('game_id', gameId);
+            const gameHasTag = await datamappers.gameTagDatamapper.findByKeyValue('game_id', gameId);
+
+            if (issues) {
+                await Promise.all(issues.map(async (issue) => {
+                    await datamappers.issueDatamapper.delete(issue.id);
+                }));
+            }
+
+            if (categoryHasGame) {
+                await Promise.all(categoryHasGame.map(async () => {
+                    await datamappers.gameCategoryDatamapper.deleteByFk('game_id', gameId);
+                }));
+            }
+
+            if (gameHasTag) {
+                await Promise.all(gameHasTag.map(async () => {
+                    await datamappers.gameTagDatamapper.deleteByFk('game_id', gameId);
+                }));
+            }
+
+            await datamappers.gameDatamapper.delete(gameId);
+
+            return res.json({ message: 'Game deleted' });
         } catch (err) {
             return res.status(500).json({ error: `Internal Server Error: ${err.message}` });
         }

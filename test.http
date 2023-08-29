@@ -16,7 +16,7 @@ POST http://localhost:3000/login
 Content-Type: application/json
 
 {
-    "email": "test2@test.com",
+    "email": "test@test.com",
     "password": "password"
 }
 
@@ -40,14 +40,18 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEyLCJyb2xlIjoi
 }
 
 ### Update d'un Jeux
-PATCH http://localhost:3000/games/game/13
+PATCH http://localhost:3000/games/game/19
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEyLCJyb2xlIjoiZGV2ZWxvcGVyIiwidXNlcm5hbWUiOiJ1c2VyMiIsImlhdCI6MTY5MzIzOTU2MSwiZXhwIjoxNjkzMjQzMTYxfQ.giPV38fqGtfji0VHiOctvH7ZmNn57qtmW7fcJj6SH0k
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEyLCJyb2xlIjoiZGV2ZWxvcGVyIiwidXNlcm5hbWUiOiJ1c2VyMiIsImlhdCI6MTY5MzI5ODE0OCwiZXhwIjoxNjkzMzAxNzQ4fQ.AcK4dgde1I5qb5R5GShRBufyBfy3hkjlixYKg0hoVmQ
 
 {
-    "name": "Jeux Test",
+    "name": "Jeux 5465",
     "description": "test2"
 }
+
+### Delete d'un Jeux
+DELETE http://localhost:3000/games/game/19
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEyLCJyb2xlIjoiZGV2ZWxvcGVyIiwidXNlcm5hbWUiOiJ1c2VyMiIsImlhdCI6MTY5MzI5ODE0OCwiZXhwIjoxNjkzMzAxNzQ4fQ.AcK4dgde1I5qb5R5GShRBufyBfy3hkjlixYKg0hoVmQ
 
 ### Trouver tous les Jeux
 GET http://localhost:3000/games
@@ -56,12 +60,12 @@ GET http://localhost:3000/games
 GET http://localhost:3000/games/game/1
 
 ### Create Issue
-POST http://localhost:3000/games/game/1/issues
+POST http://localhost:3000/games/game/19/issues
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb2xlIjoiZGV2ZWxvcGVyIiwiaWF0IjoxNjkzMjEzMjE3LCJleHAiOjE2OTMyMTY4MTd9.OKK4sLllNHrspu8zk-G8OWpwWhc7-WFcqwYoOyPhNNY
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb2xlIjoicGxheWVyIiwidXNlcm5hbWUiOiJ1c2VyIiwiaWF0IjoxNjkzMjk5NTIwLCJleHAiOjE2OTMzMDMxMjB9.Prw1M_Nd2WOJzcCnpXf06CF-Ehi2bYD0U8E9eaGWD0I
 
 {
-    "title": "test7",
+    "title": "test32g",
     "description": "test test",
     "is_minor": true,
     "is_public": true,
