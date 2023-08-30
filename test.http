@@ -110,6 +110,7 @@ GET http://localhost:3000/games/game/1/issue/1
 ### Create Suggestion
 POST http://localhost:3000/games/game/1/suggestions
 Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb2xlIjoicGxheWVyIiwidXNlcm5hbWUiOiJ1c2VyIiwiaWF0IjoxNjkzMzE1MzI1LCJleHAiOjE2OTMzMTg5MjV9.Q5C6ZiNFWBK_0Dv8IBfP86W_eV1DQzcp0F5hPsp7QWc
 
 {
     "title": "test",
