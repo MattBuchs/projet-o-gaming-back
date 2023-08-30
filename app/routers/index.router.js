@@ -72,4 +72,7 @@ router.route('/search')
 router.route('/platforms')
     .get(controllerUtils.getAllPlatforms);
 
+router.route('/games/game/:id_game/tags')
+    .get(controllerUtils.getTagsFromGame);
+
 export default router;

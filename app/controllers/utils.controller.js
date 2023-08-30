@@ -26,4 +26,20 @@ export default {
             return res.status(500).json({ error: `Internal Server Error: ${err.message}` });
         }
     },
+
+    async getTagsFromGame(req, res) {
+        const gameId = req.params.id_game;
+        try {
+            const tagsByGame = await datamappers.gameTagDatamapper.findTagsByGameId(gameId);
+            if (!tagsByGame) {
+                return res.status(404).json({ error: 'No tags found' });
+            }
+
+            const tags = await datamappers.tagDatamapper.findTagsByids(tagsByGame.tag_ids);
+
+            return res.json({ tags });
+        } catch (err) {
+            return res.status(500).json({ error: `Internal Server Error: ${err.message}` });
+        }
+    },
 };
