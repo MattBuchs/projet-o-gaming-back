@@ -1,4 +1,5 @@
 import express from 'express';
+import controllerSearch from '../controllers/search.controller.js';
 import controllerAuth from '../controllers/auth.controller.js';
 import controllerUser from '../controllers/user.controller.js';
 import controllerGame from '../controllers/game.controller.js';
@@ -61,5 +62,9 @@ router.route('/users')
 
 router.route('/users/user/:id_user')
     .get(controllerUser.getOneUser);
+
+/* Search */
+router.route('/search')
+    .get(controllerSearch.getSearch);
 
 export default router;
