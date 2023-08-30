@@ -153,3 +153,6 @@ GET http://localhost:3000/users
 
 ### Trouver un user
 GET http://localhost:3000/users/user/11
+
+### Trouver toutes les plateformes
+GET http://localhost:3000/platforms
