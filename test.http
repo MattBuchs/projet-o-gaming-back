@@ -154,5 +154,14 @@ GET http://localhost:3000/users
 ### Trouver un user
 GET http://localhost:3000/users/user/11
 
+### Search exact
+GET http://localhost:3000/search?search=Thoughtful-lemon
+
+### Search partial
+GET http://localhost:3000/search?search=Thoughtful
+
+### Search vague
+GET http://localhost:3000/search?search=a
+
 ### Trouver toutes les plateformes
 GET http://localhost:3000/platforms
