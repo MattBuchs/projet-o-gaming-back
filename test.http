@@ -166,3 +166,6 @@ GET http://localhost:3000/search?search=a
 
 ### Trouver toutes les plateformes
 GET http://localhost:3000/platforms
+
+### Trouver les tags à partir d'un jeu
+GET http://localhost:3000/games/game/14/tags
