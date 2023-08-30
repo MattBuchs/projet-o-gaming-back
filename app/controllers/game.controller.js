@@ -108,19 +108,6 @@ export default {
         }
     },
 
-    async getAllCategories(req, res) {
-        try {
-            const categories = await datamappers.categoryDatamapper.findAll();
-            if (!categories) {
-                return res.status(404).json({ error: 'No categories found' });
-            }
-
-            return res.json({ categories });
-        } catch (err) {
-            return res.status(500).json({ error: `Internal Server Error: ${err.message}` });
-        }
-    },
-
     async updateGame(req, res) {
         const gameId = Number(req.params.id_game);
         const inputData = req.body;

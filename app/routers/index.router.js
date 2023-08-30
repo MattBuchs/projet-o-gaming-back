@@ -54,7 +54,7 @@ router.route('/games/game/:id_game/suggestion/:id_suggestion')
 
 /* Categories */
 router.route('/categories')
-    .get(controllerGame.getAllCategories);
+    .get(controllerUtils.getAllCategories);
 
 /* Users */
 router.route('/users')
