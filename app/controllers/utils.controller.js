@@ -35,7 +35,7 @@ export default {
                 return res.status(404).json({ error: 'No tags found' });
             }
 
-            const tags = await datamappers.tagDatamapper.findTagsByids(tagsByGame.tag_ids);
+            const tags = await datamappers.tagDatamapper.findTagsByIds(tagsByGame.tag_ids);
 
             return res.json({ tags });
         } catch (err) {
