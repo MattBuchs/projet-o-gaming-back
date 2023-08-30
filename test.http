@@ -16,26 +16,26 @@ POST http://localhost:3000/login
 Content-Type: application/json
 
 {
-    "email": "test@test.com",
+    "email": "test2@test.com",
     "password": "password"
 }
 
 ### Test Token
 GET  http://localhost:3000/test
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb2xlIjoiZGV2ZWxvcGVyIiwiaWF0IjoxNjkzMjEzMjE3LCJleHAiOjE2OTMyMTY4MTd9.OKK4sLllNHrspu8zk-G8OWpwWhc7-WFcqwYoOyPhNNY
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb2xlIjoiZGV2ZWxvcGVyIiwidXNlcm5hbWUiOiJ1c2VyMiIsImlhdCI6MTY5MzM4NjA5OCwiZXhwIjoxNjkzMzg5Njk4fQ.76A_opVXeKJY66kTMJiiL9xW2shvQjaA3kQg02uBsm4
 
 ### Création d'un Jeux
 POST http://localhost:3000/games/game
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEyLCJyb2xlIjoiZGV2ZWxvcGVyIiwidXNlcm5hbWUiOiJ1c2VyMiIsImlhdCI6MTY5MzMwOTk2MywiZXhwIjoxNjkzMzEzNTYzfQ.AC_IrDp7eVeAoKIrJvDBV4UrMJ2luDNnxCj0l-v8fcg
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb2xlIjoiZGV2ZWxvcGVyIiwidXNlcm5hbWUiOiJ1c2VyMiIsImlhdCI6MTY5MzM4NjA5OCwiZXhwIjoxNjkzMzg5Njk4fQ.76A_opVXeKJY66kTMJiiL9xW2shvQjaA3kQg02uBsm4
 
 {
-    "name": "Jeux 515",
+    "name": "Jeux test1",
     "description": "test",
     "picture": "https://www.jeuxvideo.com/smileys_img/45.gif",
     "external_link": "https://www.test",
     "release_date": "2021-05-20",
-    "categories": ["screen", "porcupine", "attitude"],
+    "categories": ["Action", "Adventure", "Casual"],
     "tags": ["view", "analyst", "action"]
 }
 
@@ -110,6 +110,7 @@ GET http://localhost:3000/games/game/1/issue/1
 ### Create Suggestion
 POST http://localhost:3000/games/game/1/suggestions
 Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb2xlIjoicGxheWVyIiwidXNlcm5hbWUiOiJ1c2VyIiwiaWF0IjoxNjkzMzE1MzI1LCJleHAiOjE2OTMzMTg5MjV9.Q5C6ZiNFWBK_0Dv8IBfP86W_eV1DQzcp0F5hPsp7QWc
 
 {
     "title": "test",
@@ -162,3 +163,5 @@ GET http://localhost:3000/search?search=Thoughtful
 ### Search vague
 GET http://localhost:3000/search?search=a
 
+### Trouver toutes les plateformes
+GET http://localhost:3000/platforms

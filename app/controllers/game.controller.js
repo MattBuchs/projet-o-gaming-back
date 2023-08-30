@@ -5,7 +5,7 @@ import UserInputError from '../errors/user.input.error.js';
 export default {
     async getAllGames(req, res) {
         try {
-            const games = await datamappers.gameDatamapper.findAll();
+            const games = await datamappers.gameDatamapper.getGamesWithDetails();
             return res.json({ games });
         } catch (err) {
             return res.status(500).json({ error: `Internal Server Error: ${err}` });
@@ -105,19 +105,6 @@ export default {
                 return res.status(400).json({ error: 'Duplicate entry' });
             }
             return res.status(500).json({ error: `Internal Server Error: ${err}` });
-        }
-    },
-
-    async getAllCategories(req, res) {
-        try {
-            const categories = await datamappers.categoryDatamapper.findAll();
-            if (!categories) {
-                return res.status(404).json({ error: 'No categories found' });
-            }
-
-            return res.json({ categories });
-        } catch (err) {
-            return res.status(500).json({ error: `Internal Server Error: ${err.message}` });
         }
     },
 

@@ -4,6 +4,7 @@ import controllerAuth from '../controllers/auth.controller.js';
 import controllerUser from '../controllers/user.controller.js';
 import controllerGame from '../controllers/game.controller.js';
 import controllerIssue from '../controllers/issue.controller.js';
+import controllerUtils from '../controllers/utils.controller.js';
 import controllerSuggestion from '../controllers/suggestion.controller.js';
 import authenticateToken from '../validation/authToken.middleware.js';
 import checkUserRole from '../validation/checkUserRole.middleware.js';
@@ -54,7 +55,7 @@ router.route('/games/game/:id_game/suggestion/:id_suggestion')
 
 /* Categories */
 router.route('/categories')
-    .get(controllerGame.getAllCategories);
+    .get(controllerUtils.getAllCategories);
 
 /* Users */
 router.route('/users')
@@ -66,5 +67,9 @@ router.route('/users/user/:id_user')
 /* Search */
 router.route('/search')
     .get(controllerSearch.getSearch);
+
+/* Utils */
+router.route('/platforms')
+    .get(controllerUtils.getAllPlatforms);
 
 export default router;
