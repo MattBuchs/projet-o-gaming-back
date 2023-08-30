@@ -16,13 +16,13 @@ POST http://localhost:3000/login
 Content-Type: application/json
 
 {
-    "email": "test@test.com",
+    "email": "test2@test.com",
     "password": "password"
 }
 
 ### Test Token
 GET  http://localhost:3000/test
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb2xlIjoiZGV2ZWxvcGVyIiwiaWF0IjoxNjkzMjEzMjE3LCJleHAiOjE2OTMyMTY4MTd9.OKK4sLllNHrspu8zk-G8OWpwWhc7-WFcqwYoOyPhNNY
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb2xlIjoiZGV2ZWxvcGVyIiwidXNlcm5hbWUiOiJ1c2VyMiIsImlhdCI6MTY5MzM4NjA5OCwiZXhwIjoxNjkzMzg5Njk4fQ.76A_opVXeKJY66kTMJiiL9xW2shvQjaA3kQg02uBsm4
 
 ### Création d'un Jeux
 POST http://localhost:3000/games/game
