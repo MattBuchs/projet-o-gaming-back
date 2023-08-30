@@ -9,7 +9,10 @@ export default class GameDatamapper extends CoreDatamapper {
         SELECT
             "game".*,
             "user"."username" AS "author",
-            ARRAY_AGG(DISTINCT "category"."name") AS categories,
+            CASE
+                WHEN COUNT(DISTINCT "category"."name") = 0 THEN ARRAY[]::TEXT[]
+                ELSE ARRAY_AGG(DISTINCT "category"."name")
+            END AS categories,
             COUNT(DISTINCT "issue"."id") AS issue_count,
             COUNT(DISTINCT "suggestion"."id") AS suggestion_count
         FROM "game"
