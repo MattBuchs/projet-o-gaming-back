@@ -1,5 +1,6 @@
 import express from 'express';
 import controllerAuth from '../controllers/auth.controller.js';
+import controllerUser from '../controllers/user.controller.js';
 import controllerGame from '../controllers/game.controller.js';
 import controllerIssue from '../controllers/issue.controller.js';
 import controllerSuggestion from '../controllers/suggestion.controller.js';
@@ -37,14 +38,7 @@ router.route('/games/game/:id_game/issues')
 
 router.route('/games/game/:id_game/issue/:id_issue')
     .get(controllerIssue.getOneIssue)
-    .patch(authenticateToken, (req, res) => {
-        if (req.user.role === 'player') {
-            controllerIssue.updateAuthorIssue(req, res);
-        }
-        if (req.user.role === 'developer') {
-            controllerIssue.updateDeveloperIssue(req, res);
-        }
-    })
+    .patch(authenticateToken, controllerIssue.updateIssue)
     .delete(authenticateToken, controllerIssue.deleteIssue);
 
 /* Suggestions */
@@ -60,5 +54,12 @@ router.route('/games/game/:id_game/suggestion/:id_suggestion')
 /* Categories */
 router.route('/categories')
     .get(controllerGame.getAllCategories);
+
+/* Users */
+router.route('/users')
+    .get(controllerUser.getAllUsers);
+
+router.route('/users/user/:id_user')
+    .get(controllerUser.getOneUser);
 
 export default router;

@@ -90,7 +90,7 @@ export default {
             return res.status(500).json({ error: `Internal Server Error: ${err.message}` });
         }
     },
-    async updateAuthorIssue(req, res) {
+    async updateIssue(req, res) {
         const issueId = Number(req.params.id_issue);
         const inputData = req.body;
 
@@ -100,11 +100,19 @@ export default {
                 return res.status(400).json({ error: 'Issue Not Found' });
             }
 
-            if (inputData.assign_to || inputData.status) {
+            const isAuthor = req.user.userId === issue.user_id;
+            const isDev = req.user.role === 'developer';
+
+            // if user id given is not the author and not a dev send Unauthorized
+            if (!isAuthor && !isDev) return res.status(401).json({ error: 'Unauthorized' });
+
+            const isPlayer = req.user.role === 'player';
+
+            // if a player and assign to or inputData are present send Unauthorized
+            // players can not assign or update status
+            if (isPlayer && (inputData.assign_to || inputData.status)) {
                 return res.status(400).json({ error: 'Unauthorized' });
             }
-
-            if (req.user.userId !== issue.user_id) return res.status(401).json({ error: 'Unauthorized' });
 
             await datamappers.issueDatamapper.update(inputData, issueId);
 
@@ -113,33 +121,6 @@ export default {
             return res.status(500).json({ error: `Internal Server Error: ${err.message}` });
         }
     },
-
-    async updateDeveloperIssue(req, res) {
-        const issueId = Number(req.params.id_issue);
-        const inputData = req.body;
-
-        try {
-            const issue = await datamappers.issueDatamapper.findByPk(issueId);
-            if (!issue) {
-                return res.status(400).json({ error: 'Issue Not Found' });
-            }
-
-            if (inputData.assign_to || inputData.status) {
-                return res.status(400).json({ error: 'Unauthorized' });
-            }
-
-            const game = await datamappers.gameDatamapper.findByPk(issue.game_id);
-
-            if (req.user.userId !== game.user_id) return res.status(401).json({ error: 'Unauthorized' });
-
-            await datamappers.issueDatamapper.update(inputData, issueId);
-
-            return res.status(200).json({ message: 'Issue updated successfully' });
-        } catch (err) {
-            return res.status(500).json({ error: `Internal Server Error: ${err.message}` });
-        }
-    },
-
     async deleteIssue(req, res) {
         const issueId = Number(req.params.id_issue);
 
