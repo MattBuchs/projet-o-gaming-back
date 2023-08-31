@@ -14,6 +14,7 @@ client.connect((error) => {
     } else {
         console.log('pg in seeding.js: successfully connected to the database');
     }
+    console.log('STARTING TABLE SEEDING');
 });
 
 async function accessDatabase(query, values) {
@@ -25,6 +26,9 @@ async function accessDatabase(query, values) {
 }
 
 const NumberOfFakeEntries = 10;
+const NumberOfTagsAndCategories = 3;
+
+/* TABLE SEEDING */
 
 // TAG seeding --------------------------------
 for (let i = 0; i < NumberOfFakeEntries; i += 1) {
@@ -88,8 +92,8 @@ const categories = [
     'Sport',
     'Strategy',
 ];
-
-for (let i = 0; i < categories.length; i += 1) {
+const numberOfCategories = categories.length;
+for (let i = 0; i < numberOfCategories; i += 1) {
     // faker data
     const randomColor = faker.color.rgb();
     // insert data into database
@@ -215,7 +219,7 @@ for (let i = 0; i < NumberOfFakeEntries; i += 1) {
     await accessDatabase(query, values);
 }
 
-// COMMENT seeding
+// COMMENT seeding --------------------------------
 for (let i = 0; i < NumberOfFakeEntries; i += 1) {
     // faker data
     const randomDescription = faker.lorem.lines({ min: 1, max: 5 });
@@ -225,6 +229,60 @@ for (let i = 0; i < NumberOfFakeEntries; i += 1) {
     const query = 'INSERT INTO "comment" (description, user_id, issue_id) VALUES($1, $2, $3);';
     const values = [randomDescription, devID, randomIssueID];
     await accessDatabase(query, values);
+}
+
+/* LINK TABLE SEEDING */
+console.log('STARTING LINK TABLE SEEDING');
+
+// CATEGORY_HAS_GAME seeding --------------------------------
+for (let i = 0; i < NumberOfFakeEntries; i += 1) {
+    const randomGameID = i + 1;
+    for (let j = 0; j < NumberOfTagsAndCategories; j += 1) {
+        /* data */
+        // number between 0 and numberOfCategories-1 eg: 0 1 2, 1 2 3, 2 3 4, ...
+        const numberBetween = (j + i) % numberOfCategories;
+        // +1 to make it the number between 1 and numberOfCategories eg: 1 2 3, 2 3 4, 3 4 5 ...
+        const randomCategoryID = (numberBetween) + 1;
+
+        /* insert data into database */
+        const query = 'INSERT INTO "category_has_game" (category_id, game_id) VALUES ($1, $2)';
+        const values = [randomCategoryID, randomGameID];
+        await accessDatabase(query, values);
+    }
+}
+
+// GAME_HAS_TAG seeding --------------------------------
+for (let i = 0; i < NumberOfFakeEntries; i += 1) {
+    const randomGameID = i + 1;
+    for (let j = 0; j < NumberOfTagsAndCategories; j += 1) {
+        /* data */
+        // number between 0 and NumberOfFakeEntries-1 eg: 0 1 2, 1 2 3, 2 3 4, ...
+        const numberBetween = (j + i) % NumberOfFakeEntries;
+        // +1 to make it the number between 1 and NumberOfFakeEntries eg: 1 2 3, 2 3 4, 3 4 5 ...
+        const randomTagID = (numberBetween) + 1;
+
+        /* insert data into database */
+        const query = 'INSERT INTO "game_has_tag" (game_id, tag_id) VALUES ($1, $2)';
+        const values = [randomGameID, randomTagID];
+        await accessDatabase(query, values);
+    }
+}
+
+// ISSUE_HAS_TAG seeding --------------------------------
+for (let i = 0; i < NumberOfFakeEntries; i += 1) {
+    const randomIssueID = i + 1;
+    for (let j = 0; j < NumberOfTagsAndCategories; j += 1) {
+        /* data */
+        // number between 0 and NumberOfFakeEntries-1 eg: 0 1 2, 1 2 3, 2 3 4, ...
+        const numberBetween = (j + i) % NumberOfFakeEntries;
+        // +1 to make it the number between 1 and NumberOfFakeEntries eg: 1 2 3, 2 3 4, 3 4 5 ...
+        const randomTagID = (numberBetween) + 1;
+
+        /* insert data into database */
+        const query = 'INSERT INTO "issue_has_tag" (issue_id, tag_id) VALUES ($1, $2)';
+        const values = [randomIssueID, randomTagID];
+        await accessDatabase(query, values);
+    }
 }
 
 await client.end();
