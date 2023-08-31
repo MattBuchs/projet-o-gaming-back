@@ -61,8 +61,9 @@ router.route('/categories')
 router.route('/users')
     .get(controllerUser.getAllUsers);
 
-router.route('/users/user/:id_user')
-    .get(controllerUser.getOneUser);
+router.route('/user/:id_user')
+    .get(controllerUser.getOneUser)
+    .patch(authenticateToken, controllerUser.updateUser)
 
 /* Search */
 router.route('/search')
