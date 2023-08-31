@@ -60,9 +60,9 @@ GET http://localhost:3000/games
 GET http://localhost:3000/games/game/1
 
 ### Create Issue
-POST http://localhost:3000/games/game/19/issues
+POST http://localhost:3000/games/game/24/issues
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb2xlIjoicGxheWVyIiwidXNlcm5hbWUiOiJ1c2VyIiwiaWF0IjoxNjkzMjk5NTIwLCJleHAiOjE2OTMzMDMxMjB9.Prw1M_Nd2WOJzcCnpXf06CF-Ehi2bYD0U8E9eaGWD0I
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb2xlIjoiZGV2ZWxvcGVyIiwidXNlcm5hbWUiOiJ1c2VyMiIsImlhdCI6MTY5MzQ3MzAwNSwiZXhwIjoxNjkzNDc2NjA1fQ.I7jqADHsXtNt0Ai6SmOuWcaNyx8Ni6xUma95mMHT9wQ
 
 {
     "title": "test32g",
@@ -74,7 +74,8 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb2xlIjoi
     "replication": "test test",
     "published_at": "2021-02-13",
     "user_id": 11,
-    "platform_id": 2
+    "platform_id": 2,
+    "tags": ["view", "analyst", "action"]
 }
 
 ### Delete Issue
