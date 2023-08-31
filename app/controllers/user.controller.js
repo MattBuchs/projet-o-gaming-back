@@ -1,3 +1,4 @@
+import bcrypt from 'bcrypt';
 import * as datamappers from '../models/index.datamapper.js';
 
 export default {
@@ -77,6 +78,63 @@ export default {
             }
 
             return res.json({ user });
+        } catch (err) {
+            return res.status(500).json({ error: `Internal Server Error: ${err.message}` });
+        }
+    },
+
+    async updateUser(req, res) {
+        const userId = Number(req.params.id_user);
+
+        try {
+            const user = await datamappers.userDatamapper.findByPk(userId);
+            if (!user) {
+                return res.status(404).json(`Can not find user with id ${userId}`);
+            }
+
+            if (req.user.userId !== user.id) return res.status(401).json({ error: 'Unauthorized' });
+
+            const {
+                username,
+                old_password: oldPassword,
+                new_password: newPassword,
+                confirm_password: confirmPassword,
+            } = req.body;
+            const inputData = {};
+
+            if (username) {
+                const newUsername = username.trim();
+                if (newUsername.length < 3) {
+                    return res.status(400).json({ error: 'Username must be at least 3 characters' });
+                }
+
+                inputData.username = newUsername;
+            }
+
+            if (oldPassword || newPassword || confirmPassword) {
+                if (!oldPassword || !newPassword || !confirmPassword) {
+                    return res.status(400).json({ error: 'Missing values' });
+                }
+
+                const passwordExist = await bcrypt.compare(oldPassword, user.password);
+                if (!passwordExist) {
+                    return res.status(400).json({ error: 'An error has occurred' });
+                }
+
+                if (newPassword !== confirmPassword) {
+                    return res.status(400).json({ error: 'New password and confirm password must be the same' });
+                }
+
+                const saltRounds = 10;
+                const salt = await bcrypt.genSalt(saltRounds);
+                const encryptedPass = await bcrypt.hash(newPassword, salt);
+
+                inputData.password = encryptedPass;
+            }
+
+            const updateInfos = await datamappers.userDatamapper.update(inputData, userId);
+
+            return res.json({ updateInfos });
         } catch (err) {
             return res.status(500).json({ error: `Internal Server Error: ${err.message}` });
         }

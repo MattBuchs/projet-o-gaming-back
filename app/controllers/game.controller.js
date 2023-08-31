@@ -14,15 +14,14 @@ export default {
     async getOneGame(req, res) {
         try {
             const gameId = req.params.id_game;
-            const game = await datamappers.gameDatamapper.findByKeyValue('id', gameId);
-            // not sure if needed:
-            // const findGame = await datamappers.gameDatamapper.findByPk(gameId);
+            const game = await datamappers.gameDatamapper.findOneGameWithDetails(gameId);
+
             if (!game) {
                 return res.status(404).json(`Can not find game with id ${gameId}`);
             }
             return res.json({ game });
         } catch (err) {
-            return res.status(500).json({ error: `Internal Server Error: ${DatabaseError(err)}` });
+            return res.status(500).json({ error: `Internal Server Error: ${err.message}` });
         }
     },
     async createGame(req, res) {

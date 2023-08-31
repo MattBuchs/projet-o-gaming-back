@@ -4,7 +4,7 @@ export default {
     async getAllIssues(req, res) {
         try {
             const gameId = req.params.id_game;
-            const issues = await datamappers.issueDatamapper.findByKeyValue('game_id', gameId);
+            const issues = await datamappers.issueDatamapper.findIssuesWithGame(gameId);
             return res.json({ issues });
         } catch (err) {
             return res.status(500).json({ error: `Internal Server Error: ${err}` });
@@ -42,6 +42,7 @@ export default {
             published_at: publishedAt,
             user_id: userId,
             platform_id: platformId,
+            tags,
         } = req.body;
 
         try {
@@ -69,6 +70,12 @@ export default {
                 return res.status(400).json({ error: 'User Not Found' });
             }
 
+            const getTagsByName = await Promise.all(tags.map(async (tag) => datamappers.tagDatamapper.findOne('title', tag)));
+
+            if (getTagsByName.includes(null)) return res.status(400).json({ error: 'Tag Not Found' });
+
+            const ids = getTagsByName.map((tag) => tag.id);
+
             await datamappers.issueDatamapper.create({
                 title,
                 description,
@@ -82,6 +89,13 @@ export default {
                 game_id: gameId,
                 platform_id: platformId,
             });
+
+            const issue = await datamappers.issueDatamapper.findLatestByField('user_id', userId);
+
+            await Promise.all(ids.map(async (id) => datamappers.issueTagDatamapper.create({
+                issue_id: issue.id,
+                tag_id: id,
+            })));
 
             return res.status(201).json({ message: 'Issue created successfully' });
         } catch (err) {
