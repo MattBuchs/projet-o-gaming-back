@@ -84,4 +84,9 @@ export default class CoreDatamapper {
         const result = await this.client.query(`DELETE FROM "${this.tableName}" WHERE ${key} = $1`, [value]);
         return !!result.rowCount;
     }
+
+    async findLatestByField(field, id) {
+        const result = await this.client.query(`SELECT * FROM "${this.tableName}" WHERE "${field}" = $1 ORDER BY id DESC LIMIT 1`, [id]);
+        return result.rows[0] || null;
+    }
 }
