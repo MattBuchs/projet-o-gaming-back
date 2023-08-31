@@ -17,7 +17,7 @@ Content-Type: application/json
 
 {
     "email": "test2@test.com",
-    "password": "password"
+    "password": "password9"
 }
 
 ### Test Token
@@ -152,8 +152,19 @@ GET http://localhost:3000/categories
 GET http://localhost:3000/users
 
 ### Trouver un user
-GET http://localhost:3000/users/user/11
+GET http://localhost:3000/user/11
 
+### Update un user
+PATCH http://localhost:3000/user/11
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb2xlIjoiZGV2ZWxvcGVyIiwidXNlcm5hbWUiOiJ1c2VyMiIsImlhdCI6MTY5MzQ3MDI5NywiZXhwIjoxNjkzNDczODk3fQ.JU88Wtenz54D2BNjVpZyWs264rDGSSAuUjBYXBaMD90
+
+{
+    "username": "user2",
+    "old_password": "password9",
+    "new_password": "password",
+    "confirm_password": "password"
+}
 
 ### Search exact
 GET http://localhost:3000/search?search=Thoughtful-lemon
