@@ -4,7 +4,7 @@ export default {
     async getAllIssues(req, res) {
         try {
             const gameId = req.params.id_game;
-            const issues = await datamappers.issueDatamapper.findByKeyValue('game_id', gameId);
+            const issues = await datamappers.issueDatamapper.findIssuesWithGame(gameId);
             return res.json({ issues });
         } catch (err) {
             return res.status(500).json({ error: `Internal Server Error: ${err}` });
