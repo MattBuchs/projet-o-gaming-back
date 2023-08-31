@@ -57,7 +57,7 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEyLCJyb2xlIjoi
 GET http://localhost:3000/games
 
 ### Trouver un Jeux
-GET http://localhost:3000/games/game/1
+GET http://localhost:3000/games/game/24
 
 ### Create Issue
 POST http://localhost:3000/games/game/19/issues
