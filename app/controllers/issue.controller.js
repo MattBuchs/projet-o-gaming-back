@@ -26,7 +26,7 @@ export default {
             }
             return res.json({ issue });
         } catch (err) {
-            return res.status(500).json({ error: `Internal Server Error: ${err}` });
+            return res.status(500).json({ error: `Internal Server Error: ${err.message}` });
         }
     },
     async createIssue(req, res) {
