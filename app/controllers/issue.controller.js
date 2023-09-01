@@ -2,9 +2,12 @@ import * as datamappers from '../models/index.datamapper.js';
 
 export default {
     async getAllIssues(req, res) {
+        console.log(req.params)
         try {
             const gameId = req.params.id_game;
+            console.log('gameId: ', gameId);
             const issues = await datamappers.issueDatamapper.findIssuesWithGame(gameId);
+            console.log('issues: ', issues);
             return res.json({ issues });
         } catch (err) {
             return res.status(500).json({ error: `Internal Server Error: ${err}` });
