@@ -18,7 +18,7 @@ router.route('/login')
     .post(controllerAuth.postLogin);
 
 router.get('/test', authenticateToken, (req, res) => {
-    res.json({ message: 'Hello World' });
+    res.json({ message: 'Token authenticated' });
 });
 
 /* Games */
