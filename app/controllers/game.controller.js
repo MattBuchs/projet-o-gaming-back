@@ -1,6 +1,4 @@
 import * as datamappers from '../models/index.datamapper.js';
-import DatabaseError from '../errors/database.error.js';
-import UserInputError from '../errors/user.input.error.js';
 
 export default {
     async getAllGames(req, res) {
@@ -35,6 +33,7 @@ export default {
             categories,
             tags,
         } = req.body;
+        let findGame;
 
         try {
             if (!name
@@ -60,7 +59,7 @@ export default {
                 return res.status(500).json({ error: 'Game not created' });
             }
 
-            const findGame = await datamappers.gameDatamapper.findOne('name', name);
+            findGame = await datamappers.gameDatamapper.findOne('name', name);
 
             if (!findGame) {
                 return res.status(404).json({ error: 'Game not found' });
@@ -73,7 +72,12 @@ export default {
                     let findTag = await datamappers.tagDatamapper.findOne('title', tagTitle);
 
                     if (!findTag) {
-                        findTag = await datamappers.tagDatamapper.create({ title: tagTitle });
+                        await datamappers.tagDatamapper.create({ title: tagTitle });
+                        findTag = await datamappers.tagDatamapper.findOne('title', tagTitle);
+                    }
+
+                    if (!findTag.id) {
+                        throw new Error('The game was not created');
                     }
 
                     await datamappers.gameTagDatamapper.create({
@@ -102,6 +106,11 @@ export default {
         } catch (err) {
             if (err.code === '23505') {
                 return res.status(400).json({ error: 'Duplicate entry' });
+            }
+            if (err.message === 'The game was not created') {
+                await datamappers.gameCategoryDatamapper.deleteGameCategories(findGame.id);
+                await datamappers.gameDatamapper.delete(findGame.id);
+                return res.status(500).json({ error: err.message });
             }
             return res.status(500).json({ error: `Internal Server Error: ${err}` });
         }
