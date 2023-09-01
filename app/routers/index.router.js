@@ -63,7 +63,7 @@ router.route('/users')
 
 router.route('/user/:id_user')
     .get(controllerUser.getOneUser)
-    .patch(authenticateToken, controllerUser.updateUser)
+    .patch(authenticateToken, controllerUser.updateUser);
 
 /* Search */
 router.route('/search')
@@ -75,5 +75,8 @@ router.route('/platforms')
 
 router.route('/games/game/:id_game/tags')
     .get(controllerUtils.getTagsFromGame);
+
+router.route('/tags')
+    .get(controllerUtils.getAllTags);
 
 export default router;
