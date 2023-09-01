@@ -17,7 +17,7 @@ Content-Type: application/json
 
 {
     "email": "test2@test.com",
-    "password": "password9"
+    "password": "password"
 }
 
 ### Test Token
@@ -27,7 +27,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb
 ### Création d'un Jeux
 POST http://localhost:3000/games/game
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb2xlIjoiZGV2ZWxvcGVyIiwidXNlcm5hbWUiOiJ1c2VyMiIsImlhdCI6MTY5MzM4NjA5OCwiZXhwIjoxNjkzMzg5Njk4fQ.76A_opVXeKJY66kTMJiiL9xW2shvQjaA3kQg02uBsm4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb2xlIjoiZGV2ZWxvcGVyIiwidXNlcm5hbWUiOiJ1c2VyMiIsImlhdCI6MTY5MzU2OTU0OCwiZXhwIjoxNjkzNTczMTQ4fQ.LWI4yaIpNcdrJ4XqrPLadmi18qewpeyp_BFpHpYevz8
 
 {
     "name": "Jeux test1",
