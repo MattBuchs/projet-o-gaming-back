@@ -48,7 +48,7 @@ router.route('/games/game/:id_game/suggestions')
     .get(controllerSuggestion.getAllSuggestions)
     .post(authenticateToken, controllerSuggestion.createSuggestion);
 
-router.route('/games/game/:id_game/suggestion/:id_suggestion')
+router.route('/suggestion/:id_suggestion')
     .get(controllerSuggestion.getOneSuggestion)
     .patch(authenticateToken, controllerSuggestion.updateSuggestion)
     .delete(authenticateToken, controllerSuggestion.deleteSuggestion);

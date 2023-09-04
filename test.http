@@ -127,11 +127,11 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb2xlIjoi
 }
 
 ### Delete Suggestion
-DELETE http://localhost:3000/games/game/1/suggestion/13
+DELETE http://localhost:3000/suggestion/13
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb2xlIjoicGxheWVyIiwidXNlcm5hbWUiOiJ1c2VyIiwiaWF0IjoxNjkzMjkxNjc2LCJleHAiOjE2OTMyOTUyNzZ9.VXBl1lFRL7DXRj19fun0IVSdzH7l5QvYd0WU-7nWITQ
 
 ### Update Suggestion 
-PATCH http://localhost:3000/games/game/1/suggestion/1
+PATCH http://localhost:3000/suggestion/1
 Content-Type: application/json
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb2xlIjoiZGV2ZWxvcGVyIiwiaWF0IjoxNjkzMjEzMjE3LCJleHAiOjE2OTMyMTY4MTd9.OKK4sLllNHrspu8zk-G8OWpwWhc7-WFcqwYoOyPhNNY
 
@@ -143,8 +143,8 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb2xlIjoi
 ### Trouver tous les Suggestions d'un Jeux
 GET http://localhost:3000/games/game/1/suggestions
 
-### Trouver un Suggestion d'un Jeux
-GET http://localhost:3000/games/game/1/suggestion/1
+### Trouver un Suggestion 
+GET http://localhost:3000/suggestion/1
 
 ### Trouver tous les Catégories
 GET http://localhost:3000/categories
