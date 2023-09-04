@@ -12,13 +12,16 @@ export default class SuggestionDatamapper extends CoreDatamapper {
             "suggestion"."description",
             "suggestion"."published_at",
             "suggestion"."user_id", 
-            "user"."username" AS author 
+            "user"."username" AS author,
+            "game"."name" AS game 
         FROM "suggestion"
         JOIN "user" ON "user"."id" = "suggestion"."user_id"
+        JOIN "game" ON "game"."id" = "suggestion"."game_id"
         WHERE "suggestion"."id" = $1
         GROUP BY
             "suggestion"."id",
-            "user"."username"`,
+            "user"."username",
+            "game"."name"`,
             [suggestionId],
         );
 
