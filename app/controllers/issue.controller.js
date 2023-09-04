@@ -125,6 +125,7 @@ export default {
                 return res.status(400).json({ error: 'Unauthorized' });
             }
 
+            inputData.updated_at = new Date();
             await datamappers.issueDatamapper.update(inputData, issueId);
 
             return res.status(200).json({ message: 'Issue updated successfully' });
