@@ -55,4 +55,8 @@ export default {
             return res.status(500).json({ error: `Internal Server Error: ${err.message}` });
         }
     },
+
+    async home(req, res) {
+        res.redirect('/docs');
+    },
 };

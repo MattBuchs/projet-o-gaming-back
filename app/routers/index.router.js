@@ -11,6 +11,9 @@ import checkUserRole from '../validation/checkUserRole.middleware.js';
 
 const router = express.Router();
 
+router.route('/')
+    .get(controllerUtils.home);
+
 router.route('/signup')
     /**
      * POST /signup
@@ -34,10 +37,6 @@ router.route('/login')
      * @return {Error}  500 - Internal server error
      */
     .post(controllerAuth.postLogin);
-
-router.get('/test', authenticateToken, (req, res) => {
-    res.json({ message: 'Token authenticated' });
-});
 
 /* Games */
 router.route('/games/game')
