@@ -20,6 +20,9 @@ const router = express.Router();
 // router.get('/test', authenticateToken, (req, res) => {
 //     res.json({ message: 'Token authenticated' });
 // });
+router.get('/test', authenticateToken, (req, res) => {
+    res.json({ message: 'Token authenticated' });
+});
 
 /* Games */
 router.use('/games', gamesRouter);
@@ -49,8 +52,13 @@ router.route('/games/game/:id_game/suggestion/:id_suggestion')
 router.route('/categories')
     .get(controllerUtils.getAllCategories);
 
-/* Users */
 router.use('/users', userRouter);
+router.route('/users')
+    .get(controllerUser.getAllUsers);
+
+router.route('/user/:id_user')
+    .get(controllerUser.getOneUser)
+    .patch(authenticateToken, controllerUser.updateUser);
 
 /* Search */
 router.route('/search')
@@ -62,5 +70,8 @@ router.route('/platforms')
 
 router.route('/games/game/:id_game/tags')
     .get(controllerUtils.getTagsFromGame);
+
+router.route('/tags')
+    .get(controllerUtils.getAllTags);
 
 export default router;

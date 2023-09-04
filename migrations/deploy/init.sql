@@ -109,8 +109,8 @@ CREATE TABLE "category_has_game" (
 );
 
 CREATE TABLE "issue_has_tag" (
-    "issue_id" int NOT NULL REFERENCES "issue"("id"),
-    "tag_id" int NOT NULL REFERENCES "tag"("id"),
+    "issue_id" int NOT NULL REFERENCES "issue"("id") ON DELETE CASCADE,
+    "tag_id" int NOT NULL REFERENCES "tag"("id") ON DELETE CASCADE,
     "created_at" timestamptz NOT NULL DEFAULT now(),
     "updated_at" timestamptz
 );

@@ -18,7 +18,7 @@ export default {
             const gameId = req.params.id_game;
             const issueId = req.params.id_issue;
 
-            const game = await datamappers.issueDatamapper.findByPk(gameId);
+            const game = await datamappers.gameDatamapper.findByPk(gameId);
             if (!game) {
                 return res.status(404).json(`Can not find game with id ${gameId}`);
             }

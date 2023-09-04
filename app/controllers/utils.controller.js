@@ -42,4 +42,17 @@ export default {
             return res.status(500).json({ error: `Internal Server Error: ${err.message}` });
         }
     },
+
+    async getAllTags(req, res) {
+        try {
+            const tags = await datamappers.tagDatamapper.findAll();
+            if (!tags) {
+                return res.status(404).json({ error: 'No tags found' });
+            }
+
+            return res.json({ tags });
+        } catch (err) {
+            return res.status(500).json({ error: `Internal Server Error: ${err.message}` });
+        }
+    },
 };

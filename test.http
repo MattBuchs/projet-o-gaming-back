@@ -17,7 +17,7 @@ Content-Type: application/json
 
 {
     "email": "test2@test.com",
-    "password": "password9"
+    "password": "password"
 }
 
 ### Test Token
@@ -27,7 +27,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb
 ### Création d'un Jeux
 POST http://localhost:3000/games/game
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb2xlIjoiZGV2ZWxvcGVyIiwidXNlcm5hbWUiOiJ1c2VyMiIsImlhdCI6MTY5MzM4NjA5OCwiZXhwIjoxNjkzMzg5Njk4fQ.76A_opVXeKJY66kTMJiiL9xW2shvQjaA3kQg02uBsm4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb2xlIjoiZGV2ZWxvcGVyIiwidXNlcm5hbWUiOiJ1c2VyMiIsImlhdCI6MTY5MzU2OTU0OCwiZXhwIjoxNjkzNTczMTQ4fQ.LWI4yaIpNcdrJ4XqrPLadmi18qewpeyp_BFpHpYevz8
 
 {
     "name": "Jeux test1",
@@ -106,7 +106,7 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb2xlIjoi
 GET http://localhost:3000/games/game/1/issues
 
 ### Trouver un Issue d'un Jeux
-GET http://localhost:3000/games/game/1/issue/16
+GET http://localhost:3000/games/game/12/issue/11
 
 ### Create Suggestion
 POST http://localhost:3000/games/game/1/suggestions
@@ -181,3 +181,6 @@ GET http://localhost:3000/platforms
 
 ### Trouver les tags à partir d'un jeu
 GET http://localhost:3000/games/game/14/tags
+
+### Trouver les tags
+GET http://localhost:3000/tags
