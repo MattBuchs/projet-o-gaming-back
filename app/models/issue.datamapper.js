@@ -18,19 +18,23 @@ export default class IssueDatamapper extends CoreDatamapper {
             "issue"."frequency",
             "issue"."replication",
             "issue"."published_at",
-            "issue"."user_id", 
-            "user"."username" AS author, 
+            "user"."id" AS "user_id",
+            "user"."username" AS author,
+            "game"."name" AS game,
             "platform"."name" AS platform, 
             JSON_AGG("tag"."title") AS tags
         FROM "issue"
         JOIN "user" ON "user"."id" = "issue"."user_id"
         JOIN "platform" ON "platform"."id" = "issue"."platform_id"
+        JOIN "game" ON "game"."id" = "issue"."game_id"
         LEFT JOIN "issue_has_tag" ON "issue_has_tag"."issue_id" = "issue"."id"
         LEFT JOIN "tag" ON "tag"."id" = "issue_has_tag"."tag_id"
         WHERE "issue"."id" = $1
         GROUP BY
             "issue"."id",
+            "user"."id",
             "user"."username",
+            "game"."name",
             "platform"."name"`,
             [issueId],
         );
