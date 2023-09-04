@@ -27,7 +27,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb
 ### Création d'un Jeux
 POST http://localhost:3000/games/game
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb2xlIjoiZGV2ZWxvcGVyIiwidXNlcm5hbWUiOiJ1c2VyMiIsImlhdCI6MTY5MzU2OTU0OCwiZXhwIjoxNjkzNTczMTQ4fQ.LWI4yaIpNcdrJ4XqrPLadmi18qewpeyp_BFpHpYevz8
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb2xlIjoiZGV2ZWxvcGVyIiwidXNlcm5hbWUiOiJ1c2VyMiIsImlhdCI6MTY5MzgzNzQxOSwiZXhwIjoxNjkzODQxMDE5fQ._9rYVL1RVFTN4iR2gmhY21s7QtI9LKsLVZTq7w7L53Y
 
 {
     "name": "Jeux test1",
@@ -60,14 +60,14 @@ GET http://localhost:3000/games
 GET http://localhost:3000/games/game/24
 
 ### Create Issue
-POST http://localhost:3000/games/game/24/issues
+POST http://localhost:3000/games/game/14/issues
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb2xlIjoiZGV2ZWxvcGVyIiwidXNlcm5hbWUiOiJ1c2VyMiIsImlhdCI6MTY5MzQ3MzAwNSwiZXhwIjoxNjkzNDc2NjA1fQ.I7jqADHsXtNt0Ai6SmOuWcaNyx8Ni6xUma95mMHT9wQ
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb2xlIjoiZGV2ZWxvcGVyIiwidXNlcm5hbWUiOiJ1c2VyMiIsImlhdCI6MTY5MzgzNzQxOSwiZXhwIjoxNjkzODQxMDE5fQ._9rYVL1RVFTN4iR2gmhY21s7QtI9LKsLVZTq7w7L53Y
 
 {
     "title": "test32g",
     "description": "test test",
-    "is_minor": true,
+    "is_minor": false,
     "is_public": true,
     "is_online": true,
     "frequency": "test",
