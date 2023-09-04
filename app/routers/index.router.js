@@ -38,7 +38,7 @@ router.route('/games/game/:id_game/issues')
     .get(controllerIssue.getAllIssues)
     .post(authenticateToken, controllerIssue.createIssue);
 
-router.route('/games/game/:id_game/issue/:id_issue')
+router.route('/issue/:id_issue')
     .get(controllerIssue.getOneIssue)
     .patch(authenticateToken, controllerIssue.updateIssue)
     .delete(authenticateToken, controllerIssue.deleteIssue);
