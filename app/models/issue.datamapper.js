@@ -18,6 +18,7 @@ export default class IssueDatamapper extends CoreDatamapper {
             "issue"."frequency",
             "issue"."replication",
             "issue"."published_at",
+            "user"."id" AS "user_id",
             "user"."username" AS author,
             "game"."name" AS game,
             "platform"."name" AS platform, 
@@ -31,6 +32,7 @@ export default class IssueDatamapper extends CoreDatamapper {
         WHERE "issue"."id" = $1
         GROUP BY
             "issue"."id",
+            "user"."id",
             "user"."username",
             "game"."name",
             "platform"."name"`,
