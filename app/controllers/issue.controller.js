@@ -44,8 +44,8 @@ export default {
             if (!title
                 || !description
                 || isMinor === undefined
-                || !isPublic === undefined
-                || !isOnline === undefined
+                || isPublic === undefined
+                || isOnline === undefined
                 || !frequency
                 || !replication
                 || !publishedAt
