@@ -17,24 +17,22 @@ export default {
                  || !password
                  || !confirmPassword
                  || !roleId) {
-                return res.json({ error: 'Missing values' });
+                return res.status(400).json({ error: 'Missing values' });
             }
 
             // verification de l'email
             if (!EmailValidator.validate(email)) {
-                return res.json({ error: 'Invalid email' });
+                return res.status(400).json({ error: 'Invalid email' });
             }
 
             // verifier si password correspond à password confirm
             if (password !== confirmPassword) {
-                return res.json({
-                    error: 'Password confirmation is incorrect',
-                });
+                return res.status(400).json({ error: 'Password and confirm password are not the same' });
             }
 
             const existEmail = await datamappers.userDatamapper.findByEmail(email);
             if (existEmail) {
-                return res.json({
+                return res.status(400).json({
                     error: 'An error has occurred',
                 });
             }
@@ -67,17 +65,17 @@ export default {
 
         try {
             if (!EmailValidator.validate(email)) {
-                return res.json({ error: 'Invalid email' });
+                return res.status(400).json({ error: 'Invalid email' });
             }
 
             const existUser = await datamappers.userDatamapper.findByEmail(email);
             if (!existUser) {
-                return res.json({ error: 'Incorrect email or password' });
+                return res.status(400).json({ error: 'Incorrect email or password' });
             }
 
             const passOk = await bcrypt.compare(password, existUser.password);
             if (!passOk) {
-                return res.json({ error: 'Incorrect email or password' });
+                return res.status(400).json({ error: 'Incorrect email or password' });
             }
 
             const role = await datamappers.roleDatamapper.findByPk(existUser.role_id);
