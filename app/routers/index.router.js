@@ -12,6 +12,13 @@ import checkUserRole from '../validation/checkUserRole.middleware.js';
 const router = express.Router();
 
 router.route('/signup')
+    /**
+     * POST /signup
+     * @summary Create a new user
+     * @param {SignupInputObject} request.body.required - User info
+     * @return {boolean} 200 - User created
+     * @return {Error}  400 - Bad request
+     */
     .post(controllerAuth.postSignup);
 
 router.route('/login')

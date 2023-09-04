@@ -12,7 +12,7 @@ const options = {
     // Base directory which we use to locate your JSDOC files
     baseDir: dirname,
     // Glob pattern to find your jsdoc files (multiple patterns can be added in an array)
-    filesPattern: './**/*.js',
+    filesPattern: '../**/*.js',
     // URL where SwaggerUI will be rendered
     swaggerUIPath: '/',
     // Expose OpenAPI UI
