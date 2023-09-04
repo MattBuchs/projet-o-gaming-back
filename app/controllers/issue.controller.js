@@ -15,18 +15,13 @@ export default {
     },
     async getOneIssue(req, res) {
         try {
-            const gameId = req.params.id_game;
             const issueId = req.params.id_issue;
-
-            const game = await datamappers.gameDatamapper.findByPk(gameId);
-            if (!game) {
-                return res.status(404).json(`Can not find game with id ${gameId}`);
-            }
 
             const issue = await datamappers.issueDatamapper.findIssueWithDetails(issueId);
             if (!issue) {
-                return res.status(404).json(`Can not find issue with id ${issueId} for game with id ${gameId}`);
+                return res.status(404).json(`Can not find issue with id ${issueId}`);
             }
+
             return res.json({ issue });
         } catch (err) {
             return res.status(500).json({ error: `Internal Server Error: ${err.message}` });
@@ -133,6 +128,7 @@ export default {
                 return res.status(400).json({ error: 'Unauthorized' });
             }
 
+            inputData.updated_at = new Date();
             await datamappers.issueDatamapper.update(inputData, issueId);
 
             return res.status(200).json({ message: 'Issue updated successfully' });

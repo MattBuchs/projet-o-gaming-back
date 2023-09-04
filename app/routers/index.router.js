@@ -1,77 +1,36 @@
 import express from 'express';
 import controllerSearch from '../controllers/search.controller.js';
-import controllerIssue from '../controllers/issue.controller.js';
 import controllerUtils from '../controllers/utils.controller.js';
-import controllerSuggestion from '../controllers/suggestion.controller.js';
-import authenticateToken from '../validation/authToken.middleware.js';
+import controllerAuth from '../controllers/auth.controller.js';
+// Routers
+import testAuthRouter from './testAuth.router.js';
 import gamesRouter from './games.router.js';
-import issuesRouter from './issues.router.js';
-import userRouter from './user.router.js';
-import otherRouter from './other.router.js';
+import issueRouter from './issues.router.js';
+import suggestionRouter from './suggestions.router.js';
+import userRouter from './users.router.js';
 
 const router = express.Router();
 
-// router.route('/signup')
-//     .post(controllerAuth.postSignup);
+router.route('/signup').post(controllerAuth.postSignup);
 
-// router.route('/login')
-//     .post(controllerAuth.postLogin);
+router.route('/login').post(controllerAuth.postLogin);
 
-// router.get('/test', authenticateToken, (req, res) => {
-//     res.json({ message: 'Token authenticated' });
-// });
-router.get('/test', authenticateToken, (req, res) => {
-    res.json({ message: 'Token authenticated' });
-});
+router.use('/test', testAuthRouter);
 
-/* Games */
 router.use('/games', gamesRouter);
 
-/* Issues */
-router.use('/games/game', issuesRouter);
-// router.route('/games/game/:id_game/issues')
-//     .get(controllerissue.getAllIssues)
-//     .post(authenticateToken, controllerIssue.createIssue);
+router.use('/issue', issueRouter);
 
-// router.route('/games/game/:id_game/issue/:id_issue')
-//     .get(controllerIssue.getOneIssue)
-//     .patch(authenticateToken, controllerIssue.updateIssue)
-//     .delete(authenticateToken, controllerIssue.deleteIssue);
-
-/* Suggestions */
-router.route('/games/game/:id_game/suggestions')
-    .get(controllerSuggestion.getAllSuggestions)
-    .post(authenticateToken, controllerSuggestion.createSuggestion);
-
-router.route('/games/game/:id_game/suggestion/:id_suggestion')
-    .get(controllerSuggestion.getOneSuggestion)
-    .patch(authenticateToken, controllerSuggestion.updateSuggestion)
-    .delete(authenticateToken, controllerSuggestion.deleteSuggestion);
-
-/* Categories */
-router.route('/categories')
-    .get(controllerUtils.getAllCategories);
+router.use('/suggestion', suggestionRouter);
 
 router.use('/users', userRouter);
-router.route('/users')
-    .get(controllerUser.getAllUsers);
 
-router.route('/user/:id_user')
-    .get(controllerUser.getOneUser)
-    .patch(authenticateToken, controllerUser.updateUser);
+router.route('/categories').get(controllerUtils.getAllCategories);
 
-/* Search */
-router.route('/search')
-    .get(controllerSearch.getSearch);
+router.route('/search').get(controllerSearch.getSearch);
 
-/* Utils */
-router.route('/platforms')
-    .get(controllerUtils.getAllPlatforms);
+router.route('/platforms').get(controllerUtils.getAllPlatforms);
 
-router.route('/games/game/:id_game/tags')
-    .get(controllerUtils.getTagsFromGame);
-
-router.route('/tags')
-    .get(controllerUtils.getAllTags);
+router.route('/tags').get(controllerUtils.getAllTags);
 
 export default router;

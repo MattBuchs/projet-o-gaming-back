@@ -14,18 +14,12 @@ export default {
     },
     async getOneSuggestion(req, res) {
         try {
-            const gameId = req.params.id_game;
             const suggestionId = req.params.id_suggestion;
-
-            const game = await datamappers.suggestionDatamapper.findByPk(gameId);
-            if (!game) {
-                return res.status(404).json(`Can not find game with id ${gameId}`);
-            }
 
             const suggestion = await datamappers
                 .suggestionDatamapper.findSuggestionWithDetails(suggestionId);
             if (!suggestion) {
-                return res.status(404).json(`Can not find suggestion with id ${suggestionId} for game with id ${gameId}`);
+                return res.status(404).json(`Can not find suggestion with id ${suggestionId}`);
             }
             return res.json({ suggestion });
         } catch (err) {
@@ -88,13 +82,8 @@ export default {
                 return res.status(400).json({ error: 'Suggestion Not Found' });
             }
 
-            // console.log("req.user.userId: ", req.user.userId)
-            // console.log("suggestion.user_id: ", suggestion.user_id)
             const isAuthor = req.user.userId === suggestion.user_id;
-            // console.log("isAuthor: ", isAuthor)
-            // console.log("req.user.role: ", req.user.role)
             const isDev = req.user.role === 'developer';
-            // console.log("isDev: ", isDev)
 
             // if user id given is not the author and not a dev send Unauthorized
             if (!isAuthor && !isDev) return res.status(401).json({ error: 'Unauthorized' });
