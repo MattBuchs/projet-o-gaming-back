@@ -13,4 +13,10 @@ export default {
      * @property {string} avatar - The avatar of the user
      * @property {integer} role_id - The role id of the user
      */
+
+    /**
+     * @typedef {object} LoginInputObject
+     * @property {string} email - The email of the user
+     * @property {string} password - The password of the user
+     */
 };

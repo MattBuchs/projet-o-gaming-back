@@ -18,10 +18,21 @@ router.route('/signup')
      * @param {SignupInputObject} request.body.required - User info
      * @return {boolean} 200 - User created
      * @return {Error}  400 - Bad request
+     * @return {Error}  409 - Conflict
+     * @return {Error}  500 - Internal server error
      */
     .post(controllerAuth.postSignup);
 
 router.route('/login')
+    /**
+     * POST /login
+     * @summary Login a user
+     * @param {LoginInputObject} request.body.required - User info
+     * @return {object} 200 - User created
+     * @return {Error}  400 - Bad request
+     * @return {Error}  409 - Conflict
+     * @return {Error}  500 - Internal server error
+     */
     .post(controllerAuth.postLogin);
 
 router.get('/test', authenticateToken, (req, res) => {

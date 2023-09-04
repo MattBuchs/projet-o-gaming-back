@@ -6,15 +6,15 @@ const dirname = url.fileURLToPath(new URL('.', import.meta.url));
 const options = {
     info: {
         version: '1.0.0',
-        title: 'O\'Gaming',
-        description: 'une API à destination des éditeurs/développeurs de jeux vidéo et des joueurs',
+        title: 'Cadavre exquis online',
+        description: 'Outil de génération de cadavre exquis',
     },
     // Base directory which we use to locate your JSDOC files
     baseDir: dirname,
     // Glob pattern to find your jsdoc files (multiple patterns can be added in an array)
     filesPattern: '../**/*.js',
     // URL where SwaggerUI will be rendered
-    swaggerUIPath: '/',
+    swaggerUIPath: '/docs',
     // Expose OpenAPI UI
     exposeSwaggerUI: true,
     // Expose Open API JSON Docs documentation in `apiDocsPath` path.
