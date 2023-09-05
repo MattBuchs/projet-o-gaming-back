@@ -21,6 +21,7 @@ export default class IssueDatamapper extends CoreDatamapper {
             "user"."id" AS "user_id",
             "user"."username" AS author,
             "game"."name" AS game,
+            "platform"."id" AS "platform_id",
             "platform"."name" AS platform, 
             CASE
                 WHEN COUNT("tag"."id") > 0 THEN JSON_AGG("tag"."title")
@@ -38,6 +39,7 @@ export default class IssueDatamapper extends CoreDatamapper {
             "user"."id",
             "user"."username",
             "game"."name",
+            "platform"."id",
             "platform"."name"`,
             [issueId],
         );
