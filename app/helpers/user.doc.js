@@ -6,8 +6,8 @@ const dirname = url.fileURLToPath(new URL('.', import.meta.url));
 const options = {
     info: {
         version: '1.0.0',
-        title: 'Cadavre exquis online',
-        description: 'Outil de génération de cadavre exquis',
+        title: 'O\'Gaming',
+        description: 'une API à destination des éditeurs/développeurs de jeux vidéo et des joueurs.',
     },
     // Base directory which we use to locate your JSDOC files
     baseDir: dirname,

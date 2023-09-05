@@ -31,7 +31,7 @@ router.route('/login')
      * POST /login
      * @summary Login a user
      * @param {LoginInputObject} request.body.required - User info
-     * @return {object} 200 - User created
+     * @return {Message} 200 - User created
      * @return {Error}  400 - Bad request
      * @return {Error}  409 - Conflict
      * @return {Error}  500 - Internal server error
@@ -43,9 +43,23 @@ router.route('/games/game')
     .post([authenticateToken, checkUserRole.isDeveloper], controllerGame.createGame);
 
 router.route('/games')
+    /**
+     * GET /games
+     * @summary Get all games
+     * @return {Array.<Game>} 200 - Array of games
+     * @return {Error}  500 - Internal server error
+     */
     .get(controllerGame.getAllGames);
 
 router.route('/games/game/:id_game')
+    /**
+     * GET /games/game/:id_game
+     * @summary Get a game
+     * @param {integer} id_game.path.required - Game id
+     * @return {Game} 200 - Game
+     * @return {Error}  404 - Game not found
+     * @return {Error}  500 - Internal server error
+     */
     .get(controllerGame.getOneGame)
     .patch([authenticateToken, checkUserRole.isDeveloper], controllerGame.updateGame)
     .delete([authenticateToken, checkUserRole.isDeveloper], controllerGame.deleteGame);
