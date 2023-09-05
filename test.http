@@ -27,16 +27,16 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb
 ### Création d'un Jeux
 POST http://localhost:3000/games/game
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb2xlIjoiZGV2ZWxvcGVyIiwidXNlcm5hbWUiOiJ1c2VyMiIsImlhdCI6MTY5MzgzNzQxOSwiZXhwIjoxNjkzODQxMDE5fQ._9rYVL1RVFTN4iR2gmhY21s7QtI9LKsLVZTq7w7L53Y
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb2xlIjoiZGV2ZWxvcGVyIiwidXNlcm5hbWUiOiJ1c2VyMiIsImlhdCI6MTY5MzkwMTc5NiwiZXhwIjoxNjkzOTA1Mzk2fQ.n-HdO6W5TEXRxm5bcK0WlYXjbi2XAEeLBEbO-pUkQmo
 
 {
-    "name": "Jeux test1",
+    "name": "Jeux test32",
     "description": "test",
     "picture": "https://www.jeuxvideo.com/smileys_img/45.gif",
     "external_link": "https://www.test",
     "release_date": "2021-05-20",
     "categories": ["Action", "Adventure", "Casual"],
-    "tags": ["view", "analyst", "action"]
+    "tags": []
 }
 
 ### Update d'un Jeux
@@ -62,7 +62,7 @@ GET http://localhost:3000/games/game/24
 ### Create Issue
 POST http://localhost:3000/games/game/14/issues
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb2xlIjoiZGV2ZWxvcGVyIiwidXNlcm5hbWUiOiJ1c2VyMiIsImlhdCI6MTY5MzgzNzQxOSwiZXhwIjoxNjkzODQxMDE5fQ._9rYVL1RVFTN4iR2gmhY21s7QtI9LKsLVZTq7w7L53Y
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb2xlIjoiZGV2ZWxvcGVyIiwidXNlcm5hbWUiOiJ1c2VyMiIsImlhdCI6MTY5MzkwMTc5NiwiZXhwIjoxNjkzOTA1Mzk2fQ.n-HdO6W5TEXRxm5bcK0WlYXjbi2XAEeLBEbO-pUkQmo
 
 {
     "title": "test32g",
@@ -75,7 +75,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb
     "published_at": "2021-02-13",
     "user_id": 11,
     "platform_id": 2,
-    "tags": ["view", "analyst", "action"]
+    "tags": []
 }
 
 ### Delete Issue
@@ -106,7 +106,7 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb2xlIjoi
 GET http://localhost:3000/games/game/1/issues
 
 ### Trouver un Issue d'un Jeux
-GET http://localhost:3000/issue/1
+GET http://localhost:3000/issue/13
 
 ### Create Suggestion
 POST http://localhost:3000/games/game/1/suggestions

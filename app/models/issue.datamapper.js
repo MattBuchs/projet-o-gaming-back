@@ -22,7 +22,10 @@ export default class IssueDatamapper extends CoreDatamapper {
             "user"."username" AS author,
             "game"."name" AS game,
             "platform"."name" AS platform, 
-            JSON_AGG("tag"."title") AS tags
+        CASE
+                WHEN COUNT("tag"."id") > 0 THEN JSON_AGG("tag"."title")
+                ELSE '[]'::json
+        END AS tags
         FROM "issue"
         JOIN "user" ON "user"."id" = "issue"."user_id"
         JOIN "platform" ON "platform"."id" = "issue"."platform_id"
@@ -49,7 +52,7 @@ export default class IssueDatamapper extends CoreDatamapper {
                 "issue"."title",
                 "issue"."status",
                 "user"."username" AS "author",
-                CASE
+            CASE
                 WHEN COUNT("tag"."id") > 0 THEN JSON_AGG("tag"."title")
                 ELSE '[]'::json
             END AS tags
