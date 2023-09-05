@@ -53,7 +53,7 @@ export default class IssueDatamapper extends CoreDatamapper {
             "issue"."id",
             "issue"."title",
             "issue"."status",
-            "issue"."is_online",
+            "issue"."is_public",
             "user"."id" AS user_id,
             "user"."username" AS "author",
             CASE
