@@ -3,8 +3,8 @@ POST http://localhost:3000/signup
 Content-Type: application/json
 
 {
-    "username": "user3",
-    "email": "test3@test.com",
+    "username": "user2",
+    "email": "test2@test.com",
     "password": "password",
     "confirmPassword": "password",
     "avatar": "https://img.freepik.com/premium-vector/young-smiling-man-avatar-man-with-brown-beard-mustache-hair-wearing-yellow-sweater-sweatshirt-3d-vector-people-character-illustration-cartoon-minimal-style_365941-860.jpg",
@@ -27,16 +27,16 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb
 ### Création d'un Jeux
 POST http://localhost:3000/games/game
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb2xlIjoiZGV2ZWxvcGVyIiwidXNlcm5hbWUiOiJ1c2VyMiIsImlhdCI6MTY5MzU2OTU0OCwiZXhwIjoxNjkzNTczMTQ4fQ.LWI4yaIpNcdrJ4XqrPLadmi18qewpeyp_BFpHpYevz8
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb2xlIjoiZGV2ZWxvcGVyIiwidXNlcm5hbWUiOiJ1c2VyMiIsImlhdCI6MTY5MzkwMTc5NiwiZXhwIjoxNjkzOTA1Mzk2fQ.n-HdO6W5TEXRxm5bcK0WlYXjbi2XAEeLBEbO-pUkQmo
 
 {
-    "name": "Jeux test1",
+    "name": "Jeux test32",
     "description": "test",
     "picture": "https://www.jeuxvideo.com/smileys_img/45.gif",
     "external_link": "https://www.test",
     "release_date": "2021-05-20",
     "categories": ["Action", "Adventure", "Casual"],
-    "tags": ["view", "analyst", "action"]
+    "tags": []
 }
 
 ### Update d'un Jeux
@@ -57,17 +57,17 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEyLCJyb2xlIjoi
 GET http://localhost:3000/games
 
 ### Trouver un Jeux
-GET http://localhost:3000/games/game/1
+GET http://localhost:3000/games/game/11
 
 ### Create Issue
-POST http://localhost:3000/games/game/24/issues
+POST http://localhost:3000/games/game/14/issues
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb2xlIjoiZGV2ZWxvcGVyIiwidXNlcm5hbWUiOiJ1c2VyMiIsImlhdCI6MTY5MzQ3MzAwNSwiZXhwIjoxNjkzNDc2NjA1fQ.I7jqADHsXtNt0Ai6SmOuWcaNyx8Ni6xUma95mMHT9wQ
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb2xlIjoiZGV2ZWxvcGVyIiwidXNlcm5hbWUiOiJ1c2VyMiIsImlhdCI6MTY5MzkwMTc5NiwiZXhwIjoxNjkzOTA1Mzk2fQ.n-HdO6W5TEXRxm5bcK0WlYXjbi2XAEeLBEbO-pUkQmo
 
 {
     "title": "test32g",
     "description": "test test",
-    "is_minor": true,
+    "is_minor": false,
     "is_public": true,
     "is_online": true,
     "frequency": "test",
@@ -75,25 +75,25 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb
     "published_at": "2021-02-13",
     "user_id": 11,
     "platform_id": 2,
-    "tags": ["view", "analyst", "action"]
+    "tags": []
 }
 
 ### Delete Issue
-DELETE http://localhost:3000/games/game/1/issue/11
+DELETE http://localhost:3000/issue/11
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb2xlIjoiZGV2ZWxvcGVyIiwiaWF0IjoxNjkzMjEzMjE3LCJleHAiOjE2OTMyMTY4MTd9.OKK4sLllNHrspu8zk-G8OWpwWhc7-WFcqwYoOyPhNNY
 
 ### Update Issue Player
-PATCH http://localhost:3000/games/game/1/issue/11
+PATCH http://localhost:3000/issue/10
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb2xlIjoiZGV2ZWxvcGVyIiwiaWF0IjoxNjkzMjEzMjE3LCJleHAiOjE2OTMyMTY4MTd9.OKK4sLllNHrspu8zk-G8OWpwWhc7-WFcqwYoOyPhNNY
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb2xlIjoiZGV2ZWxvcGVyIiwidXNlcm5hbWUiOiJ1c2VyMiIsImlhdCI6MTY5MzgxNzY5MCwiZXhwIjoxNjkzODIxMjkwfQ.3KrSjwfMSnQxKsNo6Tu81u9sFpsUJ8lFedyz0VLOEyQ
 
 {
-    "title": "test32",
+    "title": "test1",
     "description": "test test test"
 }
 
 ### Update Issue Developer
-PATCH http://localhost:3000/games/game/13/issue/13
+PATCH http://localhost:3000/issue/13
 Content-Type: application/json
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb2xlIjoiZGV2ZWxvcGVyIiwiaWF0IjoxNjkzMjEzMjE3LCJleHAiOjE2OTMyMTY4MTd9.OKK4sLllNHrspu8zk-G8OWpwWhc7-WFcqwYoOyPhNNY
 
@@ -105,8 +105,8 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb2xlIjoi
 ### Trouver tous les Issues d'un Jeux
 GET http://localhost:3000/games/game/1/issues
 
-### Trouver un Issue d'un Jeux
-GET http://localhost:3000/games/game/12/issue/11
+### Trouver un Issue
+GET http://localhost:3000/issue/13
 
 ### Create Suggestion
 POST http://localhost:3000/games/game/1/suggestions
@@ -127,11 +127,11 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb2xlIjoi
 }
 
 ### Delete Suggestion
-DELETE http://localhost:3000/games/game/1/suggestion/13
+DELETE http://localhost:3000/suggestion/13
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb2xlIjoicGxheWVyIiwidXNlcm5hbWUiOiJ1c2VyIiwiaWF0IjoxNjkzMjkxNjc2LCJleHAiOjE2OTMyOTUyNzZ9.VXBl1lFRL7DXRj19fun0IVSdzH7l5QvYd0WU-7nWITQ
 
 ### Update Suggestion 
-PATCH http://localhost:3000/games/game/1/suggestion/1
+PATCH http://localhost:3000/suggestion/1
 Content-Type: application/json
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb2xlIjoiZGV2ZWxvcGVyIiwiaWF0IjoxNjkzMjEzMjE3LCJleHAiOjE2OTMyMTY4MTd9.OKK4sLllNHrspu8zk-G8OWpwWhc7-WFcqwYoOyPhNNY
 
@@ -143,8 +143,8 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb2xlIjoi
 ### Trouver tous les Suggestions d'un Jeux
 GET http://localhost:3000/games/game/1/suggestions
 
-### Trouver un Suggestion d'un Jeux
-GET http://localhost:3000/games/game/1/suggestion/1
+### Trouver un Suggestion 
+GET http://localhost:3000/suggestion/1
 
 ### Trouver tous les Catégories
 GET http://localhost:3000/categories
