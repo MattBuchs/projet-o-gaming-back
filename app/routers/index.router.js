@@ -40,6 +40,22 @@ router.route('/login')
 
 /* Games */
 router.route('/games/game')
+    /**
+     * POST /games/game
+     * @summary Create a new game
+     * @param {CreateGameObject} request.body.required - Game info
+     * @security BearerAuth
+     * @return {boolean} 200 - Game created
+     * @return {Error}  400 - Bad request
+     * @return {Error}  401 - Unauthorized
+     * @return {Error}  500 - Internal server error
+     * @description
+     * To authenticate, include the JWT token in the "Authorization" header as follows:
+     * - Type: Bearer
+     * - Token: Your-JWT-Token-Here
+     *
+     * Note: To create a game, you need to be a developer.
+     */
     .post([authenticateToken, checkUserRole.isDeveloper], controllerGame.createGame);
 
 router.route('/games')
@@ -73,8 +89,29 @@ router.route('/games/game/:id_game')
      * @return {Error}  401 - Unauthorized
      * @return {Error}  404 - Game not found
      * @return {Error}  500 - Internal server error
+     * @description To authenticate, include the JWT token in the "Authorization" header as follows:
+     * - Type: Bearer
+     * - Token: Your-JWT-Token-Here
+     *
+     * Note: To update a game, you need to be a developer.
      */
     .patch([authenticateToken, checkUserRole.isDeveloper], controllerGame.updateGame)
+    /**
+     * DELETE /games/game/{id_game}
+     * @summary Delete a game
+     * @param {integer} id_game.path.required - Game id
+     * @security BearerAuth
+     * @return {boolean} 200 - Game deleted
+     * @return {Error}  400 - Bad request
+     * @return {Error}  401 - Unauthorized
+     * @return {Error}  404 - Game not found
+     * @return {Error}  500 - Internal server error
+     * @description To authenticate, include the JWT token in the "Authorization" header as follows:
+     * - Type: Bearer
+     * - Token: Your-JWT-Token-Here
+     *
+     * Note: To delete a game, you need to be a developer.
+     */
     .delete([authenticateToken, checkUserRole.isDeveloper], controllerGame.deleteGame);
 
 /* Issues */
@@ -88,6 +125,21 @@ router.route('/games/game/:id_game/issues')
      * @return {Error}  500 - Internal server error
      */
     .get(controllerIssue.getAllIssues)
+    /**
+     * POST /games/game/{id_game}/issues
+     * @summary Create a new issue
+     * @param {integer} id_game.path.required - Game id
+     * @param {CreateIssueObject} request.body.required - Issue info
+     * @security BearerAuth
+     * @return {boolean} 200 - Issue created
+     * @return {Error}  400 - Bad request
+     * @return {Error}  401 - Unauthorized
+     * @return {Error}  404 - Game not found
+     * @return {Error}  500 - Internal server error
+     * @description To authenticate, include the JWT token in the "Authorization" header as follows:
+     * - Type: Bearer
+     * - Token: Your-JWT-Token-Here
+     */
     .post(authenticateToken, controllerIssue.createIssue);
 
 router.route('/issue/:id_issue')
@@ -100,7 +152,40 @@ router.route('/issue/:id_issue')
      * @return {Error}  500 - Internal server error
      */
     .get(controllerIssue.getOneIssue)
+    /**
+     * PATCH /issue/{id_issue}
+     * @summary Update an issue
+     * @param {integer} id_issue.path.required - Issue id
+     * @param {UpdateIssueObject} request.body.required - Issue info
+     * @security BearerAuth
+     * @return {boolean} 200 - Issue updated
+     * @return {Error}  400 - Bad request
+     * @return {Error}  401 - Unauthorized
+     * @return {Error}  404 - Issue not found
+     * @return {Error}  500 - Internal server error
+     * @description To authenticate, include the JWT token in the "Authorization" header as follows:
+     * - Type: Bearer
+     * - Token: Your-JWT-Token-Here
+     *
+     * Note: To update an issue, you need to be a developer or author.
+     */
     .patch(authenticateToken, controllerIssue.updateIssue)
+    /**
+     * DELETE /issue/{id_issue}
+     * @summary Delete an issue
+     * @param {integer} id_issue.path.required - Issue id
+     * @security BearerAuth
+     * @return {boolean} 200 - Issue deleted
+     * @return {Error}  400 - Bad request
+     * @return {Error}  401 - Unauthorized
+     * @return {Error}  404 - Issue not found
+     * @return {Error}  500 - Internal server error
+     * @description To authenticate, include the JWT token in the "Authorization" header as follows:
+     * - Type: Bearer
+     * - Token: Your-JWT-Token-Here
+     *
+     * Note: To delete an issue, you need to be a author.
+     */
     .delete(authenticateToken, controllerIssue.deleteIssue);
 
 /* Suggestions */
@@ -114,6 +199,21 @@ router.route('/games/game/:id_game/suggestions')
      * @return {Error}  500 - Internal server error
      */
     .get(controllerSuggestion.getAllSuggestions)
+    /**
+     * POST /games/game/{id_game}/suggestions
+     * @summary Create a new suggestion
+     * @param {integer} id_game.path.required - Game id
+     * @param {CreateSuggestionObject} request.body.required - Suggestion info
+     * @security BearerAuth
+     * @return {boolean} 200 - Suggestion created
+     * @return {Error}  400 - Bad request
+     * @return {Error}  401 - Unauthorized
+     * @return {Error}  404 - Game not found
+     * @return {Error}  500 - Internal server error
+     * @description To authenticate, include the JWT token in the "Authorization" header as follows:
+     * - Type: Bearer
+     * - Token: Your-JWT-Token-Here
+     */
     .post(authenticateToken, controllerSuggestion.createSuggestion);
 
 router.route('/suggestion/:id_suggestion')
@@ -126,7 +226,40 @@ router.route('/suggestion/:id_suggestion')
      * @return {Error}  500 - Internal server error
      */
     .get(controllerSuggestion.getOneSuggestion)
+    /**
+     * PATCH /suggestion/{id_suggestion}
+     * @summary Update a suggestion
+     * @param {integer} id_suggestion.path.required - Suggestion id
+     * @param {UpdateSuggestionObject} request.body.required - Suggestion info
+     * @security BearerAuth
+     * @return {boolean} 200 - Suggestion updated
+     * @return {Error}  400 - Bad request
+     * @return {Error}  401 - Unauthorized
+     * @return {Error}  404 - Suggestion not found
+     * @return {Error}  500 - Internal server error
+     * @description To authenticate, include the JWT token in the "Authorization" header as follows:
+     * - Type: Bearer
+     * - Token: Your-JWT-Token-Here
+     *
+     * Note: To update a suggestion, you need to be a developer or author.
+     */
     .patch(authenticateToken, controllerSuggestion.updateSuggestion)
+    /**
+     * DELETE /suggestion/{id_suggestion}
+     * @summary Delete a suggestion
+     * @param {integer} id_suggestion.path.required - Suggestion id
+     * @security BearerAuth
+     * @return {boolean} 200 - Suggestion deleted
+     * @return {Error}  400 - Bad request
+     * @return {Error}  401 - Unauthorized
+     * @return {Error}  404 - Suggestion not found
+     * @return {Error}  500 - Internal server error
+     * @description To authenticate, include the JWT token in the "Authorization" header as follows:
+     * - Type: Bearer
+     * - Token: Your-JWT-Token-Here
+     *
+     * Note: To delete a suggestion, you need to be a author.
+     */
     .delete(authenticateToken, controllerSuggestion.deleteSuggestion);
 
 /* Categories */
@@ -161,6 +294,23 @@ router.route('/user/:id_user')
      * @return {Error}  500 - Internal server error
      */
     .get(controllerUser.getOneUser)
+    /**
+     * PATCH /user/{id_user}
+     * @summary Update a user
+     * @param {integer} id_user.path.required - User id
+     * @param {UpdateUserObject} request.body.required - User info
+     * @security BearerAuth
+     * @return {boolean} 200 - User updated
+     * @return {Error}  400 - Bad request
+     * @return {Error}  401 - Unauthorized
+     * @return {Error}  404 - User not found
+     * @return {Error}  500 - Internal server error
+     * @description To authenticate, include the JWT token in the "Authorization" header as follows:
+     * - Type: Bearer
+     * - Token: Your-JWT-Token-Here
+     *
+     * Note: To update a user, you need to be the user.
+     */
     .patch(authenticateToken, controllerUser.updateUser);
 
 /* Search */

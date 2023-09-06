@@ -9,13 +9,6 @@ const options = {
         title: 'O\'Gaming',
         description: 'une API à destination des éditeurs/développeurs de jeux vidéo et des joueurs.',
     },
-    // Définition du schéma de sécurité pour l'authentification Bearer Token
-    security: {
-        BasicAuth: {
-            type: 'http',
-            scheme: 'basic',
-        },
-    },
     // Base directory which we use to locate your JSDOC files
     baseDir: dirname,
     // Glob pattern to find your jsdoc files (multiple patterns can be added in an array)
