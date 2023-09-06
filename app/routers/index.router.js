@@ -18,6 +18,7 @@ router.route('/signup')
     /**
      * POST /signup
      * @summary Create a new user
+     * @tags Auth
      * @param {SignupInputObject} request.body.required - User info
      * @return {boolean} 200 - User created
      * @return {Error}  400 - Bad request
@@ -30,6 +31,7 @@ router.route('/login')
     /**
      * POST /login
      * @summary Login a user
+     * @tags Auth
      * @param {LoginInputObject} request.body.required - User info
      * @return {Message} 200 - User created
      * @return {Error}  400 - Bad request
@@ -43,6 +45,7 @@ router.route('/games/game')
     /**
      * POST /games/game
      * @summary Create a new game
+     * @tags Games
      * @param {CreateGameObject} request.body.required - Game info
      * @security BearerAuth
      * @return {boolean} 200 - Game created
@@ -62,6 +65,7 @@ router.route('/games')
     /**
      * GET /games
      * @summary Get all games
+     * @tags Games
      * @return {Array.<Game>} 200 - Array of games
      * @return {Error}  404 - Games not found
      * @return {Error}  500 - Internal server error
@@ -72,6 +76,7 @@ router.route('/games/game/:id_game')
     /**
      * GET /games/game/{id_game}
      * @summary Get a game
+     * @tags Games
      * @param {integer} id_game.path.required - Game id
      * @return {Game} 200 - Game
      * @return {Error}  404 - Game not found
@@ -81,6 +86,7 @@ router.route('/games/game/:id_game')
     /**
      * PATCH /games/game/{id_game}
      * @summary Update a game
+     * @tags Games
      * @param {integer} id_game.path.required - Game id
      * @param {UpdateGameObject} request.body.required - Game info
      * @security BearerAuth  // Ajout de la sécurité BearerAuth
@@ -99,6 +105,7 @@ router.route('/games/game/:id_game')
     /**
      * DELETE /games/game/{id_game}
      * @summary Delete a game
+     * @tags Games
      * @param {integer} id_game.path.required - Game id
      * @security BearerAuth
      * @return {boolean} 200 - Game deleted
@@ -119,6 +126,7 @@ router.route('/games/game/:id_game/issues')
     /**
      * GET /games/game/{id_game}/issues
      * @summary Get all issues from a game
+     * @tags Issues
      * @param {integer} id_game.path.required - Game id
      * @return {Array.<Issue>} 200 - Array of issues
      * @return {Error}  404 - Game not found
@@ -128,6 +136,7 @@ router.route('/games/game/:id_game/issues')
     /**
      * POST /games/game/{id_game}/issues
      * @summary Create a new issue
+     * @tags Issues
      * @param {integer} id_game.path.required - Game id
      * @param {CreateIssueObject} request.body.required - Issue info
      * @security BearerAuth
@@ -146,6 +155,7 @@ router.route('/issue/:id_issue')
     /**
      * GET /issue/{id_issue}
      * @summary Get an issue
+     * @tags Issues
      * @param {integer} id_issue.path.required - Issue id
      * @return {Issue} 200 - Issue
      * @return {Error}  404 - Issue not found
@@ -155,6 +165,7 @@ router.route('/issue/:id_issue')
     /**
      * PATCH /issue/{id_issue}
      * @summary Update an issue
+     * @tags Issues
      * @param {integer} id_issue.path.required - Issue id
      * @param {UpdateIssueObject} request.body.required - Issue info
      * @security BearerAuth
@@ -173,6 +184,7 @@ router.route('/issue/:id_issue')
     /**
      * DELETE /issue/{id_issue}
      * @summary Delete an issue
+     * @tags Issues
      * @param {integer} id_issue.path.required - Issue id
      * @security BearerAuth
      * @return {boolean} 200 - Issue deleted
@@ -193,6 +205,7 @@ router.route('/games/game/:id_game/suggestions')
     /**
      * GET /games/game/{id_game}/suggestions
      * @summary Get all suggestions from a game
+     * @tags Suggestions
      * @param {integer} id_game.path.required - Game id
      * @return {Array.<Suggestion>} 200 - Array of suggestions
      * @return {Error}  404 - Game not found
@@ -202,6 +215,7 @@ router.route('/games/game/:id_game/suggestions')
     /**
      * POST /games/game/{id_game}/suggestions
      * @summary Create a new suggestion
+     * @tags Suggestions
      * @param {integer} id_game.path.required - Game id
      * @param {CreateSuggestionObject} request.body.required - Suggestion info
      * @security BearerAuth
@@ -220,6 +234,7 @@ router.route('/suggestion/:id_suggestion')
     /**
      * GET /suggestion/{id_suggestion}
      * @summary Get a suggestion
+     * @tags Suggestions
      * @param {integer} id_suggestion.path.required - Suggestion id
      * @return {Suggestion} 200 - Suggestion
      * @return {Error}  404 - Suggestion not found
@@ -229,6 +244,7 @@ router.route('/suggestion/:id_suggestion')
     /**
      * PATCH /suggestion/{id_suggestion}
      * @summary Update a suggestion
+     * @tags Suggestions
      * @param {integer} id_suggestion.path.required - Suggestion id
      * @param {UpdateSuggestionObject} request.body.required - Suggestion info
      * @security BearerAuth
@@ -247,6 +263,7 @@ router.route('/suggestion/:id_suggestion')
     /**
      * DELETE /suggestion/{id_suggestion}
      * @summary Delete a suggestion
+     * @tags Suggestions
      * @param {integer} id_suggestion.path.required - Suggestion id
      * @security BearerAuth
      * @return {boolean} 200 - Suggestion deleted
@@ -267,6 +284,7 @@ router.route('/categories')
     /**
      * GET /categories
      * @summary Get all categories
+     * @tags Utils
      * @return {Array.<Category>} 200 - Array of categories
      * @return {Error}  404 - Categories not found
      * @return {Error}  500 - Internal server error
@@ -278,6 +296,7 @@ router.route('/users')
     /**
      * GET /users
      * @summary Get all users
+     * @tags Users
      * @return {Array.<Users>} 200 - Array of users
      * @return {Error}  404 - Users not found
      * @return {Error}  500 - Internal server error
@@ -288,6 +307,7 @@ router.route('/user/:id_user')
     /**
      * GET /user/{id_user}
      * @summary Get a user
+     * @tags Users
      * @param {integer} id_user.path.required - User id
      * @return {User} 200 - User
      * @return {Error}  404 - User not found
@@ -297,6 +317,7 @@ router.route('/user/:id_user')
     /**
      * PATCH /user/{id_user}
      * @summary Update a user
+     * @tags Users
      * @param {integer} id_user.path.required - User id
      * @param {UpdateUserObject} request.body.required - User info
      * @security BearerAuth
@@ -318,6 +339,7 @@ router.route('/search')
     /**
      * GET /search
      * @summary Search
+     * @tags Search
      * @param {string} search.query.required - Search
      * @return {Array.<Search>} 200 - Array of search
      * @return {Error}  404 - Search not found
@@ -330,6 +352,7 @@ router.route('/platforms')
     /**
      * GET /platforms
      * @summary Get all platforms
+     * @tags Utils
      * @return {Array.<Platforms>} 200 - Array of platforms
      * @return {Error}  404 - Platforms not found
      * @return {Error}  500 - Internal server error
@@ -340,6 +363,7 @@ router.route('/games/game/:id_game/tags')
     /**
      * GET /games/game/{id_game}/tags
      * @summary Get all tags from a game
+     * @tags Utils
      * @param {integer} id_game.path.required - Game id
      * @return {Array.<Tags>} 200 - Array of tags of a game
      * @return {Error}  404 - Game not found
@@ -351,6 +375,7 @@ router.route('/tags')
     /**
      * GET /tags
      * @summary Get all tags
+     * @tags Utils
      * @return {Array.<Tags>} 200 - Array of tags
      * @return {Error}  404 - Tags not found
      * @return {Error}  500 - Internal server error

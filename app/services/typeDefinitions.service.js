@@ -1,14 +1,17 @@
 export default {
+    // * Error
     /**
      * @typedef {object} Error
      * @property {string} error
      */
 
+    // * Message
     /**
      * @typedef {object} Message
      * @property {string} message
      */
 
+    // * Auth
     /**
      * @typedef {object} SignupInputObject
      * @property {string} username - The username of the user
@@ -25,6 +28,7 @@ export default {
      * @property {string} password - The password of the user
      */
 
+    // * GET
     /**
      * @typedef {object} Game
      * @property {integer} id - The id of the game
