@@ -18,19 +18,28 @@ export default class IssueDatamapper extends CoreDatamapper {
             "issue"."frequency",
             "issue"."replication",
             "issue"."published_at",
-            "issue"."user_id", 
-            "user"."username" AS author, 
+            "user"."id" AS "user_id",
+            "user"."username" AS author,
+            "game"."name" AS game,
+            "platform"."id" AS "platform_id",
             "platform"."name" AS platform, 
-            JSON_AGG("tag"."title") AS tags
+            CASE
+                WHEN COUNT("tag"."id") > 0 THEN JSON_AGG("tag"."title")
+                ELSE '[]'::json
+            END AS tags
         FROM "issue"
         JOIN "user" ON "user"."id" = "issue"."user_id"
         JOIN "platform" ON "platform"."id" = "issue"."platform_id"
+        JOIN "game" ON "game"."id" = "issue"."game_id"
         LEFT JOIN "issue_has_tag" ON "issue_has_tag"."issue_id" = "issue"."id"
         LEFT JOIN "tag" ON "tag"."id" = "issue_has_tag"."tag_id"
         WHERE "issue"."id" = $1
         GROUP BY
             "issue"."id",
+            "user"."id",
             "user"."username",
+            "game"."name",
+            "platform"."id",
             "platform"."name"`,
             [issueId],
         );
@@ -40,24 +49,27 @@ export default class IssueDatamapper extends CoreDatamapper {
 
     async findIssuesWithGame(gameId) {
         const result = await this.client.query(`
-            SELECT
-                "issue"."id",
-                "issue"."title",
-                "issue"."status",
-                "user"."username" AS "author",
-                CASE
+        SELECT
+            "issue"."id",
+            "issue"."title",
+            "issue"."status",
+            "issue"."is_public",
+            "user"."id" AS user_id,
+            "user"."username" AS "author",
+            CASE
                 WHEN COUNT("tag"."id") > 0 THEN JSON_AGG("tag"."title")
                 ELSE '[]'::json
             END AS tags
-            FROM "issue"
-            JOIN "user" ON "user"."id" = "issue"."user_id"
-            LEFT JOIN "issue_has_tag" ON "issue_has_tag"."issue_id" = "issue"."id"
-            LEFT JOIN "tag" ON "tag"."id" = "issue_has_tag"."tag_id"
-            WHERE "issue"."game_id" = $1
-            GROUP BY
-                "issue"."id",
-                "issue"."status",
-                "user"."username";
+        FROM "issue"
+        JOIN "user" ON "user"."id" = "issue"."user_id"
+        LEFT JOIN "issue_has_tag" ON "issue_has_tag"."issue_id" = "issue"."id"
+        LEFT JOIN "tag" ON "tag"."id" = "issue_has_tag"."tag_id"
+        WHERE "issue"."game_id" = $1
+        GROUP BY
+            "issue"."id",
+            "issue"."status",
+            "user"."id",
+            "user"."username"
         `, [gameId]);
 
         return result.rows;

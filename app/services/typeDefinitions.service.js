@@ -114,4 +114,17 @@ export default {
      * @property {integer} id - The id of the tag
      * @property {string} title - The title of the tag
      */
+
+    // UPDATE
+    /**
+     * @typedef {object} UpdateGameObject
+     * @property {string} name - The name of the game
+     * @property {string} description - The description of the game
+     * @property {string} picture - The picture of the game
+     * @property {string} external_link - The external link of the game
+     * @return {Game.model} 200 - Game
+     * @return {Error}  404 - Game not found
+     * @return {Error}  500 - Internal server error
+     * @example response - 200 - success response example
+     */
 };

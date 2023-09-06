@@ -62,6 +62,18 @@ router.route('/games/game/:id_game')
      * @return {Error}  500 - Internal server error
      */
     .get(controllerGame.getOneGame)
+    /**
+     * PATCH /games/game/{id_game}
+     * @summary Update a game
+     * @param {integer} id_game.path.required - Game id
+     * @param {UpdateGameObject} request.body.required - Game info
+     * @security BearerAuth  // Ajout de la sécurité BearerAuth
+     * @return {boolean} 200 - Game updated
+     * @return {Error}  400 - Bad request
+     * @return {Error}  401 - Unauthorized
+     * @return {Error}  404 - Game not found
+     * @return {Error}  500 - Internal server error
+     */
     .patch([authenticateToken, checkUserRole.isDeveloper], controllerGame.updateGame)
     .delete([authenticateToken, checkUserRole.isDeveloper], controllerGame.deleteGame);
 
