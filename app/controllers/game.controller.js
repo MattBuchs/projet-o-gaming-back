@@ -65,9 +65,8 @@ export default {
                 return res.status(404).json({ error: 'Game not found' });
             }
 
-            let tagPromises;
             if (tags && tags.length > 0) {
-                tagPromises = tags.map(async (tag) => {
+                Promise.all(tags.map(async (tag) => {
                     const tagTitle = tag.toLowerCase();
                     let findTag = await datamappers.tagDatamapper.findOne('title', tagTitle);
 
@@ -84,10 +83,10 @@ export default {
                         game_id: findGame.id,
                         tag_id: findTag.id,
                     });
-                });
+                }));
             }
 
-            const categoryPromises = categories.map(async (category) => {
+            Promise.all(categories.map(async (category) => {
                 const findCategory = await datamappers.categoryDatamapper.findOne('name', category);
 
                 if (!findCategory) {
@@ -98,9 +97,7 @@ export default {
                     category_id: findCategory.id,
                     game_id: findGame.id,
                 });
-            });
-
-            await Promise.all([...tagPromises, ...categoryPromises]);
+            }));
 
             return res.json({ message: 'Game created' });
         } catch (err) {
@@ -129,10 +126,9 @@ export default {
             if (req.user.userId !== game.user_id) return res.status(401).json({ error: 'Unauthorized' });
 
             inputData.updated_at = new Date();
-            console.log(inputData);
             await datamappers.gameDatamapper.update(inputData, gameId);
 
-            return res.status(200).json({ message: 'Issue updated successfully' });
+            return res.status(200).json({ message: 'Game updated successfully' });
         } catch (err) {
             return res.status(500).json({ error: `Internal Server Error: ${err.message}` });
         }

@@ -27,7 +27,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb
 ### Création d'un Jeux
 POST http://localhost:3000/games/game
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb2xlIjoiZGV2ZWxvcGVyIiwidXNlcm5hbWUiOiJ1c2VyMiIsImlhdCI6MTY5MzkwMTc5NiwiZXhwIjoxNjkzOTA1Mzk2fQ.n-HdO6W5TEXRxm5bcK0WlYXjbi2XAEeLBEbO-pUkQmo
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb2xlIjoiZGV2ZWxvcGVyIiwidXNlcm5hbWUiOiJ1c2VyMiIsImlhdCI6MTY5NDAyMzczNCwiZXhwIjoxNjk0MDI3MzM0fQ.PZ19xhnianG7uSW779vYYul_cJvL2uo-B6sMpmrNkpA
 
 {
     "name": "Jeux test32",
@@ -36,13 +36,13 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb
     "external_link": "https://www.test",
     "release_date": "2021-05-20",
     "categories": ["Action", "Adventure", "Casual"],
-    "tags": []
+    "tags": ["épée", "bouclier"]
 }
 
 ### Update d'un Jeux
-PATCH http://localhost:3000/games/game/19
+PATCH http://localhost:3000/games/game/11
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEyLCJyb2xlIjoiZGV2ZWxvcGVyIiwidXNlcm5hbWUiOiJ1c2VyMiIsImlhdCI6MTY5MzI5ODE0OCwiZXhwIjoxNjkzMzAxNzQ4fQ.AcK4dgde1I5qb5R5GShRBufyBfy3hkjlixYKg0hoVmQ
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb2xlIjoiZGV2ZWxvcGVyIiwidXNlcm5hbWUiOiJ1c2VyMiIsImlhdCI6MTY5NDAyMzczNCwiZXhwIjoxNjk0MDI3MzM0fQ.PZ19xhnianG7uSW779vYYul_cJvL2uo-B6sMpmrNkpA
 
 {
     "name": "Jeux 5465",
@@ -50,19 +50,19 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEyLCJyb2xlIjoi
 }
 
 ### Delete d'un Jeux
-DELETE http://localhost:3000/games/game/19
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEyLCJyb2xlIjoiZGV2ZWxvcGVyIiwidXNlcm5hbWUiOiJ1c2VyMiIsImlhdCI6MTY5MzI5ODE0OCwiZXhwIjoxNjkzMzAxNzQ4fQ.AcK4dgde1I5qb5R5GShRBufyBfy3hkjlixYKg0hoVmQ
+DELETE http://localhost:3000/games/game/11
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb2xlIjoiZGV2ZWxvcGVyIiwidXNlcm5hbWUiOiJ1c2VyMiIsImlhdCI6MTY5NDAyMzczNCwiZXhwIjoxNjk0MDI3MzM0fQ.PZ19xhnianG7uSW779vYYul_cJvL2uo-B6sMpmrNkpA
 
 ### Trouver tous les Jeux
 GET http://localhost:3000/games
 
 ### Trouver un Jeux
-GET http://localhost:3000/games/game/11
+GET http://localhost:3000/games/game/10
 
 ### Create Issue
-POST http://localhost:3000/games/game/14/issues
+POST http://localhost:3000/games/game/10/issues
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb2xlIjoiZGV2ZWxvcGVyIiwidXNlcm5hbWUiOiJ1c2VyMiIsImlhdCI6MTY5MzkwMTc5NiwiZXhwIjoxNjkzOTA1Mzk2fQ.n-HdO6W5TEXRxm5bcK0WlYXjbi2XAEeLBEbO-pUkQmo
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb2xlIjoiZGV2ZWxvcGVyIiwidXNlcm5hbWUiOiJ1c2VyMiIsImlhdCI6MTY5NDAyMzczNCwiZXhwIjoxNjk0MDI3MzM0fQ.PZ19xhnianG7uSW779vYYul_cJvL2uo-B6sMpmrNkpA
 
 {
     "title": "test32g",
@@ -80,12 +80,12 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb
 
 ### Delete Issue
 DELETE http://localhost:3000/issue/11
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb2xlIjoiZGV2ZWxvcGVyIiwiaWF0IjoxNjkzMjEzMjE3LCJleHAiOjE2OTMyMTY4MTd9.OKK4sLllNHrspu8zk-G8OWpwWhc7-WFcqwYoOyPhNNY
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb2xlIjoiZGV2ZWxvcGVyIiwidXNlcm5hbWUiOiJ1c2VyMiIsImlhdCI6MTY5NDAyMzczNCwiZXhwIjoxNjk0MDI3MzM0fQ.PZ19xhnianG7uSW779vYYul_cJvL2uo-B6sMpmrNkpA
 
 ### Update Issue Player
-PATCH http://localhost:3000/issue/10
+PATCH http://localhost:3000/issue/11
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb2xlIjoiZGV2ZWxvcGVyIiwidXNlcm5hbWUiOiJ1c2VyMiIsImlhdCI6MTY5MzgxNzY5MCwiZXhwIjoxNjkzODIxMjkwfQ.3KrSjwfMSnQxKsNo6Tu81u9sFpsUJ8lFedyz0VLOEyQ
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb2xlIjoiZGV2ZWxvcGVyIiwidXNlcm5hbWUiOiJ1c2VyMiIsImlhdCI6MTY5NDAyMzczNCwiZXhwIjoxNjk0MDI3MzM0fQ.PZ19xhnianG7uSW779vYYul_cJvL2uo-B6sMpmrNkpA
 
 {
     "title": "test1",
@@ -106,7 +106,7 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb2xlIjoi
 GET http://localhost:3000/games/game/1/issues
 
 ### Trouver un Issue
-GET http://localhost:3000/issue/13
+GET http://localhost:3000/issue/10
 
 ### Create Suggestion
 POST http://localhost:3000/games/game/1/suggestions
