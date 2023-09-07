@@ -3,8 +3,8 @@ POST http://localhost:3000/signup
 Content-Type: application/json
 
 {
-    "username": "user2",
-    "email": "test2@test.com",
+    "username": "user3",
+    "email": "test3@test.com",
     "password": "password",
     "confirmPassword": "password",
     "avatar": "https://img.freepik.com/premium-vector/young-smiling-man-avatar-man-with-brown-beard-mustache-hair-wearing-yellow-sweater-sweatshirt-3d-vector-people-character-illustration-cartoon-minimal-style_365941-860.jpg",
@@ -16,21 +16,21 @@ POST http://localhost:3000/login
 Content-Type: application/json
 
 {
-    "email": "test2@test.com",
+    "email": "test3@test.com",
     "password": "password"
 }
 
 ### Test Token
 GET  http://localhost:3000/test
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb2xlIjoiZGV2ZWxvcGVyIiwidXNlcm5hbWUiOiJ1c2VyMiIsImlhdCI6MTY5MzM4NjA5OCwiZXhwIjoxNjkzMzg5Njk4fQ.76A_opVXeKJY66kTMJiiL9xW2shvQjaA3kQg02uBsm4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjE1LCJyb2xlIjoiZGV2ZWxvcGVyIiwidXNlcm5hbWUiOiJ1c2VyMyIsImlhdCI6MTY5MzgzMTQ1MSwiZXhwIjoxNjkzODM1MDUxfQ.nnM6QImvhwGQrHb45gBubFn6ed2ukrMPOeLqU3Cuc7A
 
 ### Création d'un Jeux
 POST http://localhost:3000/games/game
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb2xlIjoiZGV2ZWxvcGVyIiwidXNlcm5hbWUiOiJ1c2VyMiIsImlhdCI6MTY5MzkwMTc5NiwiZXhwIjoxNjkzOTA1Mzk2fQ.n-HdO6W5TEXRxm5bcK0WlYXjbi2XAEeLBEbO-pUkQmo
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjE1LCJyb2xlIjoiZGV2ZWxvcGVyIiwidXNlcm5hbWUiOiJ1c2VyMyIsImlhdCI6MTY5MzgzMTQ1MSwiZXhwIjoxNjkzODM1MDUxfQ.nnM6QImvhwGQrHb45gBubFn6ed2ukrMPOeLqU3Cuc7A
 
 {
-    "name": "Jeux test32",
+    "name": "Jeux test2",
     "description": "test",
     "picture": "https://www.jeuxvideo.com/smileys_img/45.gif",
     "external_link": "https://www.test",
@@ -41,9 +41,9 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb
 }
 
 ### Update d'un Jeux
-PATCH http://localhost:3000/games/game/11
+PATCH http://localhost:3000/games/game/16
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb2xlIjoiZGV2ZWxvcGVyIiwidXNlcm5hbWUiOiJ1c2VyMiIsImlhdCI6MTY5NDAyMzczNCwiZXhwIjoxNjk0MDI3MzM0fQ.PZ19xhnianG7uSW779vYYul_cJvL2uo-B6sMpmrNkpA
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjE1LCJyb2xlIjoiZGV2ZWxvcGVyIiwidXNlcm5hbWUiOiJ1c2VyMyIsImlhdCI6MTY5MzgzMTQ1MSwiZXhwIjoxNjkzODM1MDUxfQ.nnM6QImvhwGQrHb45gBubFn6ed2ukrMPOeLqU3Cuc7A
 
 {
     "name": "Jeux 5465",
@@ -51,19 +51,19 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb
 }
 
 ### Delete d'un Jeux
-DELETE http://localhost:3000/games/game/11
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb2xlIjoiZGV2ZWxvcGVyIiwidXNlcm5hbWUiOiJ1c2VyMiIsImlhdCI6MTY5NDAyMzczNCwiZXhwIjoxNjk0MDI3MzM0fQ.PZ19xhnianG7uSW779vYYul_cJvL2uo-B6sMpmrNkpA
+DELETE http://localhost:3000/games/game/16
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjE1LCJyb2xlIjoiZGV2ZWxvcGVyIiwidXNlcm5hbWUiOiJ1c2VyMyIsImlhdCI6MTY5MzgzMTQ1MSwiZXhwIjoxNjkzODM1MDUxfQ.nnM6QImvhwGQrHb45gBubFn6ed2ukrMPOeLqU3Cuc7A
 
 ### Trouver tous les Jeux
 GET http://localhost:3000/games
 
 ### Trouver un Jeux
-GET http://localhost:3000/games/game/11
+GET http://localhost:3000/games/game/16
 
 ### Create Issue
-POST http://localhost:3000/games/game/14/issues
+POST http://localhost:3000/games/game/1/issues
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb2xlIjoiZGV2ZWxvcGVyIiwidXNlcm5hbWUiOiJ1c2VyMiIsImlhdCI6MTY5MzkwMTc5NiwiZXhwIjoxNjkzOTA1Mzk2fQ.n-HdO6W5TEXRxm5bcK0WlYXjbi2XAEeLBEbO-pUkQmo
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjE1LCJyb2xlIjoiZGV2ZWxvcGVyIiwidXNlcm5hbWUiOiJ1c2VyMyIsImlhdCI6MTY5MzgzMTQ1MSwiZXhwIjoxNjkzODM1MDUxfQ.nnM6QImvhwGQrHb45gBubFn6ed2ukrMPOeLqU3Cuc7A
 
 {
     "title": "test32g",
@@ -80,13 +80,13 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb
 }
 
 ### Delete Issue
-DELETE http://localhost:3000/issue/11
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb2xlIjoiZGV2ZWxvcGVyIiwiaWF0IjoxNjkzMjEzMjE3LCJleHAiOjE2OTMyMTY4MTd9.OKK4sLllNHrspu8zk-G8OWpwWhc7-WFcqwYoOyPhNNY
+DELETE http://localhost:3000/issue/12
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjE1LCJyb2xlIjoiZGV2ZWxvcGVyIiwidXNlcm5hbWUiOiJ1c2VyMyIsImlhdCI6MTY5MzgzMTQ1MSwiZXhwIjoxNjkzODM1MDUxfQ.nnM6QImvhwGQrHb45gBubFn6ed2ukrMPOeLqU3Cuc7A
 
 ### Update Issue Player
-PATCH http://localhost:3000/issue/10
+PATCH http://localhost:3000/issue/12
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb2xlIjoiZGV2ZWxvcGVyIiwidXNlcm5hbWUiOiJ1c2VyMiIsImlhdCI6MTY5MzgxNzY5MCwiZXhwIjoxNjkzODIxMjkwfQ.3KrSjwfMSnQxKsNo6Tu81u9sFpsUJ8lFedyz0VLOEyQ
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjE1LCJyb2xlIjoiZGV2ZWxvcGVyIiwidXNlcm5hbWUiOiJ1c2VyMyIsImlhdCI6MTY5MzgzMTQ1MSwiZXhwIjoxNjkzODM1MDUxfQ.nnM6QImvhwGQrHb45gBubFn6ed2ukrMPOeLqU3Cuc7A
 
 {
     "title": "test1",
@@ -94,9 +94,9 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb
 }
 
 ### Update Issue Developer
-PATCH http://localhost:3000/issue/13
+PATCH http://localhost:3000/issue/12
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb2xlIjoiZGV2ZWxvcGVyIiwiaWF0IjoxNjkzMjEzMjE3LCJleHAiOjE2OTMyMTY4MTd9.OKK4sLllNHrspu8zk-G8OWpwWhc7-WFcqwYoOyPhNNY
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjE1LCJyb2xlIjoiZGV2ZWxvcGVyIiwidXNlcm5hbWUiOiJ1c2VyMyIsImlhdCI6MTY5MzgzMTQ1MSwiZXhwIjoxNjkzODM1MDUxfQ.nnM6QImvhwGQrHb45gBubFn6ed2ukrMPOeLqU3Cuc7A
 
 {
     "status": "accepted",
@@ -106,8 +106,8 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb2xlIjoi
 ### Trouver tous les Issues d'un Jeux
 GET http://localhost:3000/games/game/1/issues
 
-### Trouver un Issue
-GET http://localhost:3000/issue/13
+### Trouver un Issue d'un Jeux
+GET http://localhost:3000/issue/12
 
 ### Create Suggestion
 POST http://localhost:3000/games/game/1/suggestions
@@ -154,18 +154,18 @@ GET http://localhost:3000/categories
 GET http://localhost:3000/users
 
 ### Trouver un user
-GET http://localhost:3000/user/11
+GET http://localhost:3000/users/11
 
 ### Update un user
-PATCH http://localhost:3000/user/11
+PATCH http://localhost:3000/users/11
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb2xlIjoiZGV2ZWxvcGVyIiwidXNlcm5hbWUiOiJ1c2VyMiIsImlhdCI6MTY5MzQ3MDI5NywiZXhwIjoxNjkzNDczODk3fQ.JU88Wtenz54D2BNjVpZyWs264rDGSSAuUjBYXBaMD90
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjE1LCJyb2xlIjoiZGV2ZWxvcGVyIiwidXNlcm5hbWUiOiJ1c2VyMyIsImlhdCI6MTY5MzgzMTQ1MSwiZXhwIjoxNjkzODM1MDUxfQ.nnM6QImvhwGQrHb45gBubFn6ed2ukrMPOeLqU3Cuc7A
 
 {
-    "username": "user2",
-    "old_password": "password9",
-    "new_password": "password",
-    "confirm_password": "password"
+    "username": "user3",
+    "old_password": "password",
+    "new_password": "password9",
+    "confirm_password": "password9"
 }
 
 ### Search exact
@@ -181,7 +181,7 @@ GET http://localhost:3000/search?search=a
 GET http://localhost:3000/platforms
 
 ### Trouver les tags à partir d'un jeu
-GET http://localhost:3000/games/game/14/tags
+GET http://localhost:3000/games/game/1/tags
 
 ### Trouver les tags
 GET http://localhost:3000/tags
