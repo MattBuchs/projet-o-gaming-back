@@ -7,7 +7,7 @@ const options = {
     info: {
         version: '1.0.0',
         title: 'O\'Gaming',
-        description: 'une API à destination des éditeurs/développeurs de jeux vidéo et des joueurs.',
+        description: 'An API created for video game publilshers/developers and players.',
     },
     // Base directory which we use to locate your JSDOC files
     baseDir: dirname,
