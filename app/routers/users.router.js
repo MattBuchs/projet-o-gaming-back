@@ -17,7 +17,7 @@ router.route('/')
 
 router.route('/:id_user')
     /**
-     * GET /user/{id_user}
+     * GET /users/{id_user}
      * @summary Get a user
      * @tags Users
      * @param {integer} id_user.path.required - User id
@@ -27,7 +27,7 @@ router.route('/:id_user')
      */
     .get(controllerUser.getOneUser)
     /**
-     * PATCH /user/{id_user}
+     * PATCH /users/{id_user}
      * @summary Update a user
      * @tags Users
      * @param {integer} id_user.path.required - User id
