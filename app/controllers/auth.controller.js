@@ -2,8 +2,6 @@ import * as EmailValidator from 'email-validator';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import * as datamappers from '../models/index.datamapper.js';
-import DatabaseError from '../errors/database.error.js';
-import UserInputError from '../errors/user.input.error.js';
 
 export default {
     async postSignup(req, res) {
@@ -53,10 +51,9 @@ export default {
         } catch (err) {
             // code 23505 = unique_violation
             if (err.code === '23505') {
-                throw new UserInputError(err);
-            } else {
-                throw new DatabaseError(err);
+                return res.status(400).json({ error: 'Duplicate entry' });
             }
+            return res.status(500).json({ error: `Internal Server Error: ${err.message}` });
         }
     },
 
@@ -92,10 +89,9 @@ export default {
         } catch (err) {
             // code 23505 = unique_violation
             if (err.code === '23505') {
-                throw new UserInputError(err);
-            } else {
-                throw new DatabaseError(err);
+                return res.status(400).json({ error: 'Duplicate entry' });
             }
+            return res.status(500).json({ error: `Internal Server Error: ${err.message}` });
         }
     },
 };
