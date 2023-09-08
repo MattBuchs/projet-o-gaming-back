@@ -18,12 +18,12 @@ export default {
                 return res.status(400).json({ error: 'Missing values' });
             }
 
-            // verification de l'email
+            // email verification
             if (!EmailValidator.validate(email)) {
                 return res.status(400).json({ error: 'Invalid email' });
             }
 
-            // verifier si password correspond à password confirm
+            // check if passwords match
             if (password !== confirmPassword) {
                 return res.status(400).json({ error: 'Password and confirm password are not the same' });
             }
@@ -70,6 +70,7 @@ export default {
                 return res.status(400).json({ error: 'Incorrect email or password' });
             }
 
+            // check if password matches database password
             const passOk = await bcrypt.compare(password, existUser.password);
             if (!passOk) {
                 return res.status(400).json({ error: 'Incorrect email or password' });
@@ -83,6 +84,7 @@ export default {
                 username: existUser.username,
             };
 
+            // creation of the token
             const token = jwt.sign(user, process.env.SECRET_KEY, { expiresIn: '1h' });
 
             return res.json({ token });

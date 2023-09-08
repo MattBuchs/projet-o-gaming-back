@@ -1,4 +1,4 @@
-### Création d'un utilisateur
+### Creating a user
 POST http://localhost:3000/signup
 Content-Type: application/json
 
@@ -11,7 +11,7 @@ Content-Type: application/json
     "role_id": 1
 }
 
-### Connexion d'un utilisateur
+### User Login
 POST http://localhost:3000/login
 Content-Type: application/json
 
@@ -20,11 +20,7 @@ Content-Type: application/json
     "password": "password"
 }
 
-### Test Token
-GET  http://localhost:3000/test
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjE1LCJyb2xlIjoiZGV2ZWxvcGVyIiwidXNlcm5hbWUiOiJ1c2VyMyIsImlhdCI6MTY5MzgzMTQ1MSwiZXhwIjoxNjkzODM1MDUxfQ.nnM6QImvhwGQrHb45gBubFn6ed2ukrMPOeLqU3Cuc7A
-
-### Création d'un Jeux
+### Creating a Game
 POST http://localhost:3000/games/game
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjE1LCJyb2xlIjoiZGV2ZWxvcGVyIiwidXNlcm5hbWUiOiJ1c2VyMyIsImlhdCI6MTY5MzgzMTQ1MSwiZXhwIjoxNjkzODM1MDUxfQ.nnM6QImvhwGQrHb45gBubFn6ed2ukrMPOeLqU3Cuc7A
@@ -40,7 +36,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjE1LCJyb
 
 }
 
-### Update d'un Jeux
+### Update a Game
 PATCH http://localhost:3000/games/game/16
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjE1LCJyb2xlIjoiZGV2ZWxvcGVyIiwidXNlcm5hbWUiOiJ1c2VyMyIsImlhdCI6MTY5MzgzMTQ1MSwiZXhwIjoxNjkzODM1MDUxfQ.nnM6QImvhwGQrHb45gBubFn6ed2ukrMPOeLqU3Cuc7A
@@ -50,14 +46,14 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjE1LCJyb
     "description": "test2"
 }
 
-### Delete d'un Jeux
+### Delete a Game
 DELETE http://localhost:3000/games/game/16
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjE1LCJyb2xlIjoiZGV2ZWxvcGVyIiwidXNlcm5hbWUiOiJ1c2VyMyIsImlhdCI6MTY5MzgzMTQ1MSwiZXhwIjoxNjkzODM1MDUxfQ.nnM6QImvhwGQrHb45gBubFn6ed2ukrMPOeLqU3Cuc7A
 
-### Trouver tous les Jeux
+### Find all Games
 GET http://localhost:3000/games
 
-### Trouver un Jeux
+### Find a Game
 GET http://localhost:3000/games/game/16
 
 ### Create Issue
@@ -103,10 +99,10 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjE1LCJyb
     "assign_to": "test@developer.com"
 } 
 
-### Trouver tous les Issues d'un Jeux
+### Find all Issues a Game
 GET http://localhost:3000/games/game/1/issues
 
-### Trouver un Issue d'un Jeux
+### Find an Issue
 GET http://localhost:3000/issue/12
 
 ### Create Suggestion
@@ -141,22 +137,22 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb2xlIjoi
     "description": "test test of patch test"
 } 
 
-### Trouver tous les Suggestions d'un Jeux
+### Find all Suggestions a Game
 GET http://localhost:3000/games/game/1/suggestions
 
-### Trouver un Suggestion 
+### Find a Suggestion
 GET http://localhost:3000/suggestion/1
 
-### Trouver tous les Catégories
+### Find all categories
 GET http://localhost:3000/categories
 
-### Trouver tous les users
+### Find all users
 GET http://localhost:3000/users
 
-### Trouver un user
+### Find a user
 GET http://localhost:3000/users/11
 
-### Update un user
+### Update a user
 PATCH http://localhost:3000/users/11
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjE1LCJyb2xlIjoiZGV2ZWxvcGVyIiwidXNlcm5hbWUiOiJ1c2VyMyIsImlhdCI6MTY5MzgzMTQ1MSwiZXhwIjoxNjkzODM1MDUxfQ.nnM6QImvhwGQrHb45gBubFn6ed2ukrMPOeLqU3Cuc7A
@@ -177,11 +173,11 @@ GET http://localhost:3000/search?search=Thoughtful
 ### Search vague
 GET http://localhost:3000/search?search=a
 
-### Trouver toutes les plateformes
+### Find all platforms
 GET http://localhost:3000/platforms
 
-### Trouver les tags à partir d'un jeu
+### Find tags of a game
 GET http://localhost:3000/games/game/1/tags
 
-### Trouver les tags
+### Find all tags
 GET http://localhost:3000/tags

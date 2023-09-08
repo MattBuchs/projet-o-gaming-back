@@ -65,6 +65,8 @@ export default {
                 return res.status(404).json({ error: 'Game not found' });
             }
 
+            // If there are tags, we check if they are already in the database,
+            // and if they are not there we create them
             if (tags && tags.length > 0) {
                 Promise.all(tags.map(async (tag) => {
                     const tagTitle = tag.toLowerCase();
@@ -86,6 +88,7 @@ export default {
                 }));
             }
 
+            // We link the categories to the game
             Promise.all(categories.map(async (category) => {
                 const findCategory = await datamappers.categoryDatamapper.findOne('name', category);
 

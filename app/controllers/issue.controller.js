@@ -2,12 +2,10 @@ import * as datamappers from '../models/index.datamapper.js';
 
 export default {
     async getAllIssues(req, res) {
-        console.log(req.params)
         try {
             const gameId = req.params.id_game;
-            console.log('gameId: ', gameId);
             const issues = await datamappers.issueDatamapper.findIssuesWithGame(gameId);
-            console.log('issues: ', issues);
+
             return res.json({ issues });
         } catch (err) {
             return res.status(500).json({ error: `Internal Server Error: ${err}` });
@@ -90,6 +88,7 @@ export default {
 
             const issue = await datamappers.issueDatamapper.findLatestByField('user_id', userId);
 
+            // We add the ids to the link table
             await Promise.all(ids.map(async (id) => datamappers.issueTagDatamapper.create({
                 issue_id: issue.id,
                 tag_id: id,

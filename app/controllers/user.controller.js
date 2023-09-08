@@ -6,7 +6,7 @@ export default {
         try {
             const getUsers = await datamappers.userDatamapper.findAll();
 
-            // Créer une nouvelle liste d'utilisateurs sans le champ password
+            // Create a new list of users without the password field
             const users = getUsers.map(({
                 password, created_at: createdAt, updated_at: updatedAt, role_id: roleId, ...user
             }) => user);
