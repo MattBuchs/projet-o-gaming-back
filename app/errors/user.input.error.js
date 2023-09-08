@@ -4,7 +4,6 @@ export default class UserInputError extends Error {
 
         this.status = 400;
 
-        console.log('wow', err);
         if (err.name === 'ValidationError') {
             this.userMessage = err.details[0].message;
         } else if (err.code === '23505') {
