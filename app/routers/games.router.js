@@ -56,7 +56,7 @@ router.route('/game/:id_game')
      * @tags Games
      * @param {integer} id_game.path.required - Game id
      * @param {UpdateGameObject} request.body.required - Game info
-     * @security BearerAuth  // Ajout de la sécurité BearerAuth
+     * @security BearerAuth  // Adding BearerAuth security
      * @return {boolean} 200 - Game updated
      * @return {Error}  400 - Bad request
      * @return {Error}  401 - Unauthorized
