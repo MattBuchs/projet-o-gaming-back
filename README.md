@@ -6,11 +6,10 @@
 O'Gaming is an API created for video game publishers/developpers and players.
 The principal idea of "O'Gaming", and therefore also its MVP, is to create a unifided feedback plateform for video game.
 Publishers and developpers can add their game to the plateform where players can then:
-    signal bugs and also
+    signal bugs and
     create suggestions
 The main goal being to simplify the life of developpers who today often use several methods and plateforms to find this information.
 And this is the same for gamers looking to buy games, giving one unified place to find info on games for everyone.
-
 
 ## The Team
 - Yoann Cos

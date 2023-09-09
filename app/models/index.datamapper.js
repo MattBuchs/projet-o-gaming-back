@@ -1,6 +1,6 @@
 import client from '../helpers/db.js';
 
-// les différents datamappers
+// All of the datamappers
 import CategoryDatamapper from './category.datamapper.js';
 import CommentDatamapper from './comment.datamapper.js';
 import GameDatamapper from './game.datamapper.js';
@@ -14,7 +14,7 @@ import GameCategoryDatamapper from './gameCategory.datamapper.js';
 import IssueTagDatamapper from './issueTag.datamapper.js';
 import GameTagDatamapper from './gameTag.datamapper.js';
 
-// Instanciation avec injection du client dans le constructeur
+// Instanciation while passing client to the constructor
 export const categoryDatamapper = new CategoryDatamapper(client);
 export const commentDatamapper = new CommentDatamapper(client);
 export const gameDatamapper = new GameDatamapper(client);
