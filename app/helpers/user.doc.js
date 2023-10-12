@@ -5,9 +5,18 @@ const dirname = url.fileURLToPath(new URL('.', import.meta.url));
 
 const options = {
     info: {
-        version: '1.0.0',
+        version: '1.1.0',
         title: 'O\'Gaming',
         description: 'An API created for video game publilshers/developers and players.',
+    },
+    security: {
+        BearerAuth: {
+            description: 'JWT Authorization',
+            type: 'http',
+            scheme: 'bearer',
+            in: 'header',
+            bearerFormat: 'JWT',
+        },
     },
     // Base directory which we use to locate your JSDOC files
     baseDir: dirname,
