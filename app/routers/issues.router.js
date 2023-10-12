@@ -1,6 +1,7 @@
 import express from 'express';
 import controllerIssue from '../controllers/issue.controller.js';
 import authenticateToken from '../validation/authToken.middleware.js';
+import cleanScriptTagsMiddleware from '../validation/checkInjectionXSS.middleware.js';
 
 const router = express.Router();
 
@@ -33,7 +34,7 @@ router.route('/:id_issue')
      *
      * Note: To update an issue, you need to be a developer or author.
      */
-    .patch(authenticateToken, controllerIssue.updateIssue)
+    .patch([authenticateToken, cleanScriptTagsMiddleware], controllerIssue.updateIssue)
     /**
      * DELETE /issue/{id_issue}
      * @summary Delete an issue

@@ -1,6 +1,7 @@
 import express from 'express';
 import controllerSuggestion from '../controllers/suggestion.controller.js';
 import authenticateToken from '../validation/authToken.middleware.js';
+import cleanScriptTagsMiddleware from '../validation/checkInjectionXSS.middleware.js';
 
 const router = express.Router();
 
@@ -33,7 +34,7 @@ router.route('/:id_suggestion')
      *
      * Note: To update a suggestion, you need to be a developer or author.
      */
-    .patch(authenticateToken, controllerSuggestion.updateSuggestion)
+    .patch([authenticateToken, cleanScriptTagsMiddleware], controllerSuggestion.updateSuggestion)
     /**
      * DELETE /suggestion/{id_suggestion}
      * @summary Delete a suggestion

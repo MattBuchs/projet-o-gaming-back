@@ -5,6 +5,7 @@ import controllerGame from '../controllers/game.controller.js';
 import controllerIssue from '../controllers/issue.controller.js';
 import controllerSuggestion from '../controllers/suggestion.controller.js';
 import controllerUtils from '../controllers/utils.controller.js';
+import cleanScriptTagsMiddleware from '../validation/checkInjectionXSS.middleware.js';
 
 const router = express.Router();
 
@@ -37,7 +38,12 @@ router.route('/game')
      *
      * Note: To create a game, you need to be a developer.
      */
-    .post([authenticateToken, checkUserRole.isDeveloper], controllerGame.createGame);
+    .post(
+        [authenticateToken,
+            checkUserRole.isDeveloper,
+            cleanScriptTagsMiddleware],
+        controllerGame.createGame,
+    );
 
 router.route('/game/:id_game')
     /**
@@ -68,7 +74,12 @@ router.route('/game/:id_game')
      *
      * Note: To update a game, you need to be a developer.
      */
-    .patch([authenticateToken, checkUserRole.isDeveloper], controllerGame.updateGame)
+    .patch(
+        [authenticateToken,
+            checkUserRole.isDeveloper,
+            cleanScriptTagsMiddleware],
+        controllerGame.updateGame,
+    )
     /**
      * DELETE /games/game/{id_game}
      * @summary Delete a game
@@ -116,7 +127,7 @@ router.route('/game/:id_game/issues')
      * - Type: Bearer
      * - Token: Your-JWT-Token-Here
      */
-    .post(authenticateToken, controllerIssue.createIssue);
+    .post([authenticateToken, cleanScriptTagsMiddleware], controllerIssue.createIssue);
 
 /* Game's Suggestions */
 router.route('/game/:id_game/suggestions')
@@ -146,7 +157,7 @@ router.route('/game/:id_game/suggestions')
      * - Type: Bearer
      * - Token: Your-JWT-Token-Here
      */
-    .post(authenticateToken, controllerSuggestion.createSuggestion);
+    .post([authenticateToken, cleanScriptTagsMiddleware], controllerSuggestion.createSuggestion);
 
 /* Game's Tags */
 router.route('/game/:id_game/tags')

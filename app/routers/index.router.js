@@ -2,6 +2,9 @@ import express from 'express';
 import controllerSearch from '../controllers/search.controller.js';
 import controllerUtils from '../controllers/utils.controller.js';
 import controllerAuth from '../controllers/auth.controller.js';
+// Middlewares
+import passwordSecurityMiddleware from '../validation/passwordSchema.middleware.js';
+import cleanScriptTagsMiddleware from '../validation/checkInjectionXSS.middleware.js';
 // Routers
 import gamesRouter from './games.router.js';
 import issueRouter from './issues.router.js';
@@ -32,7 +35,7 @@ router.route('/signup')
      * @return {Error}  409 - Conflict
      * @return {Error}  500 - Internal server error
      */
-    .post(controllerAuth.postSignup);
+    .post([cleanScriptTagsMiddleware, passwordSecurityMiddleware], controllerAuth.postSignup);
 
 router.route('/login')
     /**
@@ -45,7 +48,7 @@ router.route('/login')
      * @return {Error}  409 - Conflict
      * @return {Error}  500 - Internal server error
      */
-    .post(controllerAuth.postLogin);
+    .post(cleanScriptTagsMiddleware, controllerAuth.postLogin);
 
 /* Categories */
 router.route('/categories')

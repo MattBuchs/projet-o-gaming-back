@@ -1,6 +1,7 @@
 import express from 'express';
 import authenticateToken from '../validation/authToken.middleware.js';
 import controllerUser from '../controllers/user.controller.js';
+import cleanScriptTagsMiddleware from '../validation/checkInjectionXSS.middleware.js';
 
 const router = express.Router();
 
@@ -44,6 +45,6 @@ router.route('/:id_user')
      *
      * Note: To update a user, you need to be the user.
      */
-    .patch(authenticateToken, controllerUser.updateUser);
+    .patch([authenticateToken, cleanScriptTagsMiddleware], controllerUser.updateUser);
 
 export default router;

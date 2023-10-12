@@ -65,7 +65,8 @@ export default {
                 return res.status(400).json({ error: 'Invalid email' });
             }
 
-            const existUser = await datamappers.userDatamapper.findByEmail(email);
+            // check if user exists
+            const existUser = await datamappers.userDatamapper.findOne('email', email);
             if (!existUser) {
                 return res.status(400).json({ error: 'Incorrect email or password' });
             }
@@ -76,8 +77,10 @@ export default {
                 return res.status(400).json({ error: 'Incorrect email or password' });
             }
 
+            // get user role
             const role = await datamappers.roleDatamapper.findByPk(existUser.role_id);
 
+            // user data
             const user = {
                 userId: existUser.id,
                 role: role.name,
