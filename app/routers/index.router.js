@@ -43,9 +43,8 @@ router.route('/login')
      * @summary Login a user
      * @tags Auth
      * @param {LoginInputObject} request.body.required - User info
-     * @return {Message} 200 - User created
+     * @return {Message} 200 - User logged in
      * @return {Error}  400 - Bad request
-     * @return {Error}  409 - Conflict
      * @return {Error}  500 - Internal server error
      */
     .post(cleanScriptTagsMiddleware, controllerAuth.postLogin);

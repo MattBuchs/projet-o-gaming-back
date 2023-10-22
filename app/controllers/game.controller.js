@@ -6,7 +6,7 @@ export default {
             const games = await datamappers.gameDatamapper.getGamesWithDetails();
             return res.json({ games });
         } catch (err) {
-            return res.status(500).json({ error: `Internal Server Error: ${err}` });
+            return res.status(500).json({ error: `Internal Server Error: ${err.message}` });
         }
     },
     async getOneGame(req, res) {
@@ -15,10 +15,15 @@ export default {
             const game = await datamappers.gameDatamapper.findOneGameWithDetails(gameId);
 
             if (!game) {
-                return res.status(404).json(`Can not find game with id ${gameId}`);
+                throw new Error(`Can not find game with id ${gameId}`, { cause: { code: 404 } });
             }
+
             return res.json({ game });
         } catch (err) {
+            if (err.cause) {
+                const { code } = err.cause;
+                return res.status(code).json({ error: err.message });
+            }
             return res.status(500).json({ error: `Internal Server Error: ${err.message}` });
         }
     },
@@ -43,7 +48,7 @@ export default {
                 || !releaseDate
                 || !categories
                 || !userId) {
-                return res.status(400).json({ error: 'Missing values' });
+                throw new Error('Missing values', { cause: { code: 400 } });
             }
 
             const createdGame = await datamappers.gameDatamapper.create({
@@ -56,13 +61,13 @@ export default {
             });
 
             if (!createdGame) {
-                return res.status(500).json({ error: 'Game not created' });
+                throw new Error('Game not created', { cause: { code: 400 } });
             }
 
             findGame = await datamappers.gameDatamapper.findOne('name', name);
 
             if (!findGame) {
-                return res.status(404).json({ error: 'Game not found' });
+                throw new Error('Game not found', { cause: { code: 404 } });
             }
 
             // If there are tags, we check if they are already in the database,
@@ -78,7 +83,7 @@ export default {
                     }
 
                     if (!findTag.id) {
-                        throw new Error('The game was not created');
+                        throw new Error('The game was not created', { cause: { code: 400 } });
                     }
 
                     await datamappers.gameTagDatamapper.create({
@@ -93,7 +98,7 @@ export default {
                 const findCategory = await datamappers.categoryDatamapper.findOne('name', category);
 
                 if (!findCategory) {
-                    return res.status(404).json({ error: 'Category not found' });
+                    throw new Error('Category not found', { cause: { code: 404 } });
                 }
 
                 await datamappers.gameCategoryDatamapper.create({
@@ -102,17 +107,18 @@ export default {
                 });
             }));
 
-            return res.json({ message: 'Game created' });
+            return res.status(201).json({ message: 'Game created' });
         } catch (err) {
-            if (err.code === '23505') {
-                return res.status(400).json({ error: 'Duplicate entry' });
+            if (err.cause) {
+                const { code } = err.cause;
+                if (err.message === 'The game was not created') {
+                    await datamappers.gameCategoryDatamapper.deleteGameCategories(findGame.id);
+                    await datamappers.gameDatamapper.delete(findGame.id);
+                }
+
+                return res.status(code).json({ error: err.message });
             }
-            if (err.message === 'The game was not created') {
-                await datamappers.gameCategoryDatamapper.deleteGameCategories(findGame.id);
-                await datamappers.gameDatamapper.delete(findGame.id);
-                return res.status(500).json({ error: err.message });
-            }
-            return res.status(500).json({ error: `Internal Server Error: ${err}` });
+            return res.status(500).json({ error: `Internal Server Error: ${err.message}` });
         }
     },
 
@@ -123,16 +129,20 @@ export default {
         try {
             const game = await datamappers.gameDatamapper.findByPk(gameId);
             if (!game) {
-                return res.status(400).json({ error: 'Issue Not Found' });
+                throw new Error('Issue Not Found', { cause: { code: 400 } });
             }
 
-            if (req.user.userId !== game.user_id) return res.status(401).json({ error: 'Unauthorized' });
+            if (req.user.userId !== game.user_id) throw new Error('Unauthorized', { cause: { code: 401 } });
 
             inputData.updated_at = new Date();
             await datamappers.gameDatamapper.update(inputData, gameId);
 
             return res.status(200).json({ message: 'Game updated successfully' });
         } catch (err) {
+            if (err.cause) {
+                const { code } = err.cause;
+                return res.status(code).json({ error: err.message });
+            }
             return res.status(500).json({ error: `Internal Server Error: ${err.message}` });
         }
     },
@@ -142,10 +152,10 @@ export default {
         try {
             const game = await datamappers.gameDatamapper.findByPk(gameId);
             if (!game) {
-                return res.status(404).json({ error: 'Game not found' });
+                throw new Error('Game not found', { cause: { code: 404 } });
             }
 
-            if (req.user.userId !== game.user_id) return res.status(401).json({ error: 'Unauthorized' });
+            if (req.user.userId !== game.user_id) throw new Error('Unauthorized', { cause: { code: 401 } });
 
             const issues = await datamappers.issueDatamapper.findByKeyValue('game_id', gameId);
             const categoryHasGame = await datamappers.gameCategoryDatamapper.findByKeyValue('game_id', gameId);
@@ -173,6 +183,10 @@ export default {
 
             return res.json({ message: 'Game deleted' });
         } catch (err) {
+            if (err.cause) {
+                const { code } = err.cause;
+                return res.status(code).json({ error: err.message });
+            }
             return res.status(500).json({ error: `Internal Server Error: ${err.message}` });
         }
     },

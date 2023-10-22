@@ -15,24 +15,22 @@ export default {
                  || !password
                  || !confirmPassword
                  || !roleId) {
-                return res.status(400).json({ error: 'Missing values' });
+                throw new Error('Missing values', { cause: { code: 400 } });
             }
 
             // email verification
             if (!EmailValidator.validate(email)) {
-                return res.status(400).json({ error: 'Invalid email' });
+                throw new Error('Invalid email', { cause: { code: 400 } });
             }
 
             // check if passwords match
             if (password !== confirmPassword) {
-                return res.status(400).json({ error: 'Password and confirm password are not the same' });
+                throw new Error('Password and confirm password are not the same', { cause: { code: 400 } });
             }
 
-            const existEmail = await datamappers.userDatamapper.findByEmail(email);
+            const existEmail = await datamappers.userDatamapper.findOne('email', email);
             if (existEmail) {
-                return res.status(400).json({
-                    error: 'An error has occurred',
-                });
+                throw new Error('An error has occurred', { cause: { code: 404 } });
             }
 
             const saltRounds = 10;
@@ -47,11 +45,11 @@ export default {
                 role_id: roleId,
             });
 
-            return res.json(!!createUser);
+            return res.status(201).json(!!createUser);
         } catch (err) {
-            // code 23505 = unique_violation
-            if (err.code === '23505') {
-                return res.status(400).json({ error: 'Duplicate entry' });
+            if (err.cause) {
+                const { code } = err.cause;
+                return res.status(code).json({ error: err.message });
             }
             return res.status(500).json({ error: `Internal Server Error: ${err.message}` });
         }
@@ -61,24 +59,28 @@ export default {
         const { email, password } = req.body;
 
         try {
+            // email verification
             if (!EmailValidator.validate(email)) {
-                return res.status(400).json({ error: 'Invalid email' });
+                throw new Error('Invalid email', { cause: { code: 400 } });
             }
 
             // check if user exists
             const existUser = await datamappers.userDatamapper.findOne('email', email);
             if (!existUser) {
-                return res.status(400).json({ error: 'Incorrect email or password' });
+                throw new Error('Incorrect email or password', { cause: { code: 400 } });
             }
 
             // check if password matches database password
             const passOk = await bcrypt.compare(password, existUser.password);
             if (!passOk) {
-                return res.status(400).json({ error: 'Incorrect email or password' });
+                throw new Error('Incorrect email or password', { cause: { code: 400 } });
             }
 
             // get user role
             const role = await datamappers.roleDatamapper.findByPk(existUser.role_id);
+            if (!role) {
+                throw new Error('An error has occurred', { cause: { code: 404 } });
+            }
 
             // user data
             const user = {
@@ -92,9 +94,9 @@ export default {
 
             return res.json({ token });
         } catch (err) {
-            // code 23505 = unique_violation
-            if (err.code === '23505') {
-                return res.status(400).json({ error: 'Duplicate entry' });
+            if (err.cause) {
+                const { code } = err.cause;
+                return res.status(code).json({ error: err.message });
             }
             return res.status(500).json({ error: `Internal Server Error: ${err.message}` });
         }

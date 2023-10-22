@@ -24,7 +24,7 @@ export default {
             delete getUser.password;
 
             if (!getUser) {
-                return res.status(404).json(`Can not find user with id ${userId}`);
+                throw new Error(`Can not find user with id ${userId}`, { cause: { code: 404 } });
             }
 
             const role = await datamappers.roleDatamapper.findOne('id', getUser.role_id);
@@ -79,6 +79,10 @@ export default {
 
             return res.json({ user });
         } catch (err) {
+            if (err.cause) {
+                const { code } = err.cause;
+                return res.status(code).json({ error: err.message });
+            }
             return res.status(500).json({ error: `Internal Server Error: ${err.message}` });
         }
     },
@@ -89,10 +93,10 @@ export default {
         try {
             const user = await datamappers.userDatamapper.findByPk(userId);
             if (!user) {
-                return res.status(404).json(`Can not find user with id ${userId}`);
+                throw new Error(`Can not find user with id ${userId}`, { cause: { code: 404 } });
             }
 
-            if (req.user.userId !== user.id) return res.status(401).json({ error: 'Unauthorized' });
+            if (req.user.userId !== user.id) throw new Error('You can not update this user', { cause: { code: 403 } });
 
             const {
                 username,
@@ -105,7 +109,7 @@ export default {
             if (username) {
                 const newUsername = username.trim();
                 if (newUsername.length < 3) {
-                    return res.status(400).json({ error: 'Username must be at least 3 characters' });
+                    throw new Error('Username must be at least 3 characters long', { cause: { code: 400 } });
                 }
 
                 inputData.username = newUsername;
@@ -113,16 +117,16 @@ export default {
 
             if (oldPassword || newPassword || confirmPassword) {
                 if (!oldPassword || !newPassword || !confirmPassword) {
-                    return res.status(400).json({ error: 'Missing values' });
+                    throw new Error('Missing values', { cause: { code: 400 } });
                 }
 
                 const passwordExist = await bcrypt.compare(oldPassword, user.password);
                 if (!passwordExist) {
-                    return res.status(400).json({ error: 'An error has occurred' });
+                    throw new Error('An error has occurred', { cause: { code: 400 } });
                 }
 
                 if (newPassword !== confirmPassword) {
-                    return res.status(400).json({ error: 'New password and confirm password must be the same' });
+                    throw new Error('Passwords do not match', { cause: { code: 400 } });
                 }
 
                 const saltRounds = 10;
@@ -134,8 +138,12 @@ export default {
 
             const updateInfos = await datamappers.userDatamapper.update(inputData, userId);
 
-            return res.json({ updateInfos });
+            return res.status(200).json({ updateInfos });
         } catch (err) {
+            if (err.cause) {
+                const { code } = err.cause;
+                return res.status(code).json({ error: err.message });
+            }
             return res.status(500).json({ error: `Internal Server Error: ${err.message}` });
         }
     },

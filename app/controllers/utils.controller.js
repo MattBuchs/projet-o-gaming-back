@@ -5,11 +5,15 @@ export default {
         try {
             const platforms = await datamappers.platformDatamapper.findAll();
             if (!platforms) {
-                return res.status(404).json({ error: 'No platforms found' });
+                throw new Error('No platforms found', { cause: { code: 404 } });
             }
 
             return res.json({ platforms });
         } catch (err) {
+            if (err.cause) {
+                const { code } = err.cause;
+                return res.status(code).json({ error: err.message });
+            }
             return res.status(500).json({ error: `Internal Server Error: ${err.message}` });
         }
     },
@@ -18,11 +22,15 @@ export default {
         try {
             const categories = await datamappers.categoryDatamapper.findAll();
             if (!categories) {
-                return res.status(404).json({ error: 'No categories found' });
+                throw new Error('No categories found', { cause: { code: 404 } });
             }
 
             return res.json({ categories });
         } catch (err) {
+            if (err.cause) {
+                const { code } = err.cause;
+                return res.status(code).json({ error: err.message });
+            }
             return res.status(500).json({ error: `Internal Server Error: ${err.message}` });
         }
     },
@@ -32,13 +40,17 @@ export default {
         try {
             const tagsByGame = await datamappers.gameTagDatamapper.findTagsByGameId(gameId);
             if (!tagsByGame) {
-                return res.status(404).json({ error: 'No tags found' });
+                throw new Error('tags not found', { cause: { code: 404 } });
             }
 
             const tags = await datamappers.tagDatamapper.findTagsByIds(tagsByGame.tag_ids);
 
             return res.json({ tags });
         } catch (err) {
+            if (err.cause) {
+                const { code } = err.cause;
+                return res.status(code).json({ error: err.message });
+            }
             return res.status(500).json({ error: `Internal Server Error: ${err.message}` });
         }
     },
@@ -47,11 +59,15 @@ export default {
         try {
             const tags = await datamappers.tagDatamapper.findAll();
             if (!tags) {
-                return res.status(404).json({ error: 'No tags found' });
+                throw new Error('tags not found', { cause: { code: 404 } });
             }
 
             return res.json({ tags });
         } catch (err) {
+            if (err.cause) {
+                const { code } = err.cause;
+                return res.status(code).json({ error: err.message });
+            }
             return res.status(500).json({ error: `Internal Server Error: ${err.message}` });
         }
     },

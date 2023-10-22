@@ -1,9 +1,8 @@
-// Middleware de validation du mot de passe
-
-// Fonction de validation du mot de passe personnalisée
+// Custom Password Validation Feature
 const isValidPassword = (password) => {
     const minLength = 12;
-    // const passwordLength = password.length >= minLength;
+    // regex to check if password has at least one lowercase,
+    // one uppercase, one digit and one special character
     const hasLowercase = /[a-z]/.test(password);
     const hasUppercase = /[A-Z]/.test(password);
     const hasDigit = /\d/.test(password);
@@ -18,10 +17,12 @@ const isValidPassword = (password) => {
     };
 };
 
+// Password validation middleware
 const passwordSecurityMiddleware = (req, res, next) => {
     const { password } = req.body;
     const passwordValidation = isValidPassword(password);
 
+    // check if password is valid
     const isValid = Object.values(passwordValidation).every((value) => value === true);
 
     if (!isValid) {

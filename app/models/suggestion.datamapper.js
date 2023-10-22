@@ -17,11 +17,7 @@ export default class SuggestionDatamapper extends CoreDatamapper {
         FROM "suggestion"
         JOIN "user" ON "user"."id" = "suggestion"."user_id"
         JOIN "game" ON "game"."id" = "suggestion"."game_id"
-        WHERE "suggestion"."id" = $1
-        GROUP BY
-            "suggestion"."id",
-            "user"."username",
-            "game"."name"`,
+        WHERE "suggestion"."id" = $1`,
             [suggestionId],
         );
 

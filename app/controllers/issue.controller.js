@@ -17,11 +17,15 @@ export default {
 
             const issue = await datamappers.issueDatamapper.findIssueWithDetails(issueId);
             if (!issue) {
-                return res.status(404).json(`Can not find issue with id ${issueId}`);
+                throw new Error(`Can not find issue with id ${issueId}`, { cause: { code: 404 } });
             }
 
             return res.json({ issue });
         } catch (err) {
+            if (err.cause) {
+                const { code } = err.cause;
+                return res.status(code).json({ error: err.message });
+            }
             return res.status(500).json({ error: `Internal Server Error: ${err.message}` });
         }
     },
@@ -53,22 +57,22 @@ export default {
                 || !userId
                 || !platformId
             ) {
-                return res.status(400).json({ error: 'Missing values' });
+                throw new Error('Missing values', { cause: { code: 400 } });
             }
 
             const game = await datamappers.gameDatamapper.findByPk(gameId);
             if (!game) {
-                return res.status(400).json({ error: 'Game Not Found' });
+                throw new Error('Game not found', { cause: { code: 404 } });
             }
 
             const user = await datamappers.userDatamapper.findByPk(userId);
             if (!user) {
-                return res.status(400).json({ error: 'User Not Found' });
+                throw new Error('User not found', { cause: { code: 404 } });
             }
 
             const getTagsByName = await Promise.all(tags.map(async (tag) => datamappers.tagDatamapper.findOne('title', tag)));
 
-            if (getTagsByName.includes(null)) return res.status(400).json({ error: 'Tag Not Found' });
+            if (getTagsByName.includes(null)) throw new Error('Tag not found', { cause: { code: 404 } });
 
             const ids = getTagsByName.map((tag) => tag.id);
 
@@ -96,9 +100,9 @@ export default {
 
             return res.status(201).json({ message: 'Issue created successfully' });
         } catch (err) {
-            // code 23505 = unique_violation
-            if (err.code === '23505') {
-                return res.status(400).json({ error: 'Duplicate entry' });
+            if (err.cause) {
+                const { code } = err.cause;
+                return res.status(code).json({ error: err.message });
             }
             return res.status(500).json({ error: `Internal Server Error: ${err.message}` });
         }
@@ -110,21 +114,21 @@ export default {
         try {
             const issue = await datamappers.issueDatamapper.findByPk(issueId);
             if (!issue) {
-                return res.status(400).json({ error: 'Issue Not Found' });
+                throw new Error('Issue Not Found', { cause: { code: 404 } });
             }
 
             const isAuthor = req.user.userId === issue.user_id;
             const isDev = req.user.role === 'developer';
 
             // if user id given is not the author and not a dev send Unauthorized
-            if (!isAuthor && !isDev) return res.status(401).json({ error: 'Unauthorized' });
+            if (!isAuthor && !isDev) throw new Error('Unauthorized', { cause: { code: 401 } });
 
             const isPlayer = req.user.role === 'player';
 
             // if a player and assign to or inputData are present send Unauthorized
             // players can not assign or update status
             if (isPlayer && (inputData.assign_to || inputData.status)) {
-                return res.status(400).json({ error: 'Unauthorized' });
+                throw new Error('Unauthorized', { cause: { code: 401 } });
             }
 
             inputData.updated_at = new Date();
@@ -132,6 +136,10 @@ export default {
 
             return res.status(200).json({ message: 'Issue updated successfully' });
         } catch (err) {
+            if (err.cause) {
+                const { code } = err.cause;
+                return res.status(code).json({ error: err.message });
+            }
             return res.status(500).json({ error: `Internal Server Error: ${err.message}` });
         }
     },
@@ -141,16 +149,20 @@ export default {
         try {
             const issue = await datamappers.issueDatamapper.findByPk(issueId);
             if (!issue) {
-                return res.status(400).json({ error: 'Issue Not Found' });
+                throw new Error('Issue Not Found', { cause: { code: 404 } });
             }
 
             // check user id given vs user id of the issue
-            if (req.user.userId !== issue.user_id) return res.status(401).json({ error: 'Unauthorized' });
+            if (req.user.userId !== issue.user_id) throw new Error('Unauthorized', { cause: { code: 401 } });
 
             await datamappers.issueDatamapper.delete(issueId);
 
             return res.status(200).json({ message: 'Issue deleted successfully' });
         } catch (err) {
+            if (err.cause) {
+                const { code } = err.cause;
+                return res.status(code).json({ error: err.message });
+            }
             return res.status(500).json({ error: `Internal Server Error: ${err.message}` });
         }
     },

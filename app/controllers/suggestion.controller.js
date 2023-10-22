@@ -19,11 +19,15 @@ export default {
             const suggestion = await datamappers
                 .suggestionDatamapper.findSuggestionWithDetails(suggestionId);
             if (!suggestion) {
-                return res.status(404).json(`Can not find suggestion with id ${suggestionId}`);
+                throw new Error(`Can not find suggestion with id ${suggestionId}`, { cause: { code: 404 } });
             }
             return res.json({ suggestion });
         } catch (err) {
-            return res.status(500).json({ error: `Internal Server Error: ${err}` });
+            if (err.cause) {
+                const { code } = err.cause;
+                return res.status(code).json({ error: err.message });
+            }
+            return res.status(500).json({ error: `Internal Server Error: ${err.message}` });
         }
     },
     async createSuggestion(req, res) {
@@ -41,17 +45,17 @@ export default {
                 || !publishedAt
                 || !userId
             ) {
-                return res.status(400).json({ error: 'Missing values' });
+                throw new Error('Missing values', { cause: { code: 400 } });
             }
 
             const game = await datamappers.gameDatamapper.findByPk(gameId);
             if (!game) {
-                return res.status(400).json({ error: 'Game Not Found' });
+                throw new Error(`Can not find game with id ${gameId}`, { cause: { code: 404 } });
             }
 
             const user = await datamappers.userDatamapper.findByPk(userId);
             if (!user) {
-                return res.status(400).json({ error: 'User Not Found' });
+                throw new Error(`Can not find user with id ${userId}`, { cause: { code: 404 } });
             }
 
             await datamappers.suggestionDatamapper.create({
@@ -64,9 +68,9 @@ export default {
 
             return res.status(201).json({ message: 'Suggestion created successfully' });
         } catch (err) {
-            // code 23505 = unique_violation
-            if (err.code === '23505') {
-                return res.status(400).json({ error: 'Duplicate entry' });
+            if (err.cause) {
+                const { code } = err.cause;
+                return res.status(code).json({ error: err.message });
             }
             return res.status(500).json({ error: `Internal Server Error: ${err.message}` });
         }
@@ -78,19 +82,23 @@ export default {
         try {
             const suggestion = await datamappers.suggestionDatamapper.findByPk(suggestionId);
             if (!suggestion) {
-                return res.status(400).json({ error: 'Suggestion Not Found' });
+                throw new Error(`Can not find suggestion with id ${suggestionId}`, { cause: { code: 404 } });
             }
 
             const isAuthor = req.user.userId === suggestion.user_id;
             const isDev = req.user.role === 'developer';
 
             // if user id given is not the author and not a dev send Unauthorized
-            if (!isAuthor && !isDev) return res.status(401).json({ error: 'Unauthorized' });
+            if (!isAuthor && !isDev) throw new Error('Unauthorized', { cause: { code: 401 } });
 
             await datamappers.suggestionDatamapper.update(inputData, suggestionId);
 
             return res.status(200).json({ message: 'Suggestion updated successfully' });
         } catch (err) {
+            if (err.cause) {
+                const { code } = err.cause;
+                return res.status(code).json({ error: err.message });
+            }
             return res.status(500).json({ error: `Internal Server Error: ${err.message}` });
         }
     },
@@ -100,19 +108,23 @@ export default {
         try {
             const suggestion = await datamappers.suggestionDatamapper.findByPk(suggestionId);
             if (!suggestion) {
-                return res.status(400).json({ error: 'Suggestion Not Found' });
+                throw new Error(`Can not find suggestion with id ${suggestionId}`, { cause: { code: 404 } });
             }
 
             const isAuthor = req.user.userId === suggestion.user_id;
             const isDev = req.user.role === 'developer';
 
             // if user id given is not the author and not a dev send Unauthorized
-            if (!isAuthor && !isDev) return res.status(401).json({ error: 'Unauthorized' });
+            if (!isAuthor && !isDev) throw new Error('Unauthorized', { cause: { code: 401 } });
 
             await datamappers.suggestionDatamapper.delete(suggestionId);
 
             return res.status(200).json({ message: 'Suggestion deleted successfully' });
         } catch (err) {
+            if (err.cause) {
+                const { code } = err.cause;
+                return res.status(code).json({ error: err.message });
+            }
             return res.status(500).json({ error: `Internal Server Error: ${err.message}` });
         }
     },
